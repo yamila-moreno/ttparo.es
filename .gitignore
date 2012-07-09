@@ -1,0 +1,5 @@
+src/tasaparo/settings/local.py
+*.pyc
+*.mo
+*.swp
+src/media

@@ -27,20 +27,36 @@ class Command(BaseCommand):
         #except:
             #pass
 
+	#The expected format is:
+	#ciclo	edad	sexo	nforma	prov	aoi	factorel
+
         if csv:
             f = open(csv, 'r')
             for line in f:
-                line = line.replace('"','')
                 list_data = line.split('\t')
-                age = models.Age.objects.get(name=list_data[3])
+                # age
+                age = models.Age.objects.get(name=list_data[1])
+                # sex
                 sex = models.Sex.objects.get(name='Varón')
-                if list_data[5] == 'M':
+                if list_data[2] == 'M':
                     sex = models.Sex.objects.get(name='Mujer')
-                education = models.Education.objects.get(name='Analfabetos')
-                province = models.Province.objects.get(name=list_data[2])
+                # education
+                education = models.Education.objects.get(name='Nada Completado')
+                if list_data[3] == 'p':
+                    education = models.Education.objects.get(name='ESO / EGB')
+                elif list_data[3] == 'fp':
+                    education = models.Education.objects.get(name='FP (Grado Medio o Grado Superior)')
+                elif list_data[3] == 'b':
+                    education = models.Education.objects.get(name='Bachiller / BUP')
+                elif list_data[3] == 'u':
+                    education = models.Education.objects.get(name='Universidad (Licenciatura o Diplomatura)')
+                # province
+                province = models.Province.objects.get(name=list_data[4])
+                #aoi
                 aoi = models.Aoi.objects.get(name='Ocupados')
-                if list_data[7] == 'p':
+                if list_data[5] == 'p':
                     aoi = models.Aoi.objects.get(name='Parados')
+
                 models.Microdata.objects.create(
                     cycle = list_data[0],
                     age = age,
@@ -48,5 +64,5 @@ class Command(BaseCommand):
                     education = education,
                     province = province,
                     aoi = aoi,
-                    factorel = list_data[10],
+                    factorel = list_data[6],
                 )

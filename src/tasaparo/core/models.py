@@ -18,7 +18,6 @@ class Sex(models.Model):
 
 class Education(models.Model):
     name = models.CharField(max_length=100)
-    ine_id = models.IntegerField()
 
     def __unicode__(self):
         return self.name

@@ -4,6 +4,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from tasaparo.web.views import *
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'tasaparo.views.home', name='home'),
@@ -12,6 +14,10 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
+    url(r'^$',
+        HomeView.as_view(),
+        name = 'home',
+    ),
 
     url(r'^api/', include('tasaparo.core.urls', namespace='api')),
 

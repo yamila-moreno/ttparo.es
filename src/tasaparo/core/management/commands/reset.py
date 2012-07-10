@@ -42,7 +42,7 @@ class Command(BaseCommand):
 
         if not csv:
             return
-        '''
+
         age_map = {
             '0': models.Age.objects.get(ine_id=0),
             '5': models.Age.objects.get(ine_id=5),
@@ -58,8 +58,8 @@ class Command(BaseCommand):
             '60': models.Age.objects.get(ine_id=60),
             '65': models.Age.objects.get(ine_id=60),
         }
-        '''
 
+        '''
         age_map = {
             '12': models.Age.objects.get(ine_id=0),
             '13': models.Age.objects.get(ine_id=5),
@@ -75,7 +75,7 @@ class Command(BaseCommand):
             '10': models.Age.objects.get(ine_id=60),
             '11': models.Age.objects.get(ine_id=60),
         }
-
+        '''
         sex_map = {
             '1': models.Sex.objects.get(ine_id='1'),
             '6': models.Sex.objects.get(ine_id='6')

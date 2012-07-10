@@ -43,6 +43,17 @@ class Aoi(models.Model):
 
 class MicrodataManager(models.Manager):
     def calculate_rate(self, data):
+
+        results = Microdata.objects.all()
+        if 'sex' in data:
+            results = results.filter(sex__ine_id=data['sex'])
+        if 'age' in data:
+            results = results.filter(age__ine_id=data['age'])
+        if 'education' in data:
+            results = results.filter(education__inner_id=data['education'])
+        if 'province' in data:
+            results = results.filter(province__ine_id=data['province'])
+
         return 15
 
     def create_hash(self, data):
@@ -81,3 +92,7 @@ class Microdata(models.Model):
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)
     rate = models.IntegerField()
+    date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['date']

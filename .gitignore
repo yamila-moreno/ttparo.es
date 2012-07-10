@@ -2,4 +2,5 @@ src/tasaparo/settings/local.py
 *.pyc
 *.mo
 *.swp
+*.csv
 src/media

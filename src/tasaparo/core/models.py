@@ -50,13 +50,17 @@ class MicrodataManager(models.Manager):
         print '*'*20
         print "total ", results.count()
         if 'sex' in data:
-            results = results.filter(sex__ine_id=2)
+            results = results.filter(sex__ine_id=data['sex'])
+            print "total sex ", results.count()
         if 'age' in data:
-            results = results.filter(age__ine_id=20)
+            results = results.filter(age__ine_id=data['age'])
+            print "total age ", results.count()
         if 'education' in data:
-            results = results.filter(education__inner_id='fp')
+            results = results.filter(education__inner_id=data['education'])
+            print "total edu ", results.count()
         if 'province' in data:
-            results = results.filter(province__ine_id=1)
+            results = results.filter(province__ine_id=data['province'])
+            print "total prov ", results.count()
 
         print "hay ", len(results)
 
@@ -66,16 +70,23 @@ class MicrodataManager(models.Manager):
 
         count_todos = results.aggregate(Sum('factorel'))
 
-        print count_todos
+        unemployed = results.filter(aoi__inner_id='p').aggregate(Sum('factorel'))
 
-        return 15
+        print "unemployed", unemployed["factorel__sum"]
+        print "total ", count_todos["factorel__sum"]
+
+        result = unemployed["factorel__sum"] / count_todos["factorel__sum"] * 100
+        print "su tasa paro ", round(result)
+
+
+        return int(round(result))
 
     def create_hash(self, data):
-        sex = data['sex']
-        age = data['age']
-        province = data['province']
-        education = data['education']
-        return sex+age+province+education
+        sex = data['sex'] if 'sex' in data else None
+        age = data['age'] if 'age' in data else None
+        province = data['province'] if 'province' in data else None
+        education = data['education'] if 'education' in data else None
+        return str(sex)+str(age)+str(province)+str(education)
 
     def rate_query(self, query_hash, data):
         try:

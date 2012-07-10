@@ -17,10 +17,10 @@ class MicroDataTest(TestCase):
     def test_show_microdata(self):
         url = reverse('api:profile-rate')
         post_data = {
-            'age': '30',
-            'sex': '1',
-            'province': '28',
-            'education': 'u'
+            #'age': '20',
+            #'sex': '6',
+            #'province': '52',
+            #'education': 'fp'
         }
         response = self.client.post(url, post_data)
         self.assertEqual(response.status_code, 200)
@@ -29,5 +29,7 @@ class MicroDataTest(TestCase):
         self.assertTrue(json_parsed['success'])
 
         self.assertIsInstance(json_parsed['tasaparo'], int)
+
+        self.assertEqual(json_parsed['tasaparo'], 28)
 
 

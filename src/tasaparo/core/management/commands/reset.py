@@ -26,8 +26,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            subprocess.Popen(['dropdb', 'tasaparo']).communicate()
-            subprocess.Popen(['createdb', 'tasaparo']).communicate()
+            subprocess.Popen(['dropdb', '-U', 'tasaparo', 'tasaparo']).communicate()
+            subprocess.Popen(['createdb', '-U', 'tasaparo', 'tasaparo']).communicate()
         except:
             pass
 

@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from tasaparo.core import models
 from django.core.management.base import BaseCommand, CommandError
 from django.core import management
-from optparse import make_option
+from django.db.models import Q, Count
+from django.db import transaction
+
+from tasaparo.core import models
+
 import random, sys, subprocess, uuid
 import io
-from django.db.models import Q, Count
+
+from optparse import make_option
 
 class Command(BaseCommand):
 
@@ -18,9 +22,13 @@ class Command(BaseCommand):
     )
     help = 'Used to load a CSV file.'
 
-    def handle(self, *args, **options):
-        csv = options.get('csv', None)
+    age_cache = {}
+    education_cache = {}
+    sex_cache = {}
+    province_cache = {}
+    aoi_cache = {}
 
+    def handle(self, *args, **options):
         try:
             subprocess.Popen(['dropdb', 'tasaparo']).communicate()
             subprocess.Popen(['createdb', 'tasaparo']).communicate()
@@ -28,42 +36,85 @@ class Command(BaseCommand):
             pass
 
         management.call_command('syncdb', interactive=False)
+        self.load_csv(options)
 
+    def get_lazy_age(self, edad):
+        if edad not in self.age_cache:
+            self.age_cache[edad] = models.Age.objects.get(name=edad)
+        return self.age_cache[edad]
+
+    def get_lazy_province(self, province):
+        if province not in self.province_cache:
+            self.province_cache[province] = models.Province.objects.get(name=province)
+        return self.province_cache[province]
+
+    @transaction.commit_on_success
+    def load_csv(self, options):
         #The expected format is:
         #ciclo	edad	sexo	nforma	prov	aoi	factorel
-        if csv:
-            with io.open(csv, 'r') as f:
-                for line in f:
-                    list_data = line.split('\t')
-                    # age
-                    age = models.Age.objects.get(name=list_data[1])
-                    # sex
-                    sex = models.Sex.objects.get(name='Varón')
-                    if list_data[2] == 'M':
-                        sex = models.Sex.objects.get(name='Mujer')
-                    # education
-                    education = models.Education.objects.get(name='Nada Completado')
-                    if list_data[3] == 'p':
-                        education = models.Education.objects.get(name='ESO / EGB')
-                    elif list_data[3] == 'fp':
-                        education = models.Education.objects.get(name='FP (Grado Medio o Grado Superior)')
-                    elif list_data[3] == 'b':
-                        education = models.Education.objects.get(name='Bachiller / BUP')
-                    elif list_data[3] == 'u':
-                        education = models.Education.objects.get(name='Universidad (Licenciatura o Diplomatura)')
-                    # province
-                    province = models.Province.objects.get(name=list_data[4])
-                    #aoi
-                    aoi = models.Aoi.objects.get(name='Ocupados')
-                    if list_data[5] == 'p':
-                        aoi = models.Aoi.objects.get(name='Parados')
+        csv = options['csv']
 
-                    models.Microdata.objects.create(
-                        cycle = list_data[0],
-                        age = age,
-                        sex = sex,
-                        education = education,
-                        province = province,
-                        aoi = aoi,
-                        factorel = list_data[6],
-                    )
+        if not csv:
+            return
+
+
+        sex_m = models.Sex.objects.get(name=u'Mujer')
+        sex_h = models.Sex.objects.get(name=u'Varón')
+
+        education_map = {
+            "p": models.Education.objects.get(name=u'ESO / EGB'),
+            "o": models.Education.objects.get(name=u'Nada Completado'),
+            "fp": models.Education.objects.get(name=u'FP (Grado Medio o Grado Superior)'),
+            "b": models.Education.objects.get(name=u'Bachiller / BUP'),
+            "u": models.Education.objects.get(name=u'Universidad (Licenciatura o Diplomatura)'),
+        }
+
+        aoi_map = {
+            "o": models.Aoi.objects.get(name='Ocupados'),
+            "p": models.Aoi.objects.get(name='Parados'),
+        }
+
+        buffer = []
+
+        with io.open(csv, 'r') as f:
+            counter = 0
+            for line in f:
+                try:
+                    ciclo, edad, sexo, education, province, aoi, factorel = line.split('\t')
+                except ValueError:
+                    continue
+
+                sys.stdout.write("\r{0}".format(counter))
+                counter += 1
+
+                age = self.get_lazy_age(edad)
+
+                if sexo == 'M':
+                    sexo = sex_m
+                else:
+                    sexo = sex_h
+
+                education = education_map[education]
+                province = self.get_lazy_province(province)
+                aoi = aoi_map[aoi]
+
+                obj = models.Microdata(
+                    cycle = ciclo,
+                    age = age,
+                    sex = sexo,
+                    education = education,
+                    province = province,
+                    aoi = aoi,
+                    factorel = factorel,
+                )
+                buffer.append(obj)
+
+                if len(buffer) >= 200:
+                    self.bulk_insert(buffer)
+                    buffer = []
+
+            if len(buffer) > 0:
+                self.bulk_insert(buffer)
+
+    def bulk_insert(self, data):
+        models.Microdata.objects.bulk_create(data)

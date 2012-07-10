@@ -48,19 +48,21 @@ class MicrodataManager(models.Manager):
 
         results = Microdata.objects.all()
         print '*'*20
-        print results.count()
+        print "total ", results.count()
         if 'sex' in data:
-            print "sex " , data['sex']
-            results = results.filter(sex__ine_id=1)
+            results = results.filter(sex__ine_id=2)
         if 'age' in data:
-            print "age " , data['age']
-            results = results.filter(age__ine_id=30)
+            results = results.filter(age__ine_id=20)
         if 'education' in data:
-            results = results.filter(education__inner_id='u')
+            results = results.filter(education__inner_id='fp')
         if 'province' in data:
-            results = results.filter(province__ine_id=28)
+            results = results.filter(province__ine_id=1)
 
         print "hay ", len(results)
+
+        results = results.filter(cycle=157)
+
+        print "hay en el ciclo ", len(results)
 
         count_todos = results.aggregate(Sum('factorel'))
 

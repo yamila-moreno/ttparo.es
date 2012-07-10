@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
 
@@ -44,15 +45,26 @@ class Aoi(models.Model):
 class MicrodataManager(models.Manager):
     def calculate_rate(self, data):
 
+
         results = Microdata.objects.all()
+        print '*'*20
+        print results.count()
         if 'sex' in data:
-            results = results.filter(sex__ine_id=data['sex'])
+            print "sex " , data['sex']
+            results = results.filter(sex__ine_id=1)
         if 'age' in data:
-            results = results.filter(age__ine_id=data['age'])
+            print "age " , data['age']
+            results = results.filter(age__ine_id=30)
         if 'education' in data:
-            results = results.filter(education__inner_id=data['education'])
+            results = results.filter(education__inner_id='u')
         if 'province' in data:
-            results = results.filter(province__ine_id=data['province'])
+            results = results.filter(province__ine_id=28)
+
+        print "hay ", len(results)
+
+        count_todos = results.aggregate(Sum('factorel'))
+
+        print count_todos
 
         return 15
 

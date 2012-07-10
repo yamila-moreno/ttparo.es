@@ -12,12 +12,12 @@ from django.utils import simplejson
 
 class MicroDataTest(TestCase):
 
-    fixtures = ['initial_data']
+    fixtures = ['initial_data','microdata_test']
 
     def test_show_microdata(self):
         url = reverse('api:profile-rate')
         post_data = {
-            'age': '7',
+            'age': '30',
             'sex': '1',
             'province': '28',
             'education': 'u'

@@ -1,5 +1,4 @@
 # Django settings for tasaparo project.
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -120,6 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'tasaparo.core',
+    'tasaparo.web',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

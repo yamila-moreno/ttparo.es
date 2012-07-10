@@ -59,23 +59,6 @@ class Command(BaseCommand):
             '65': models.Age.objects.get(ine_id=60),
         }
 
-        '''
-        age_map = {
-            '12': models.Age.objects.get(ine_id=0),
-            '13': models.Age.objects.get(ine_id=5),
-            '1': models.Age.objects.get(ine_id=16),
-            '2': models.Age.objects.get(ine_id=20),
-            '3': models.Age.objects.get(ine_id=25),
-            '4': models.Age.objects.get(ine_id=30),
-            '5': models.Age.objects.get(ine_id=35),
-            '6': models.Age.objects.get(ine_id=40),
-            '7': models.Age.objects.get(ine_id=45),
-            '8': models.Age.objects.get(ine_id=50),
-            '9': models.Age.objects.get(ine_id=55),
-            '10': models.Age.objects.get(ine_id=60),
-            '11': models.Age.objects.get(ine_id=60),
-        }
-        '''
         sex_map = {
             '1': models.Sex.objects.get(ine_id='1'),
             '6': models.Sex.objects.get(ine_id='6')

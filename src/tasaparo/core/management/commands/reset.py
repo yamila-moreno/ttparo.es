@@ -42,8 +42,27 @@ class Command(BaseCommand):
 
         if not csv:
             return
+        '''
+        age_map = {
+            '0': models.Age.objects.get(ine_id=0),
+            '5': models.Age.objects.get(ine_id=5),
+            '16': models.Age.objects.get(ine_id=16),
+            '20': models.Age.objects.get(ine_id=20),
+            '25': models.Age.objects.get(ine_id=25),
+            '30': models.Age.objects.get(ine_id=30),
+            '35': models.Age.objects.get(ine_id=35),
+            '40': models.Age.objects.get(ine_id=40),
+            '45': models.Age.objects.get(ine_id=45),
+            '50': models.Age.objects.get(ine_id=50),
+            '55': models.Age.objects.get(ine_id=55),
+            '60': models.Age.objects.get(ine_id=60),
+            '65': models.Age.objects.get(ine_id=60),
+        }
+        '''
 
         age_map = {
+            '12': models.Age.objects.get(ine_id=0),
+            '13': models.Age.objects.get(ine_id=5),
             '1': models.Age.objects.get(ine_id=16),
             '2': models.Age.objects.get(ine_id=20),
             '3': models.Age.objects.get(ine_id=25),
@@ -54,15 +73,12 @@ class Command(BaseCommand):
             '8': models.Age.objects.get(ine_id=50),
             '9': models.Age.objects.get(ine_id=55),
             '10': models.Age.objects.get(ine_id=60),
-            '11': models.Age.objects.get(ine_id=65),
-            '12': models.Age.objects.get(ine_id=0),
-            '13': models.Age.objects.get(ine_id=5),
-
+            '11': models.Age.objects.get(ine_id=60),
         }
 
         sex_map = {
-            'H': models.Sex.objects.get(ine_id=1),
-            'M': models.Sex.objects.get(ine_id=6)
+            '1': models.Sex.objects.get(ine_id='1'),
+            '6': models.Sex.objects.get(ine_id='6')
         }
 
         education_map = {
@@ -114,9 +130,6 @@ class Command(BaseCommand):
 
             if len(buffer) > 0:
                 self.bulk_insert(buffer)
-
-
-        print 'Finished'
 
     def get_lazy_province(self, province):
         if province not in self.province_cache:

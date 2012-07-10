@@ -75,7 +75,7 @@ class Microdata(models.Model):
     objects = MicrodataManager()
 
     def __unicode__(self):
-        return u'%(id)s %(rate)s' % {'id':self.id, 'rate':self.rate()}
+        return u'%(id)s' % {'id':self.id}
 
 
 class RateQuery(models.Model):

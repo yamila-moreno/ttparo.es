@@ -15,8 +15,13 @@ class MicroDataTest(TestCase):
     fixtures = ['initial_data']
 
     def test_show_microdata(self):
-        url = reverse('api:show-microdata')
-        post_data = {}
+        url = reverse('api:profile-rate')
+        post_data = {
+            'age': '7',
+            'sex': '1',
+            'province': '28',
+            'education': 'u'
+        }
         response = self.client.post(url, post_data)
         self.assertEqual(response.status_code, 200)
 

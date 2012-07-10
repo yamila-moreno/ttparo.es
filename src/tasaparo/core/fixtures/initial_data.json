@@ -1,612 +1,619 @@
 [
     {
-        "pk": 1, 
-        "model": "core.age", 
+        "pk": 1,
+        "model": "core.age",
         "fields": {
-            "ine_id": 0, 
+            "ine_id": 0,
             "name": "de 0 A 4 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "core.age", 
+        "pk": 2,
+        "model": "core.age",
         "fields": {
-            "ine_id": 5, 
+            "ine_id": 5,
             "name": "de 5 A 9 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "core.age", 
+        "pk": 3,
+        "model": "core.age",
         "fields": {
-            "ine_id": 10, 
+            "ine_id": 10,
             "name": "de 10 A 15 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 4, 
-        "model": "core.age", 
+        "pk": 4,
+        "model": "core.age",
         "fields": {
-            "ine_id": 16, 
+            "ine_id": 16,
             "name": "de 16 A 19 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 5, 
-        "model": "core.age", 
+        "pk": 5,
+        "model": "core.age",
         "fields": {
-            "ine_id": 20, 
+            "ine_id": 20,
             "name": "de 20 A 24 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 6, 
-        "model": "core.age", 
+        "pk": 6,
+        "model": "core.age",
         "fields": {
-            "ine_id": 25, 
+            "ine_id": 25,
             "name": "de 25 A 29 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 7, 
-        "model": "core.age", 
+        "pk": 7,
+        "model": "core.age",
         "fields": {
-            "ine_id": 30, 
+            "ine_id": 30,
             "name": "de 30 A 34 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 8, 
-        "model": "core.age", 
+        "pk": 8,
+        "model": "core.age",
         "fields": {
-            "ine_id": 35, 
+            "ine_id": 35,
             "name": "de 35 A 39 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 9, 
-        "model": "core.age", 
+        "pk": 9,
+        "model": "core.age",
         "fields": {
-            "ine_id": 40, 
+            "ine_id": 40,
             "name": "de 40 A 44 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 10, 
-        "model": "core.age", 
+        "pk": 10,
+        "model": "core.age",
         "fields": {
-            "ine_id": 45, 
+            "ine_id": 45,
             "name": "de 45 A 49 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 11, 
-        "model": "core.age", 
+        "pk": 11,
+        "model": "core.age",
         "fields": {
-            "ine_id": 50, 
+            "ine_id": 50,
             "name": "de 50 A 54 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 12, 
-        "model": "core.age", 
+        "pk": 12,
+        "model": "core.age",
         "fields": {
-            "ine_id": 55, 
+            "ine_id": 55,
             "name": "de 55 A 59 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 13, 
-        "model": "core.age", 
+        "pk": 13,
+        "model": "core.age",
         "fields": {
-            "ine_id": 60, 
+            "ine_id": 60,
             "name": "de 60 A 64 a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 14, 
-        "model": "core.age", 
+        "pk": 14,
+        "model": "core.age",
         "fields": {
-            "ine_id": 65, 
+            "ine_id": 65,
             "name": "65 o m\u00e1s a\u00f1os"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "core.sex", 
+        "pk": 1,
+        "model": "core.sex",
         "fields": {
-            "ine_id": 1, 
+            "ine_id": 1,
             "name": "Var\u00f3n"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "core.sex", 
+        "pk": 2,
+        "model": "core.sex",
         "fields": {
-            "ine_id": 6, 
+            "ine_id": 6,
             "name": "Mujer"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "core.education", 
+        "pk": 1,
+        "model": "core.education",
         "fields": {
-            "name": "Nada Completado"
+            "name": "Nada Completado",
+            "inner_id": "o"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "core.education", 
+        "pk": 2,
+        "model": "core.education",
         "fields": {
-            "name": "ESO / EGB"
+            "name": "ESO / EGB",
+            "inner_id": "p"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "core.education", 
+        "pk": 3,
+        "model": "core.education",
         "fields": {
-            "name": "FP (Grado Medio o Grado Superior)"
+            "name": "FP (Grado Medio o Grado Superior)",
+            "inner_id": "fp"
         }
-    }, 
+    },
     {
-        "pk": 4, 
-        "model": "core.education", 
+        "pk": 4,
+        "model": "core.education",
         "fields": {
-            "name": "Bachiller / BUP"
+            "name": "Bachiller / BUP",
+            "inner_id": "b"
         }
-    }, 
+    },
     {
-        "pk": 5, 
-        "model": "core.education", 
+        "pk": 5,
+        "model": "core.education",
         "fields": {
-            "name": "Universidad (Licenciatura o Diplomatura)"
+            "name": "Universidad (Licenciatura o Diplomatura)",
+            "inner_id": "u"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "core.province", 
+        "pk": 1,
+        "model": "core.province",
         "fields": {
-            "ine_id": 1, 
+            "ine_id": 1,
             "name": "\u00c1lava"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "core.province", 
+        "pk": 2,
+        "model": "core.province",
         "fields": {
-            "ine_id": 2, 
+            "ine_id": 2,
             "name": "Albacete"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "core.province", 
+        "pk": 3,
+        "model": "core.province",
         "fields": {
-            "ine_id": 3, 
+            "ine_id": 3,
             "name": "Alicante"
         }
-    }, 
+    },
     {
-        "pk": 4, 
-        "model": "core.province", 
+        "pk": 4,
+        "model": "core.province",
         "fields": {
-            "ine_id": 4, 
+            "ine_id": 4,
             "name": "Almer\u00eda"
         }
-    }, 
+    },
     {
-        "pk": 5, 
-        "model": "core.province", 
+        "pk": 5,
+        "model": "core.province",
         "fields": {
-            "ine_id": 5, 
+            "ine_id": 5,
             "name": "\u00c1vila"
         }
-    }, 
+    },
     {
-        "pk": 6, 
-        "model": "core.province", 
+        "pk": 6,
+        "model": "core.province",
         "fields": {
-            "ine_id": 6, 
+            "ine_id": 6,
             "name": "Badajoz"
         }
-    }, 
+    },
     {
-        "pk": 7, 
-        "model": "core.province", 
+        "pk": 7,
+        "model": "core.province",
         "fields": {
-            "ine_id": 7, 
+            "ine_id": 7,
             "name": "Baleares (Illes)"
         }
-    }, 
+    },
     {
-        "pk": 8, 
-        "model": "core.province", 
+        "pk": 8,
+        "model": "core.province",
         "fields": {
-            "ine_id": 8, 
+            "ine_id": 8,
             "name": "Barcelona"
         }
-    }, 
+    },
     {
-        "pk": 9, 
-        "model": "core.province", 
+        "pk": 9,
+        "model": "core.province",
         "fields": {
-            "ine_id": 9, 
+            "ine_id": 9,
             "name": "Burgos"
         }
-    }, 
+    },
     {
-        "pk": 10, 
-        "model": "core.province", 
+        "pk": 10,
+        "model": "core.province",
         "fields": {
-            "ine_id": 10, 
+            "ine_id": 10,
             "name": "C\u00e1ceres"
         }
-    }, 
+    },
     {
-        "pk": 11, 
-        "model": "core.province", 
+        "pk": 11,
+        "model": "core.province",
         "fields": {
-            "ine_id": 11, 
+            "ine_id": 11,
             "name": "C\u00e1diz"
         }
-    }, 
+    },
     {
-        "pk": 12, 
-        "model": "core.province", 
+        "pk": 12,
+        "model": "core.province",
         "fields": {
-            "ine_id": 12, 
+            "ine_id": 12,
             "name": "Castell\u00f3n"
         }
-    }, 
+    },
     {
-        "pk": 13, 
-        "model": "core.province", 
+        "pk": 13,
+        "model": "core.province",
         "fields": {
-            "ine_id": 13, 
+            "ine_id": 13,
             "name": "Ciudad Real"
         }
-    }, 
+    },
     {
-        "pk": 14, 
-        "model": "core.province", 
+        "pk": 14,
+        "model": "core.province",
         "fields": {
-            "ine_id": 14, 
+            "ine_id": 14,
             "name": "C\u00f3rdoba"
         }
-    }, 
+    },
     {
-        "pk": 15, 
-        "model": "core.province", 
+        "pk": 15,
+        "model": "core.province",
         "fields": {
-            "ine_id": 15, 
+            "ine_id": 15,
             "name": "Coru\u00f1a (La)"
         }
-    }, 
+    },
     {
-        "pk": 16, 
-        "model": "core.province", 
+        "pk": 16,
+        "model": "core.province",
         "fields": {
-            "ine_id": 16, 
+            "ine_id": 16,
             "name": "Cuenca"
         }
-    }, 
+    },
     {
-        "pk": 17, 
-        "model": "core.province", 
+        "pk": 17,
+        "model": "core.province",
         "fields": {
-            "ine_id": 17, 
+            "ine_id": 17,
             "name": "Girona"
         }
-    }, 
+    },
     {
-        "pk": 18, 
-        "model": "core.province", 
+        "pk": 18,
+        "model": "core.province",
         "fields": {
-            "ine_id": 18, 
+            "ine_id": 18,
             "name": "Granada"
         }
-    }, 
+    },
     {
-        "pk": 19, 
-        "model": "core.province", 
+        "pk": 19,
+        "model": "core.province",
         "fields": {
-            "ine_id": 19, 
+            "ine_id": 19,
             "name": "Guadalajara"
         }
-    }, 
+    },
     {
-        "pk": 20, 
-        "model": "core.province", 
+        "pk": 20,
+        "model": "core.province",
         "fields": {
-            "ine_id": 20, 
+            "ine_id": 20,
             "name": "Guip\u00fazcoa"
         }
-    }, 
+    },
     {
-        "pk": 21, 
-        "model": "core.province", 
+        "pk": 21,
+        "model": "core.province",
         "fields": {
-            "ine_id": 21, 
+            "ine_id": 21,
             "name": "Huelva"
         }
-    }, 
+    },
     {
-        "pk": 22, 
-        "model": "core.province", 
+        "pk": 22,
+        "model": "core.province",
         "fields": {
-            "ine_id": 22, 
+            "ine_id": 22,
             "name": "Huesca"
         }
-    }, 
+    },
     {
-        "pk": 23, 
-        "model": "core.province", 
+        "pk": 23,
+        "model": "core.province",
         "fields": {
-            "ine_id": 23, 
+            "ine_id": 23,
             "name": "Ja\u00e9n"
         }
-    }, 
+    },
     {
-        "pk": 24, 
-        "model": "core.province", 
+        "pk": 24,
+        "model": "core.province",
         "fields": {
-            "ine_id": 24, 
+            "ine_id": 24,
             "name": "Le\u00f3n"
         }
-    }, 
+    },
     {
-        "pk": 25, 
-        "model": "core.province", 
+        "pk": 25,
+        "model": "core.province",
         "fields": {
-            "ine_id": 25, 
+            "ine_id": 25,
             "name": "Lleida"
         }
-    }, 
+    },
     {
-        "pk": 26, 
-        "model": "core.province", 
+        "pk": 26,
+        "model": "core.province",
         "fields": {
-            "ine_id": 26, 
+            "ine_id": 26,
             "name": "Rioja (La)"
         }
-    }, 
+    },
     {
-        "pk": 27, 
-        "model": "core.province", 
+        "pk": 27,
+        "model": "core.province",
         "fields": {
-            "ine_id": 27, 
+            "ine_id": 27,
             "name": "Lugo"
         }
-    }, 
+    },
     {
-        "pk": 28, 
-        "model": "core.province", 
+        "pk": 28,
+        "model": "core.province",
         "fields": {
-            "ine_id": 28, 
+            "ine_id": 28,
             "name": "Madrid"
         }
-    }, 
+    },
     {
-        "pk": 29, 
-        "model": "core.province", 
+        "pk": 29,
+        "model": "core.province",
         "fields": {
-            "ine_id": 29, 
+            "ine_id": 29,
             "name": "M\u00e1laga"
         }
-    }, 
+    },
     {
-        "pk": 30, 
-        "model": "core.province", 
+        "pk": 30,
+        "model": "core.province",
         "fields": {
-            "ine_id": 30, 
+            "ine_id": 30,
             "name": "Murcia"
         }
-    }, 
+    },
     {
-        "pk": 31, 
-        "model": "core.province", 
+        "pk": 31,
+        "model": "core.province",
         "fields": {
-            "ine_id": 31, 
+            "ine_id": 31,
             "name": "Navarra"
         }
-    }, 
+    },
     {
-        "pk": 32, 
-        "model": "core.province", 
+        "pk": 32,
+        "model": "core.province",
         "fields": {
-            "ine_id": 32, 
+            "ine_id": 32,
             "name": "Orense"
         }
-    }, 
+    },
     {
-        "pk": 33, 
-        "model": "core.province", 
+        "pk": 33,
+        "model": "core.province",
         "fields": {
-            "ine_id": 33, 
+            "ine_id": 33,
             "name": "Asturias"
         }
-    }, 
+    },
     {
-        "pk": 34, 
-        "model": "core.province", 
+        "pk": 34,
+        "model": "core.province",
         "fields": {
-            "ine_id": 34, 
+            "ine_id": 34,
             "name": "Palencia"
         }
-    }, 
+    },
     {
-        "pk": 35, 
-        "model": "core.province", 
+        "pk": 35,
+        "model": "core.province",
         "fields": {
-            "ine_id": 35, 
+            "ine_id": 35,
             "name": "Palmas (Las)"
         }
-    }, 
+    },
     {
-        "pk": 36, 
-        "model": "core.province", 
+        "pk": 36,
+        "model": "core.province",
         "fields": {
-            "ine_id": 36, 
+            "ine_id": 36,
             "name": "Pontevedra"
         }
-    }, 
+    },
     {
-        "pk": 37, 
-        "model": "core.province", 
+        "pk": 37,
+        "model": "core.province",
         "fields": {
-            "ine_id": 37, 
+            "ine_id": 37,
             "name": "Salamanca"
         }
-    }, 
+    },
     {
-        "pk": 38, 
-        "model": "core.province", 
+        "pk": 38,
+        "model": "core.province",
         "fields": {
-            "ine_id": 38, 
+            "ine_id": 38,
             "name": "Santa Cruz de Tenerife"
         }
-    }, 
+    },
     {
-        "pk": 39, 
-        "model": "core.province", 
+        "pk": 39,
+        "model": "core.province",
         "fields": {
-            "ine_id": 39, 
+            "ine_id": 39,
             "name": "Cantabria"
         }
-    }, 
+    },
     {
-        "pk": 40, 
-        "model": "core.province", 
+        "pk": 40,
+        "model": "core.province",
         "fields": {
-            "ine_id": 40, 
+            "ine_id": 40,
             "name": "Segovia"
         }
-    }, 
+    },
     {
-        "pk": 41, 
-        "model": "core.province", 
+        "pk": 41,
+        "model": "core.province",
         "fields": {
-            "ine_id": 41, 
+            "ine_id": 41,
             "name": "Sevilla"
         }
-    }, 
+    },
     {
-        "pk": 42, 
-        "model": "core.province", 
+        "pk": 42,
+        "model": "core.province",
         "fields": {
-            "ine_id": 42, 
+            "ine_id": 42,
             "name": "Soria"
         }
-    }, 
+    },
     {
-        "pk": 43, 
-        "model": "core.province", 
+        "pk": 43,
+        "model": "core.province",
         "fields": {
-            "ine_id": 43, 
+            "ine_id": 43,
             "name": "Tarragona"
         }
-    }, 
+    },
     {
-        "pk": 44, 
-        "model": "core.province", 
+        "pk": 44,
+        "model": "core.province",
         "fields": {
-            "ine_id": 44, 
+            "ine_id": 44,
             "name": "Teruel"
         }
-    }, 
+    },
     {
-        "pk": 45, 
-        "model": "core.province", 
+        "pk": 45,
+        "model": "core.province",
         "fields": {
-            "ine_id": 45, 
+            "ine_id": 45,
             "name": "Toledo"
         }
-    }, 
+    },
     {
-        "pk": 46, 
-        "model": "core.province", 
+        "pk": 46,
+        "model": "core.province",
         "fields": {
-            "ine_id": 46, 
+            "ine_id": 46,
             "name": "Valencia"
         }
-    }, 
+    },
     {
-        "pk": 47, 
-        "model": "core.province", 
+        "pk": 47,
+        "model": "core.province",
         "fields": {
-            "ine_id": 47, 
+            "ine_id": 47,
             "name": "Valladolid"
         }
-    }, 
+    },
     {
-        "pk": 48, 
-        "model": "core.province", 
+        "pk": 48,
+        "model": "core.province",
         "fields": {
-            "ine_id": 48, 
+            "ine_id": 48,
             "name": "Vizcaya"
         }
-    }, 
+    },
     {
-        "pk": 49, 
-        "model": "core.province", 
+        "pk": 49,
+        "model": "core.province",
         "fields": {
-            "ine_id": 49, 
+            "ine_id": 49,
             "name": "Zamora"
         }
-    }, 
+    },
     {
-        "pk": 50, 
-        "model": "core.province", 
+        "pk": 50,
+        "model": "core.province",
         "fields": {
-            "ine_id": 50, 
+            "ine_id": 50,
             "name": "Zaragoza"
         }
-    }, 
+    },
     {
-        "pk": 51, 
-        "model": "core.province", 
+        "pk": 51,
+        "model": "core.province",
         "fields": {
-            "ine_id": 51, 
+            "ine_id": 51,
             "name": "Ceuta"
         }
-    }, 
+    },
     {
-        "pk": 52, 
-        "model": "core.province", 
+        "pk": 52,
+        "model": "core.province",
         "fields": {
-            "ine_id": 52, 
+            "ine_id": 52,
             "name": "Melilla"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "core.aoi", 
+        "pk": 1,
+        "model": "core.aoi",
         "fields": {
-            "name": "Ocupados"
+            "name": "Ocupados",
+            "inner_id": "o"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "core.aoi", 
+        "pk": 2,
+        "model": "core.aoi",
         "fields": {
-            "name": "Parados"
+            "name": "Parados",
+            "inner_id": "p"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "auth.user", 
+        "pk": 1,
+        "model": "auth.user",
         "fields": {
-            "username": "admin", 
-            "first_name": "", 
-            "last_name": "", 
-            "is_active": true, 
-            "is_superuser": true, 
-            "is_staff": true, 
-            "last_login": "2012-07-09T18:20:24.875Z", 
-            "groups": [], 
-            "user_permissions": [], 
-            "password": "pbkdf2_sha256$10000$aROaz3papoyv$fVnLjUlx6NVKOIjIhF+YzMAubA2xbgjy45UOVkHicp0=", 
-            "email": "yamila.moreno@kaleidos.net", 
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2012-07-09T18:20:24.875Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$aROaz3papoyv$fVnLjUlx6NVKOIjIhF+YzMAubA2xbgjy45UOVkHicp0=",
+            "email": "yamila.moreno@kaleidos.net",
             "date_joined": "2012-07-09T14:11:28.636Z"
         }
     }

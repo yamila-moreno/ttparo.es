@@ -18,6 +18,7 @@ class Sex(models.Model):
 
 class Education(models.Model):
     name = models.CharField(max_length=100)
+    inner_id = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
@@ -32,6 +33,7 @@ class Province(models.Model):
 
 class Aoi(models.Model):
     name = models.CharField(max_length=100)
+    inner_id = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name

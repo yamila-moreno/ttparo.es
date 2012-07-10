@@ -20,13 +20,9 @@ class Command(BaseCommand):
         make_option('--csv', dest='csv', default=None,
                     help="CSV input file"),
     )
-    help = 'Used to load a CSV file.'
+    help = 'Used to reset DB, load fixtures and CSV file with microdata.'
 
-    age_cache = {}
-    education_cache = {}
-    sex_cache = {}
     province_cache = {}
-    aoi_cache = {}
 
     def handle(self, *args, **options):
         try:
@@ -38,16 +34,6 @@ class Command(BaseCommand):
         management.call_command('syncdb', interactive=False)
         self.load_csv(options)
 
-    def get_lazy_age(self, edad):
-        if edad not in self.age_cache:
-            self.age_cache[edad] = models.Age.objects.get(name=edad)
-        return self.age_cache[edad]
-
-    def get_lazy_province(self, province):
-        if province not in self.province_cache:
-            self.province_cache[province] = models.Province.objects.get(name=province)
-        return self.province_cache[province]
-
     @transaction.commit_on_success
     def load_csv(self, options):
         #The expected format is:
@@ -57,21 +43,39 @@ class Command(BaseCommand):
         if not csv:
             return
 
+        age_map = {
+            '1': models.Age.objects.get(ine_id=16),
+            '2': models.Age.objects.get(ine_id=20),
+            '3': models.Age.objects.get(ine_id=25),
+            '4': models.Age.objects.get(ine_id=30),
+            '5': models.Age.objects.get(ine_id=35),
+            '6': models.Age.objects.get(ine_id=40),
+            '7': models.Age.objects.get(ine_id=45),
+            '8': models.Age.objects.get(ine_id=50),
+            '9': models.Age.objects.get(ine_id=55),
+            '10': models.Age.objects.get(ine_id=60),
+            '11': models.Age.objects.get(ine_id=65),
+            '12': models.Age.objects.get(ine_id=0),
+            '13': models.Age.objects.get(ine_id=5),
 
-        sex_m = models.Sex.objects.get(name=u'Mujer')
-        sex_h = models.Sex.objects.get(name=u'Varón')
+        }
+
+        sex_map = {
+            'H': models.Sex.objects.get(ine_id=1),
+            'M': models.Sex.objects.get(ine_id=6)
+        }
 
         education_map = {
-            "p": models.Education.objects.get(name=u'ESO / EGB'),
-            "o": models.Education.objects.get(name=u'Nada Completado'),
-            "fp": models.Education.objects.get(name=u'FP (Grado Medio o Grado Superior)'),
-            "b": models.Education.objects.get(name=u'Bachiller / BUP'),
-            "u": models.Education.objects.get(name=u'Universidad (Licenciatura o Diplomatura)'),
+            'o': models.Education.objects.get(inner_id='o'),
+            'p': models.Education.objects.get(inner_id='p'),
+            'fp': models.Education.objects.get(inner_id='fp'),
+            'b': models.Education.objects.get(inner_id='b'),
+            'u': models.Education.objects.get(inner_id='u'),
         }
 
         aoi_map = {
-            "o": models.Aoi.objects.get(name='Ocupados'),
-            "p": models.Aoi.objects.get(name='Parados'),
+            "o": models.Aoi.objects.get(inner_id='o'),
+            "p": models.Aoi.objects.get(inner_id='p'),
         }
 
         buffer = []
@@ -80,28 +84,23 @@ class Command(BaseCommand):
             counter = 0
             for line in f:
                 try:
-                    ciclo, edad, sexo, education, province, aoi, factorel = line.split('\t')
+                    cycle, age, sex, education, province, aoi, factorel = line.split('\t')
                 except ValueError:
                     continue
 
                 sys.stdout.write("\r{0}".format(counter))
                 counter += 1
 
-                age = self.get_lazy_age(edad)
-
-                if sexo == 'M':
-                    sexo = sex_m
-                else:
-                    sexo = sex_h
-
+                age = age_map[age]
+                sex = sex_map[sex]
                 education = education_map[education]
                 province = self.get_lazy_province(province)
                 aoi = aoi_map[aoi]
 
                 obj = models.Microdata(
-                    cycle = ciclo,
+                    cycle = cycle,
                     age = age,
-                    sex = sexo,
+                    sex = sex,
                     education = education,
                     province = province,
                     aoi = aoi,
@@ -115,6 +114,14 @@ class Command(BaseCommand):
 
             if len(buffer) > 0:
                 self.bulk_insert(buffer)
+
+
+        print 'Finished'
+
+    def get_lazy_province(self, province):
+        if province not in self.province_cache:
+            self.province_cache[province] = models.Province.objects.get(ine_id=province)
+        return self.province_cache[province]
 
     def bulk_insert(self, data):
         models.Microdata.objects.bulk_create(data)

@@ -2,7 +2,7 @@ Para completar la instalación del entorno:
 
 1. Instalar nodejs
 2. Instalar npm: curl http://npmjs.org/install.sh | sudo sh
-3. Instalar less: sudo npm install less
+3. Instalar less: sudo npm install less -g
 4. Instalar tools/requirements.txt (con pip)
 
 

@@ -55,7 +55,6 @@ class FormDataView(SuperView):
 class CompareRatesView(SuperView):
     def get(self, request):
         data = request.GET
-        print 'filtro ', data
 
         rates = core.RateQuery.objects.get_rates(data).values()
         context = {'rates': list(rates)}

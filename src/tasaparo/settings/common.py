@@ -158,3 +158,5 @@ LOGGING = {
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+COMPRESS_OUTPUT_DIR = ''

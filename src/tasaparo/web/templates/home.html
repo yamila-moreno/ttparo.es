@@ -7,15 +7,81 @@
     <link rel="shortcut icon" href="" type="image/x-icon" />
     <meta name="description" content="" />
     {% compress css %}
+    <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}css/dropkick.css" />
     <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" />
     {% endcompress %}
 </head>
 <body>
-    <h1>AAAAAAAAAAAA</h1>
+    <div id="headerbg"></div>
+    <div id="container">
+        <div id="header">
+            <img src="{{ STATIC_URL }}images/logo.png" alt="logo" />
+            <ul id="menu">
+                <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
+                <li><a title="Conócenos" href="">Conócenos</a></li>
+                <li><a title="Más info" href="">Más info</a></li>
+                <li><a title="Descargar el Widget" href="">Descargar el Widget</a></li>
+                <li><a title="Api" href="">Api</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="search">
+                <h1>Calcula tu tasa de paro</h1>
+                <form id="calculate" mehod="post" action="">
+                    <div class="field">
+                        <label>Provincia</label>
+                        <select name="x1" class="default">
+                            <option>sss</option>
+                            <option>xx</option>
+                            <option>yyy</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Sexo</label>
+                        <select name="x2" class="default">
+                            <option>sss</option>
+                            <option>xx</option>
+                            <option>yyy</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Edad</label>
+                        <select name="x3" class="default">
+                            <option>sss</option>
+                            <option>xx</option>
+                            <option>yyy</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Nivel de estudios</label>
+                        <select name="x4" class="default">
+                            <option>sss</option>
+                            <option>xx</option>
+                            <option>yyy</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="CALCULAR" />
+                </form>
+                <div class="deco"></div>
+            </div>
+            <div id="question">
+                <img src="{{ STATIC_URL }}images/q.png" />
+            </div>
+            <div id="footer">
+                <p>Tu tasa de Paro © 2012</p>
+                <ul>
+                    <li><a href="">Mas info</a>  |</li>
+                    <li><a href="">Conócenos</a>  |</li>
+                    <li><a href="">Descarga el Widget</a>  |</li>
+                    <li><a href="">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% compress js %}
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery.dropkick-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery.history.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/backbone-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>

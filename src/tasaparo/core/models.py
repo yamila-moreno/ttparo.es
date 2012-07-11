@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Sum, Max
 import hashlib
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -135,3 +136,6 @@ class RateQuery(models.Model):
 
     class Meta:
         ordering = ['date']
+
+    def get_sharing_url(self):
+        return reverse('api:profile-rate-by-hash',args=[self.query_hash])

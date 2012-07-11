@@ -4,6 +4,10 @@ from django.conf import settings
 from tasaparo.core.api import *
 
 urlpatterns = patterns('',
+    url(r'^profile/rate/(?P<query_hash>\d+)/$',
+        ProfileRateByHashView.as_view(),
+        name = 'profile-rate-by-hash',
+    ),
     url(r'^profile/rate/$',
         ProfileRateView.as_view(),
         name = 'profile-rate',

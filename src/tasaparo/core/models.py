@@ -46,7 +46,7 @@ class Aoi(models.Model):
 class MicrodataManager(models.Manager):
 
     def get_rate(self,data):
-        query_hash = self.generate_hash(data)
+        query_hash = generate_hash(data)
         rate_query = RateQuery.objects.rate_query(query_hash, data)
         if not rate_query.rate:
             rate_query.rate = self.calculate_rate(data)
@@ -96,9 +96,9 @@ def generate_hash(self, data):
 
 class RateQueryManager(models.Manager):
     def latest_queries(self):
-        return RateQuery.objects.filter(rate__isnull=False)[:4]
+        return RateQuery.objects.filter(rate__isnull=False).order_by('-date')[:4]
 
-    def rate_query(self, query_hash, data):
+    def rate_query(self, query_hash, data={}):
         try:
             query = RateQuery.objects.get(query_hash=query_hash)
         except:

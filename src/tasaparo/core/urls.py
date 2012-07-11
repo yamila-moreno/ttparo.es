@@ -4,7 +4,7 @@ from django.conf import settings
 from tasaparo.core.api import *
 
 urlpatterns = patterns('',
-    url(r'^profile/rate/(?P<query_hash>\d+)/$',
+    url(r'^profile/rate/(?P<query_hash>[\w-]+)/$',
         ProfileRateByHashView.as_view(),
         name = 'profile-rate-by-hash',
     ),

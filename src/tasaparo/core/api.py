@@ -35,10 +35,8 @@ class LatestQueriesView(SuperView):
 
 class ProfileRateByHashView(SuperView):
     def get(self, request, query_hash):
-        print 'Hola'
         context = {}
         try:
-            print 'en el try'
             rate_query = core.RateQuery.objects.get(query_hash=query_hash)
             context['rate'], context['share'] = rate_query.rate, rate_query.query_hash
             return self.render_json(context, True)

@@ -83,7 +83,7 @@ class Microdata(models.Model):
     def __unicode__(self):
         return u'%(id)s' % {'id':self.id}
 
-def generate_hash(self, data):
+def generate_hash(data):
     return hashlib.md5(str(data)).hexdigest()
 
 class RateQueryManager(models.Manager):
@@ -107,6 +107,7 @@ class RateQueryManager(models.Manager):
             sex = Sex.objects.get(ine_id=data['sex']) if 'sex' in data else None
             province = Province.objects.get(ine_id=data['province']) if 'province' in data else None
             education = Education.objects.get(inner_id=data['education']) if 'education' in data else None
+            cycle = 'cycle' in data and data['cycle'] or None
 
             query = RateQuery(
                 query_hash = query_hash,

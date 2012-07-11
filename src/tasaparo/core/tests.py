@@ -26,11 +26,10 @@ class MicroDataTest(TestCase):
         }
         response = self.client.get(url, get_data)
         self.assertEqual(response.status_code, 200)
-
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
-        self.assertIsInstance(json_parsed['rate'], int)
-        self.assertEqual(json_parsed['rate'], 0)
+        self.assertIsInstance(json_parsed['rate_query']['rate'], int)
+        self.assertEqual(json_parsed['rate_query']['rate'], 0)
 
     def test_calculate_positive_rate(self):
         url = reverse('api:profile-rate')
@@ -42,8 +41,8 @@ class MicroDataTest(TestCase):
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
-        self.assertIsInstance(json_parsed['rate'], int)
-        self.assertEqual(json_parsed['rate'], 38)
+        self.assertIsInstance(json_parsed['rate_query']['rate'], int)
+        self.assertEqual(json_parsed['rate_query']['rate'], 38)
 
     def test_national_rate(self):
         url = reverse('api:national-rate')
@@ -51,8 +50,8 @@ class MicroDataTest(TestCase):
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
-        self.assertIsInstance(json_parsed['rate'], int)
-        self.assertEqual(json_parsed['rate'], 25)
+        self.assertIsInstance(json_parsed['rate_query']['rate'], int)
+        self.assertEqual(json_parsed['rate_query']['rate'], 25)
 
     def test_latest_queries(self):
         core.RateQuery.objects.create(query_hash='aaa',rate=25)

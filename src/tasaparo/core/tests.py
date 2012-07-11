@@ -9,27 +9,61 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 
+from tasaparo.core import models as core
 
 class MicroDataTest(TestCase):
 
     fixtures = ['initial_data','microdata_test']
+    #fixtures = ['initial_data']
 
-    def test_show_microdata(self):
+    def test_calculate_zero_rate(self):
         url = reverse('api:profile-rate')
-        post_data = {
-            #'age': '20',
-            #'sex': '6',
-            #'province': '52',
-            #'education': 'fp'
+        get_data = {
+            'age': '20',
+            'sex': '6',
+            'province': '52',
+            'education': 'fp'
         }
-        response = self.client.post(url, post_data)
+        response = self.client.get(url, get_data)
         self.assertEqual(response.status_code, 200)
 
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
+        self.assertIsInstance(json_parsed['rate'], int)
+        self.assertEqual(json_parsed['rate'], 0)
 
-        self.assertIsInstance(json_parsed['tasaparo'], int)
+    def test_calculate_positive_rate(self):
+        url = reverse('api:profile-rate')
+        get_data = {
+            'sex': '6',
+            'province': '52',
+        }
+        response = self.client.get(url, get_data)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(json_parsed['tasaparo'], 28)
+        json_parsed = simplejson.loads(response.content)
+        self.assertTrue(json_parsed['success'])
+        self.assertIsInstance(json_parsed['rate'], int)
+        self.assertEqual(json_parsed['rate'], 38)
 
+    def test_national_rate(self):
+        url = reverse('api:national-rate')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        json_parsed = simplejson.loads(response.content)
+        self.assertTrue(json_parsed['success'])
+        self.assertIsInstance(json_parsed['rate'], int)
+        self.assertEqual(json_parsed['rate'], 25)
+
+    def test_latest_queries(self):
+        core.RateQuery.objects.create(query_hash='aaa',rate=25)
+        core.RateQuery.objects.create(query_hash='bbb',rate=39)
+
+        url = reverse('api:latest-queries')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        json_parsed = simplejson.loads(response.content)
+        self.assertTrue(json_parsed['success'])
+        self.assertEqual(len(json_parsed['latest_queries']),2)
 

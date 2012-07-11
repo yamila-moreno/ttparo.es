@@ -7,23 +7,22 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.forms.models import model_to_dict
 
 from tasaparo.core import models as core
 
 class ProfileRateView(SuperView):
     def get(self, request):
         data = request.GET
-        context = {}
         rate_query = core.RateQuery.objects.get_rate(data)
-        context['rate'], context['share'] = rate_query.rate, rate_query.query_hash
+        context = {'rate_query': model_to_dict(rate_query)}
         return self.render_json(context, True)
 
 class NationalRateView(SuperView):
     def get(self, request):
         data = {}
-        context = {}
         rate_query = core.RateQuery.objects.get_rate(data)
-        context['rate'], context['share'] = rate_query.rate, rate_query.query_hash
+        context = {'rate_query': model_to_dict(rate_query)}
         return self.render_json(context, True)
 
 
@@ -38,7 +37,7 @@ class ProfileRateByHashView(SuperView):
         context = {}
         try:
             rate_query = core.RateQuery.objects.get(query_hash=query_hash)
-            context['rate'], context['share'] = rate_query.rate, rate_query.query_hash
+            context = {'rate_query': model_to_dict(rate_query)}
             return self.render_json(context, True)
         except:
             return self.render_json(context,False)

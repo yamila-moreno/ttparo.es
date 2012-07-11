@@ -96,3 +96,33 @@ class MicroDataTest(TestCase):
         self.assertEqual(len(json_parsed['provinces']),52)
         self.assertGreater(len(json_parsed['cycles']),28)
 
+    def test_compare_rates_call(self):
+        url = reverse('api:compare-rates')
+        get_data = {
+            'age': '20',
+            'education': 'fp'
+        }
+        response = self.client.get(url, get_data)
+        self.assertEqual(response.status_code, 200)
+        json_parsed = simplejson.loads(response.content)
+        self.assertTrue(json_parsed['success'])
+
+
+    def test_compare_rates_correct(self):
+        test_age_20 = core.Age.objects.get(ine_id = 20)
+        test_age_30 = core.Age.objects.get(ine_id = 30)
+        test_edu_o = core.Education.objects.get(inner_id='o')
+        test_edu_u = core.Education.objects.get(inner_id='u')
+        core.RateQuery.objects.create(query_hash='test',rate=91, age=test_age_20)
+        core.RateQuery.objects.create(query_hash='test2',rate=92, age=test_age_20, education=test_edu_o)
+        core.RateQuery.objects.create(query_hash='test3',rate=93, age=test_age_20, education=test_edu_u)
+        core.RateQuery.objects.create(query_hash='test4',rate=94, age=test_age_30, education=test_edu_o)
+        core.RateQuery.objects.create(query_hash='test5',rate=95, age=test_age_30, education=test_edu_u)
+        url = reverse('api:compare-rates')
+        get_data = {
+            'age': '20'
+        }
+        response = self.client.get(url, get_data)
+        json_parsed = simplejson.loads(response.content)
+        self.assertTrue(json_parsed['success'])
+        self.assertEqual(len(json_parsed['rates']),3)

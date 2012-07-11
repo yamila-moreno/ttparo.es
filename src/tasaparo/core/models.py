@@ -70,7 +70,6 @@ class MicrodataManager(models.Manager):
         rate = int(round(total_unemployed["factorel__sum"] / total["factorel__sum"] * 100))
         return rate
 
-
 class Microdata(models.Model):
     cycle = models.IntegerField()
     age = models.ForeignKey(Age)
@@ -120,6 +119,25 @@ class RateQueryManager(models.Manager):
             )
             query.save()
         return query
+
+    def get_rates(self,data):
+        results = RateQuery.objects.all()
+        if 'cycle' in data:
+            results = results.filter(cycle=data['cycle'])
+        else:
+            latest_cycle = results.aggregate(Max('cycle'))
+            results = results.filter(cycle=latest_cycle['cycle__max'])
+        if 'sex' in data:
+            results = results.filter(sex__ine_id=data['sex'])
+        if 'age' in data:
+            results = results.filter(age__ine_id=data['age'])
+        if 'education' in data:
+            results = results.filter(education__inner_id=data['education'])
+        if 'province' in data:
+            results = results.filter(province__ine_id=data['province'])
+
+        return results
+
 
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)

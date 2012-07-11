@@ -52,3 +52,11 @@ class FormDataView(SuperView):
         context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
         return self.render_json(context, True)
 
+class CompareRatesView(SuperView):
+    def get(self, request):
+        data = request.GET
+        print 'filtro ', data
+
+        rates = core.RateQuery.objects.get_rates(data).values()
+        context = {'rates': list(rates)}
+        return self.render_json(context, True)

@@ -24,4 +24,8 @@ urlpatterns = patterns('',
         FormDataView.as_view(),
         name = 'form-data',
     ),
+    url(r'^compare/rates/$',
+        CompareRatesView.as_view(),
+        name = 'compare-rates',
+    ),
 )

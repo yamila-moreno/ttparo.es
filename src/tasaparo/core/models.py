@@ -45,9 +45,6 @@ class Aoi(models.Model):
 
 class MicrodataManager(models.Manager):
 
-    def generate_hash(self, data):
-        return hashlib.md5(str(data)).hexdigest()
-
     def get_rate(self,data):
         query_hash = self.generate_hash(data)
         rate_query = RateQuery.objects.rate_query(query_hash, data)
@@ -93,6 +90,9 @@ class Microdata(models.Model):
 
     def __unicode__(self):
         return u'%(id)s' % {'id':self.id}
+
+def generate_hash(self, data):
+    return hashlib.md5(str(data)).hexdigest()
 
 class RateQueryManager(models.Manager):
     def latest_queries(self):

@@ -20,4 +20,8 @@ urlpatterns = patterns('',
         LatestQueriesView.as_view(),
         name = 'latest-queries',
     ),
+    url(r'^form/data/$',
+        FormDataView.as_view(),
+        name = 'form-data',
+    ),
 )

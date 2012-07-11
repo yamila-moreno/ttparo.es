@@ -42,3 +42,14 @@ class ProfileRateByHashView(SuperView):
             return self.render_json(context, True)
         except:
             return self.render_json(context,False)
+
+class FormDataView(SuperView):
+    def get(self, request):
+        context = {}
+        context['ages'] = list(core.Age.objects.values('ine_id','name'))
+        context['sexes'] = list(core.Sex.objects.values('ine_id','name'))
+        context['educations'] = list(core.Education.objects.values('inner_id','name'))
+        context['provinces'] = list(core.Province.objects.values('ine_id','name'))
+        context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
+        return self.render_json(context, True)
+

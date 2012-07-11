@@ -45,14 +45,6 @@ class Aoi(models.Model):
 
 class MicrodataManager(models.Manager):
 
-    def get_rate(self,data):
-        query_hash = generate_hash(data)
-        rate_query = RateQuery.objects.rate_query(query_hash, data)
-        if not rate_query.rate:
-            rate_query.rate = self.calculate_rate(data)
-            rate_query.save()
-        return rate_query
-
     def calculate_rate(self, data):
         results = Microdata.objects.all()
         if 'cycle' in data:
@@ -95,6 +87,15 @@ def generate_hash(self, data):
     return hashlib.md5(str(data)).hexdigest()
 
 class RateQueryManager(models.Manager):
+
+    def get_rate(self,data):
+        query_hash = generate_hash(data)
+        rate_query = RateQuery.objects.rate_query(query_hash, data)
+        if not rate_query.rate:
+            rate_query.rate = Microdata.objects.calculate_rate(data)
+            rate_query.save()
+        return rate_query
+
     def latest_queries(self):
         return RateQuery.objects.filter(rate__isnull=False).order_by('-date')[:4]
 

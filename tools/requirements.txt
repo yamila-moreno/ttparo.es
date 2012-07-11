@@ -2,3 +2,4 @@ Django
 psycopg2
 PIL
 django-superview
+django-compressor

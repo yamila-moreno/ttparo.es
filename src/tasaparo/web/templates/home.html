@@ -1,5 +1,23 @@
-<html>
+{% load compress %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Tasa paro</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="description" content="" />
+    {% compress css %}
+    <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" />
+    {% endcompress %}
+</head>
 <body>
     <h1>AAAAAAAAAAAA</h1>
+{% compress js %}
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/backbone-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>
+{% endcompress %}
 </body>
 </html>

@@ -159,8 +159,8 @@ class RateQuery(models.Model):
         general_rate = general_qr.rate
         percent = general_rate * 20 / 100
         if self.rate > (general_rate + percent):
-            return 'high'
+            return '3'
         elif self.rate < (general_rate.rate - percent):
-            return 'low'
+            return '1'
         else:
-            return 'medium'
+            return '2'

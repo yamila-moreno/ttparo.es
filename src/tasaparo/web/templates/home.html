@@ -25,94 +25,7 @@
             </ul>
         </div>
         <div id="content">
-            <div id="search">
-                <h1>Calcula tu tasa de paro</h1>
-                <form id="calculate" mehod="post" action="">
-                    <div class="field">
-                        <label>Provincia</label>
-                        <select id="field-province" name="province" class="default">
-                            <option>sss</option>
-                            <option>xx</option>
-                            <option>yyy</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Sexo</label>
-                        <select id="field-sex" name="sex" class="default">
-                            <option>sss</option>
-                            <option>xx</option>
-                            <option>yyy</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Edad</label>
-                        <select id="field-age" name="age" class="default">
-                            <option>sss</option>
-                            <option>xx</option>
-                            <option>yyy</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Nivel de estudios</label>
-                        <select id="field-studies" name="studies" class="default">
-                            <option>sss</option>
-                            <option>xx</option>
-                            <option>yyy</option>
-                        </select>
-                    </div>
-                    <input type="submit" value="CALCULAR" />
-                </form>
-                <div class="deco"></div>
-            </div>
-            <div id="result">
-                <div id="resulparo" class="r1">?</div>
-            </div>
-            <div id="info">
-                <h2>El paro en perfiles</h2>
-                <div class="item">
-                    <h3>Perfil Alto</h3>
-                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
-                </div>
-                <div class="item">
-                    <h3>Perfil Alto</h3>
-                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
-                </div>
-                <div class="item">
-                    <h3>Perfil Alto</h3>
-                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
-                </div>
-                <div class="item">
-                    <h3>Perfil Alto</h3>
-                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
-                </div>
-            </div>
-            <div id="last">
-                <h2>Últimos perfiles calculados</h2>
-                <div class="lresults">
-                    <div class="result r2">17</div>
-                    <div class="txt">
-                        Mujer, 43 años<br/>
-                        Santa Cruz de Tenerife<br/>
-                        Estudios Universitarios Superiores
-                    </div>
-                </div>
-                <div class="lresults">
-                    <div class="result r1">17</div>
-                    <div class="txt">
-                        Mujer, 43 años<br/>
-                        Santa Cruz de Tenerife<br/>
-                        Estudios Universitarios Superiores
-                    </div>
-                </div>
-                <div class="lresults">
-                    <div class="result r3">17</div>
-                    <div class="txt">
-                        Mujer, 43 años<br/>
-                        Santa Cruz de Tenerife<br/>
-                        Estudios Universitarios Superiores
-                    </div>
-                </div>
-            </div>
+            <div id="inner-content"></div>
             <div id="footer">
                 <p>Tu tasa de Paro © 2012</p>
                 <ul>
@@ -124,6 +37,121 @@
             </div>
         </div>
     </div>
+
+<script type="text/template" id="recalculate">
+    <form id="calculate" mehod="post" action="">
+        <div class="field">
+            <label>Provincia</label>
+            <select id="field-province" name="province" class="default">
+                <option>sss</option>
+                <option>xx</option>
+                <option>yyy</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Sexo</label>
+            <select id="field-sex" name="sex" class="default">
+                <option>sss</option>
+                <option>xx</option>
+                <option>yyy</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Edad</label>
+            <select id="field-age" name="age" class="default">
+                <option>sss</option>
+                <option>xx</option>
+                <option>yyy</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Nivel de estudios</label>
+            <select id="field-studies" name="studies" class="default">
+                <option>sss</option>
+                <option>xx</option>
+                <option>yyy</option>
+            </select>
+        </div>
+        <input type="submit" value="RECALCULAR" />
+    </form>
+</script>
+
+<script type="text/template" id="result-profile">
+    <div id="head2">    
+        <a href="">&lt; volver</a>
+        <h1>Tasa de paro en España</h1>
+    </div>
+    <div id="left"></div>
+    <div id="right">
+        <div id="chart"></div>
+    </div>
+</script>
+
+<script type="text/template" id="result-empty-template">
+    <div id="search">
+        <h1>Calcula tu tasa de paro</h1>
+        <form id="calculate" mehod="post" action="">
+            <div class="field">
+                <label>Provincia</label>
+                <select id="field-province" name="province" class="default">
+                    <option>sss</option>
+                    <option>xx</option>
+                    <option>yyy</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Sexo</label>
+                <select id="field-sex" name="sex" class="default">
+                    <option>sss</option>
+                    <option>xx</option>
+                    <option>yyy</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Edad</label>
+                <select id="field-age" name="age" class="default">
+                    <option>sss</option>
+                    <option>xx</option>
+                    <option>yyy</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Nivel de estudios</label>
+                <select id="field-studies" name="studies" class="default">
+                    <option>sss</option>
+                    <option>xx</option>
+                    <option>yyy</option>
+                </select>
+            </div>
+            <input type="submit" value="CALCULAR" />
+        </form>
+        <div class="deco"></div>
+    </div>
+    <div id="result">
+        <div id="resulparo" class="r1">?</div>
+    </div>
+</script>
+<script type="text/template" id="info-result">
+    <div id="info">
+        <h2>El paro en perfiles</h2>
+        <div class="item">
+            <h3>Perfil Alto</h3>
+            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+        </div>
+        <div class="item">
+            <h3>Perfil Alto</h3>
+            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+        </div>
+        <div class="item">
+            <h3>Perfil Alto</h3>
+            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+        </div>
+        <div class="item">
+            <h3>Perfil Alto</h3>
+            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+        </div>
+    </div>
+</script>
 <script type="text/template" id="result-template">
     <div id="resulparo" style="display: none;" class="<%- level %>"><%- result %><span><%- leveltxt %></span></div>
     <div id="nav-results">
@@ -132,9 +160,39 @@
         <a href="" id="nav-prov">Evolución<br/>de tu perfil</a>
     </div>
 </script>
-
+<script type="text/template" id="last-profiles">
+        <div id="last">
+            <h2>Últimos perfiles calculados</h2>
+            <div class="lresults">
+                <div class="result r2">17</div>
+                <div class="txt">
+                    Mujer, 43 años<br/>
+                    Santa Cruz de Tenerife<br/>
+                    Estudios Universitarios Superiores
+                </div>
+            </div>
+            <div class="lresults">
+                <div class="result r1">17</div>
+                <div class="txt">
+                    Mujer, 43 años<br/>
+                    Santa Cruz de Tenerife<br/>
+                    Estudios Universitarios Superiores
+                </div>
+            </div>
+            <div class="lresults">
+                <div class="result r3">17</div>
+                <div class="txt">
+                    Mujer, 43 años<br/>
+                    Santa Cruz de Tenerife<br/>
+                    Estudios Universitarios Superiores
+                </div>
+            </div>
+        </div>
+</script>
 {% compress js %}
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/raphael-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/elycharts.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery.dropkick-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>

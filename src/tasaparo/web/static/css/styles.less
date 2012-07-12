@@ -31,8 +31,6 @@ abbr,acronym { border:0; }
 
 body { background: url('../images/ttpbg.jpg') no-repeat; }
 
-h1 { font-family:"Open Sans Bold"; font-size: 32px; width: 935px; margin: 35px auto 0 auto; text-align: center; padding-bottom: 25px; border-bottom: 1px solid #e3e3e2; margin-bottom: 30px; }
-
 #headerbg {
     background: url('../images/bgheader.png') repeat-x;
     width: 100%;
@@ -76,6 +74,7 @@ h1 { font-family:"Open Sans Bold"; font-size: 32px; width: 935px; margin: 35px a
 }
 
 #search {
+    h1 { font-family:"Open Sans Bold"; font-size: 32px; width: 935px; margin: 35px auto 0 auto; text-align: center; padding-bottom: 25px; border-bottom: 1px solid #e3e3e2; margin-bottom: 30px; }
     float: left;
     height: 234px;
     width: 100%;
@@ -114,7 +113,7 @@ input[type=submit]{
     height: 246px;
     line-height: 215px;
     border-radius:123px;
-    span { position: absolute; left: 0; bottom: 35px; width: 100%; display: block; color: #e4b4b6; font-family: 'BreeSerif-Regular'; font-size: 17px; text-align: center; line-height: normal; }
+    span { position: absolute; left: 0; bottom: 35px; width: 100%; display: block; font-family: 'BreeSerif-Regular'; font-size: 17px; text-align: center; line-height: normal; }
 }
 
 #footer{
@@ -134,7 +133,7 @@ input[type=submit]{
     float: left;
     background-color: #f7f7f7;
     border-top: 1px solid #dedede;
-    padding: 45px 37px 45px 37px;
+    padding: 25px 37px 45px 37px;
     h2 { font-size: 24px; font-family: 'BreeSerif-Regular'; width: 100%; padding-left: 24px; margin-bottom: 25px; }
     h3 { font-family:"Open Sans Semibold"; font-size: 13px; margin-bottom: 13px; text-transform: uppercase; }
     .item { padding-left: 24px; width: 180px; float: left; margin-right: 25px; }
@@ -158,9 +157,9 @@ input[type=submit]{
     .result { width: 82px; height: 82px; border-radius: 41px; line-height: 82px; font-size: 43px; font-family: 'BreeSerif-Regular'; color: #FFF; text-align: center; float: left; cursor: pointer; }
 }
 
-.r1 { background-color: #c74a53; }
-.r2 { background-color: #e8cc4a; }
-.r3 { background-color: #acde5c; }
+.r1 { background-color: #c74a53; span { color: #e4b4b6; } }
+.r2 { background-color: #e8cc4a; span { color: #f7edcb; } }
+.r3 { background-color: #acde5c; span { color: #e8f5d7; } }
 
 .tooltip{
     border-radius: 5px;
@@ -194,3 +193,26 @@ input[type=submit]{
 #nav-map { background: url('../images/map-option.png') no-repeat; }
 #nav-comp { background: url('../images/graph-option.png') no-repeat; }
 #nav-prov { background: url('../images/circles-option.png') no-repeat; }
+
+#profile-view { padding-bottom: 35px; float: left; width: 100%; }
+
+#head2 {
+    position: relative;
+    height: 71px; line-height: 71px; background-color: #fbfbfb; 
+    h1 { font-family:"Open Sans Bold"; font-size: 32px; width:100%; text-align: center; border-bottom: 1px solid #e3e3e2; }
+    a { color: #005eff; font-size: 16px; font-family:"Open Sans Bold"; position: absolute; left: 57px; text-decoration: none;}
+}
+
+#left {
+    width: 173px;
+    float: left;
+    padding: 45px 0 0 64px;
+    input[type=submit]{ margin: 32px 0 0 0; }
+}
+
+#right { 
+    width: 720px;
+    float: right;
+    padding: 45px 43px 0 0;    
+}
+#chart { width: 690px; height: 285px; }

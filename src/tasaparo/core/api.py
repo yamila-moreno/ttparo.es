@@ -12,27 +12,31 @@ from django.forms.models import model_to_dict
 from tasaparo.core import models as core
 #from tasaparo.core.forms import FilterForm
 
-######################################
-#  TODO: form to validate input data
-######################################
-
 class ProfileRateView(SuperView):
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():
-            return self.render_json({},False)
+            return self.render_json({}, False)
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
-        context = {'rate_query': model_to_dict(rate_query)}
-        return self.render_json(context, True)
+        if rate_query:
+            context = {'rate_query': model_to_dict(rate_query)}
+            return self.render_json(context, True)
+
+        return self.render_json({},False)
 
 class NationalRateView(SuperView):
     def get(self, request):
-        data = {}
-        rate_query = core.RateQuery.objects.get_rate(data=data)
-        context = {'rate_query': model_to_dict(rate_query)}
-        return self.render_json(context, True)
+        form = FilterForm(request.GET)
+        if not form.is_valid():
+            return self.render_json({}, False)
 
+        rate_query = core.RateQuery.objects.get_rate(**form.cleaned_date)
+        if rate_query:
+            context = {'rate_query': model_to_dict(rate_query)}
+            return self.render_json(context, True)
+
+        return self.render_json({},False)
 
 class LatestQueriesView(SuperView):
     def get(self, request):
@@ -53,16 +57,22 @@ class ProfileRateByHashView(SuperView):
 class FormDataView(SuperView):
     def get(self, request):
         context = {}
-        context['ages'] = list(core.Age.objects.values('ine_id','name'))
-        context['sexes'] = list(core.Sex.objects.values('ine_id','name'))
-        context['educations'] = list(core.Education.objects.values('inner_id','name'))
-        context['provinces'] = list(core.Province.objects.values('ine_id','name'))
+        context['ages'] = list(core.Age.objects.values('id','name'))
+        context['sexes'] = list(core.Sex.objects.values('id','name'))
+        context['educations'] = list(core.Education.objects.values('id','name'))
+        context['provinces'] = list(core.Province.objects.values('id','name'))
         context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
         return self.render_json(context, True)
 
 class CompareRatesView(SuperView):
     def get(self, request):
-        data = request.GET
-        rates = core.RateQuery.objects.get_rates(data).values()
-        context = {'rates': list(rates)}
-        return self.render_json(context, True)
+        form = FilterForm(request.GET)
+        if not form.is_valid():
+            return self.render_json({}, False)
+
+        rates = core.RateQuery.objects.get_rates(**form.cleaned_data).values()
+        if rates:
+            context = {'rates': list(rates)}
+            return self.render_json(context, True)
+
+        return self.render_json({}, False)

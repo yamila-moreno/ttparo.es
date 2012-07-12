@@ -47,28 +47,36 @@ class Aoi(models.Model):
 class MicrodataManager(models.Manager):
 
     def calculate_rate(self, data):
+
+        qr_data = {
+            'age_id': data['age'] and data['age'].id or None,
+            'sex_id': data['sex'] and data['sex'].id or None,
+            'education_id': data['education'] and data['education'].id or None,
+            'province_id': data['province'] and data['province'].id or None,
+            'cycle':data['cycle']
+        }
         results = Microdata.objects.all()
-        if 'cycle' in data:
-            results = results.filter(cycle=data['cycle'])
+        if 'sex_id' in qr_data and qr_data['sex_id'] != None:
+            results = results.filter(sex__pk=data['sex_id'])
+        if 'age_id' in qr_data and qr_data['age_id'] != None:
+            results = results.filter(age__pk=data['age_id'])
+        if 'education_id' in qr_data and qr_data['education_id'] != None:
+            results = results.filter(education__pk=data['education_id'])
+        if 'province_id' in qr_data and qr_data['province_id'] != None:
+            results = results.filter(province__pk=data['province_id'])
+        if 'cycle' in qr_data:
+            results = results.filter(cycle=qr_data['cycle'])
         else:
             latest_cycle = results.aggregate(Max('cycle'))
-            results = results.filter(cycle=latest_cycle['cycle__max'])
-        if 'sex' in data:
-            results = results.filter(sex__ine_id=data['sex'])
-        if 'age' in data:
-            results = results.filter(age__ine_id=data['age'])
-        if 'education' in data:
-            results = results.filter(education__inner_id=data['education'])
-        if 'province' in data:
-            results = results.filter(province__ine_id=data['province'])
+            results = results.filter(cycle=latest_cycle)
 
-        total_unemployed = results.filter(aoi__inner_id='p').aggregate(Sum('factorel'))
-        if total_unemployed['factorel__sum'] == None:
+        values = list(results.values_list('aoi__inner_id', 'factorel'))
+        total_unemployed = sum(map(lambda x: x[1], filter(lambda x: x[0]=='p' , values)))
+        total = sum(map(lambda x: x[1], values))
+        try:
+            return int(round(total_unemployed / total * 100))
+        except ZeroDivisionError:
             return 0
-
-        total = results.aggregate(Sum('factorel'))
-        rate = int(round(total_unemployed["factorel__sum"] / total["factorel__sum"] * 100))
-        return rate
 
 
 class Microdata(models.Model):
@@ -89,37 +97,16 @@ def generate_hash(data):
 
 class RateQueryManager(models.Manager):
 
-    def get_rate(self,data):
-        query_hash = generate_hash(data)
-        rate_query = RateQuery.objects.rate_query(query_hash, data)
-        if not rate_query.rate:
-            rate_query.rate = Microdata.objects.calculate_rate(data)
-            rate_query.save()
-        return rate_query
+    def get_rate(self,data=None, query_hash=None):
+        if not query_hash:
+            query_hash = generate_hash(data)
+        try:
+            return RateQuery.objects.rate_query(query_hash, data)
+        except:
+            return None
 
     def latest_queries(self):
         return RateQuery.objects.filter(rate__isnull=False).order_by('-date')[:4]
-
-    def rate_query(self, query_hash, data={}):
-        try:
-            query = RateQuery.objects.get(query_hash=query_hash)
-        except:
-            age = Age.objects.get(ine_id=data['age']) if 'age' in data else None
-            sex = Sex.objects.get(ine_id=data['sex']) if 'sex' in data else None
-            province = Province.objects.get(ine_id=data['province']) if 'province' in data else None
-            education = Education.objects.get(inner_id=data['education']) if 'education' in data else None
-            cycle = 'cycle' in data and data['cycle'] or None
-
-            query = RateQuery(
-                query_hash = query_hash,
-                cycle = cycle,
-                age = age,
-                sex = sex,
-                province = province,
-                education = education
-            )
-            query.save()
-        return query
 
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)
@@ -133,6 +120,10 @@ class RateQuery(models.Model):
     province = models.ForeignKey(Province, null=True)
 
     objects = RateQueryManager()
+
+    def __unicode__(self):
+        return u'%(cycle)s %(age)s %(sex)s %(education)s %(province)s %(rate)s' % \
+            {'cycle':self.cycle, 'age':self.age, 'sex':self.sex, 'education':self.education, 'province':self.province, 'rate':self.rate}
 
     class Meta:
         ordering = ['date']

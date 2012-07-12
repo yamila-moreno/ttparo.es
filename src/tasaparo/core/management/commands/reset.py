@@ -6,6 +6,7 @@ from django.db.models import Q, Count
 from django.db import transaction
 
 from tasaparo.core import models
+import datamaps
 
 import random, sys, subprocess, uuid
 import io
@@ -18,7 +19,9 @@ class Command(BaseCommand):
         #make_option('--no-initial-data', action='store_true', dest='no_initial_data', default=False,
                     #help="Syncronizes models without loading any data"),
         make_option('--csv', dest='csv', default=None,
-                    help="CSV input file"),
+                    help="Microdata CSV input file"),
+        make_option('--sql', dest='sql', default=None,
+                    help="Microdata SQL input file"),
     )
     help = 'Used to reset DB, load fixtures and CSV file with microdata.'
 
@@ -32,50 +35,29 @@ class Command(BaseCommand):
             pass
 
         management.call_command('syncdb', interactive=False)
-        self.load_csv(options)
+
+        #TODO: confirmar que no se recibe csv y sql, no son compatibles
+        sql = options['sql']
+        if sql:
+            self.load_microdata_sql(sql)
+
+        csv = options['csv']
+        if csv:
+            self.load_micdrodata_csv(csv)
+
+
+    def load_microdata_sql(self, sql):
+        subprocess.Popen(['psql', '-f', sql, '-U', 'tasaparo', 'tasaparo']).communicate()
 
     @transaction.commit_on_success
-    def load_csv(self, options):
+    def load_micdrodata_csv(self, csv):
         #The expected format is:
         #ciclo	edad	sexo	nforma	prov	aoi	factorel
-        csv = options['csv']
 
-        if not csv:
-            return
-
-        age_map = {
-            '0': models.Age.objects.get(ine_id=0),
-            '5': models.Age.objects.get(ine_id=5),
-            '16': models.Age.objects.get(ine_id=16),
-            '20': models.Age.objects.get(ine_id=20),
-            '25': models.Age.objects.get(ine_id=25),
-            '30': models.Age.objects.get(ine_id=30),
-            '35': models.Age.objects.get(ine_id=35),
-            '40': models.Age.objects.get(ine_id=40),
-            '45': models.Age.objects.get(ine_id=45),
-            '50': models.Age.objects.get(ine_id=50),
-            '55': models.Age.objects.get(ine_id=55),
-            '60': models.Age.objects.get(ine_id=60),
-            '65': models.Age.objects.get(ine_id=60),
-        }
-
-        sex_map = {
-            '1': models.Sex.objects.get(ine_id='1'),
-            '6': models.Sex.objects.get(ine_id='6')
-        }
-
-        education_map = {
-            'o': models.Education.objects.get(inner_id='o'),
-            'p': models.Education.objects.get(inner_id='p'),
-            'fp': models.Education.objects.get(inner_id='fp'),
-            'b': models.Education.objects.get(inner_id='b'),
-            'u': models.Education.objects.get(inner_id='u'),
-        }
-
-        aoi_map = {
-            "o": models.Aoi.objects.get(inner_id='o'),
-            "p": models.Aoi.objects.get(inner_id='p'),
-        }
+        age_map = datamaps.age_map()
+        sex_map = datamaps.sex_map()
+        education_map = datamaps.education_map()
+        aoi_map = datamaps.aoi_map()
 
         buffer = []
 

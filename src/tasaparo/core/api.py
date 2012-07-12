@@ -14,14 +14,14 @@ from tasaparo.core import models as core
 class ProfileRateView(SuperView):
     def get(self, request):
         data = request.GET
-        rate_query = core.RateQuery.objects.get_rate(data)
+        rate_query = core.RateQuery.objects.get_rate(data=data)
         context = {'rate_query': model_to_dict(rate_query)}
         return self.render_json(context, True)
 
 class NationalRateView(SuperView):
     def get(self, request):
         data = {}
-        rate_query = core.RateQuery.objects.get_rate(data)
+        rate_query = core.RateQuery.objects.get_rate(data=data)
         context = {'rate_query': model_to_dict(rate_query)}
         return self.render_json(context, True)
 
@@ -36,7 +36,7 @@ class ProfileRateByHashView(SuperView):
     def get(self, request, query_hash):
         context = {}
         try:
-            rate_query = core.RateQuery.objects.get(query_hash=query_hash)
+            rate_query = core.RateQuery.objects.get_rate(query_hash=query_hash)
             context = {'rate_query': model_to_dict(rate_query)}
             return self.render_json(context, True)
         except:

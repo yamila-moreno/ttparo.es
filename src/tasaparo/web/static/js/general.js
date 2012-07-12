@@ -235,7 +235,6 @@ var LastProfiles = Backbone.View.extend({
           url: $('#last').attr('latest_queries'),
           dataType:'json',
           success: function(data) {
-
             var last = $("#last");
             for(var i=0; i < 4; i++){
                 var mydict;

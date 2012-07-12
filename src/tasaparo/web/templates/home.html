@@ -154,17 +154,17 @@
         <div class="item">
             <div class="ball r1"></div>
             <h3>Nivel Alto</h3>
-            <p>Bastante por encima de la media Española</p>
+            <p>Bastante por encima de la media española</p>
         </div>
         <div class="item">
             <div class="ball r2"></div>
             <h3>Nivel Medio</h3>
-            <p>Variación de un 10% arriba o abajo de la media Española</p>
+            <p>Variación de un 20% respecto de la media española</p>
         </div>
         <div class="item">
             <div class="ball r3"></div>
             <h3>Nivel Bajo</h3>
-            <p>Bastante por debajo de la media Española</p>
+            <p>Bastante por debajo de la media española</p>
         </div>
     </div>
 </script>
@@ -176,17 +176,18 @@
         <div id="nav-results">
             <a class="link" href="{% url map %}" id="nav-map">Tu perfil<br/>en España</a>
             <a class="link" href="{% url compare %}" id="nav-comp">Comparativa<br/>en tu provincia</a>
-            <a class="link" href="{% url profile %}" id="nav-prov">Evolución<br/>zerfil</a>
+            <a class="link" href="{% url profile %}" id="nav-prov">Evolución<br/>perfil</a>
         </div>
     </div>
 </script>
 
 <script type="text/template" id="last-profiles-item">
     <div class="lresults">
-        <p class="tm">hace <%- time %></p>
+        <!--<p class="tm">hace <%- time %></p>-->
         <div class="result r<%- level%>"><%- percent %></div>
         <div class="txt">
-            <%- sex %>, <%- years %> años<br/>
+            <%- sex %><br/>
+            <%- years %><br/>
             <%- province %><br/>
             <%- studies %>
         </div>

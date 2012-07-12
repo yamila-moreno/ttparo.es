@@ -160,11 +160,15 @@ class RateQuery(models.Model):
         return ('api:profile-rate-by-hash', (), {'query_hash': self.query_hash})
 
     def to_json_dict(self):
-        json_dict = model_to_dict(self)
-        json_dict.update({
+        json_dict = {
+            'age': self.age and self.age.name or 'edad indiferente',
+            'sex': self.sex and self.sex.name or 'género indiferente',
+            'province': self.province and self.province.name or 'provincia indiferente',
+            'education': self.education and self.education.name or 'formación indiferente',
+            'rate':self.rate,
             'level':self.compare_to_general[0],
             'levelText':self.compare_to_general[1]
-        })
+        }
         return json_dict
 
     @property

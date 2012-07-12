@@ -296,9 +296,8 @@ var HomeView = Backbone.View.extend({
           dataType:'json',
           success: function(data) {
               if(data.success) {
-                data = {'result': data.rate_query.rate, 'level': data.rate_query.level, 'leveltxt': data.rate_query.levelText};
+                 data = {'result': data.rate_query.rate, 'level': data.rate_query.level, 'leveltxt': data.rate_query.levelText};
                 aux = data;
-
                 $("#resulparo").fadeOut(function(){
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();

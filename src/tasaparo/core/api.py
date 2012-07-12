@@ -47,16 +47,6 @@ class LatestQueriesView(SuperView):
         context = {'latest_queries':list_json_dict}
         return self.render_json(context, True)
 
-class ProfileRateByHashView(SuperView):
-    def get(self, request, query_hash):
-        context = {}
-        try:
-            rate_query = core.RateQuery.objects.get_rate(query_hash=query_hash)
-            context = {'rate_query': rate_query.to_json_dict()}
-            return self.render_json(context, True)
-        except:
-            return self.render_json(context,False)
-
 class FormDataView(SuperView):
     def get(self, request):
         context = {}

@@ -11,24 +11,13 @@ from tasaparo.core import models as core
 from tasaparo.core.forms import FilterForm
 
 class HomeView(SuperView):
-    def get(self, request):
+    def get(self, request, query_hash=None):
         template = 'home.html'
-
         context = {}
+        if query_hash:
+            context['rate_query'] = core.RateQuery.objects.get_rate(query_hash=query_hash)
         context['form'] = FilterForm()
         context['general_rate'] = core.RateQuery.objects.get_rate()
         context['get_profile_rate_url'] = reverse('api:profile-rate')
         context['get_lastest_queries_url'] = reverse('api:latest-queries')
-
-
-
-        """
-        context = {}
-        context['ages'] = list(core.Age.objects.values('ine_id','name'))
-        context['sexes'] = list(core.Sex.objects.values('ine_id','name'))
-        context['educations'] = list(core.Education.objects.values('inner_id','name'))
-        context['provinces'] = list(core.Province.objects.values('ine_id','name'))
-        context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
-        """
         return self.render_to_response(template, context)
-

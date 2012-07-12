@@ -10,11 +10,19 @@ from django.shortcuts import get_object_or_404
 from django.forms.models import model_to_dict
 
 from tasaparo.core import models as core
+from tasaparo.core.forms import FilterForm
+
+######################################
+#  TODO: form to validate input data
+######################################
 
 class ProfileRateView(SuperView):
     def get(self, request):
-        data = request.GET
-        rate_query = core.RateQuery.objects.get_rate(data=data)
+        form = FilterForm(request.GET)
+        if not form.is_valid():
+            return self.render_json({},False)
+
+        rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
         context = {'rate_query': model_to_dict(rate_query)}
         return self.render_json(context, True)
 
@@ -55,7 +63,6 @@ class FormDataView(SuperView):
 class CompareRatesView(SuperView):
     def get(self, request):
         data = request.GET
-
         rates = core.RateQuery.objects.get_rates(data).values()
         context = {'rates': list(rates)}
         return self.render_json(context, True)

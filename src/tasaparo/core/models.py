@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models import Sum, Max
 import hashlib
@@ -46,26 +47,18 @@ class Aoi(models.Model):
 
 class MicrodataManager(models.Manager):
 
-    def calculate_rate(self, data):
-
-        qr_data = {
-            'age_id': data['age'] and data['age'].id or None,
-            'sex_id': data['sex'] and data['sex'].id or None,
-            'education_id': data['education'] and data['education'].id or None,
-            'province_id': data['province'] and data['province'].id or None,
-            'cycle':data['cycle']
-        }
+    def calculate_rate(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = Microdata.objects.all()
-        if 'sex_id' in qr_data and qr_data['sex_id'] != None:
-            results = results.filter(sex__pk=data['sex_id'])
-        if 'age_id' in qr_data and qr_data['age_id'] != None:
-            results = results.filter(age__pk=data['age_id'])
-        if 'education_id' in qr_data and qr_data['education_id'] != None:
-            results = results.filter(education__pk=data['education_id'])
-        if 'province_id' in qr_data and qr_data['province_id'] != None:
-            results = results.filter(province__pk=data['province_id'])
-        if 'cycle' in qr_data:
-            results = results.filter(cycle=qr_data['cycle'])
+        if sex:
+            results = results.filter(sex__pk=sex)
+        if age:
+            results = results.filter(age__pk=age)
+        if education:
+            results = results.filter(education__pk=education)
+        if province:
+            results = results.filter(province__pk=province)
+        if cycle:
+            results = results.filter(cycle=cycle)
         else:
             latest_cycle = results.aggregate(Max('cycle'))
             results = results.filter(cycle=latest_cycle)
@@ -91,37 +84,45 @@ class Microdata(models.Model):
     def __unicode__(self):
         return u'%(id)s' % {'id':self.id}
 
-def generate_hash(data):
-    return hashlib.md5(str(data)).hexdigest()
+def generate_hash(age=None, cycle=None, education=None, province=None, sex=None):
+    data_normalized = {}
+    data_normalized['age'] = age or ''
+    data_normalized['cycle'] = cycle or Microdata.objects.all().aggregate(Max('cycle'))
+    data_normalized['education'] = education or ''
+    data_normalized['province'] = province or ''
+    data_normalized['sex'] = sex or ''
+    return hashlib.md5(str(data_normalized)).hexdigest()
 
 class RateQueryManager(models.Manager):
 
-    def get_rate(self,data=None, query_hash=None):
+    def get_rate(self, query_hash=None, age=None, cycle=None, education=None, province=None, sex=None):
         if not query_hash:
-            query_hash = generate_hash(data)
+            query_hash = generate_hash(age,cycle,education,province,sex)
+
         try:
-            return RateQuery.objects.rate_query(query_hash, data)
+            return RateQuery.objects.get(query_hash=query_hash)
         except:
             return None
 
     def latest_queries(self):
         return RateQuery.objects.filter(rate__isnull=False).order_by('-date')[:4]
 
-    def get_rates(self,data):
+    def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = RateQuery.objects.all()
-        if 'cycle' in data:
-            results = results.filter(cycle=data['cycle'])
+
+        if cycle:
+            results = results.filter(cycle=cycle)
         else:
             latest_cycle = results.aggregate(Max('cycle'))
             results = results.filter(cycle=latest_cycle['cycle__max'])
-        if 'sex' in data:
-            results = results.filter(sex__ine_id=data['sex'])
-        if 'age' in data:
-            results = results.filter(age__ine_id=data['age'])
-        if 'education' in data:
-            results = results.filter(education__inner_id=data['education'])
-        if 'province' in data:
-            results = results.filter(province__ine_id=data['province'])
+        if sex:
+            results = results.filter(sex__pk=sex)
+        if age:
+            results = results.filter(age__pk=age)
+        if education:
+            results = results.filter(education__pk=education)
+        if province:
+            results = results.filter(province__pk=province)
 
         return results
 

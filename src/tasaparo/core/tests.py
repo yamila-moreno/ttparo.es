@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This file demonstrates writing tests using the unittest module. These will pass
 when you run "manage.py test".
@@ -24,7 +25,7 @@ class MicroDataTest(TestCase):
             'province': '52',
             'education': 'fp'
         }
-        response = self.client.get(url, get_data)
+        response = self.client.get(url, **get_data)
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
@@ -37,7 +38,7 @@ class MicroDataTest(TestCase):
             'sex': '6',
             'province': '52',
         }
-        response = self.client.get(url, get_data)
+        response = self.client.get(url, **get_data)
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
@@ -102,7 +103,7 @@ class MicroDataTest(TestCase):
             'age': '20',
             'education': 'fp'
         }
-        response = self.client.get(url, get_data)
+        response = self.client.get(url, **get_data)
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
@@ -122,7 +123,20 @@ class MicroDataTest(TestCase):
         get_data = {
             'age': '20'
         }
-        response = self.client.get(url, get_data)
+        response = self.client.get(url, **get_data)
         json_parsed = simplejson.loads(response.content)
         self.assertTrue(json_parsed['success'])
         self.assertEqual(len(json_parsed['rates']),3)
+
+    def test_query_hash(self):
+        url = reverse('api:profile-rate')
+        get_data = {
+            'age': '',
+            'sex': '',
+            'province': '',
+            'education': ''
+        }
+        response = self.client.get(url, **get_data)
+        self.assertEqual(response.status_code, 200)
+        json_parsed = simplejson.loads(response.content)
+        print json_parsed

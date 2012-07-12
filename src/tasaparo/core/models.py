@@ -103,12 +103,17 @@ class RateQueryManager(models.Manager):
         if not query_hash:
             query_hash = generate_hash(age=age,cycle=cycle,education=education,province=province,sex=sex)
         try:
-            return RateQuery.objects.get(query_hash=query_hash)
+            rq = RateQuery.objects.get(query_hash=query_hash)
+            rq.save()
+            return rq
         except RateQuery.DoesNotExist:
             return None
 
     def latest_queries(self):
-        return RateQuery.objects.filter(rate__isnull=False).order_by('-date')[:4]
+        latest_cycle = Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
+        return RateQuery.objects.filter(rate__isnull=False).\
+            exclude(age__isnull=True,sex__isnull=True,education__isnull=True,province__isnull=True,cycle=latest_cycle).\
+            order_by('-date')[:4]
 
     def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = RateQuery.objects.all()

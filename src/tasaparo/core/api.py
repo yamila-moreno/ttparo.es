@@ -40,8 +40,11 @@ class NationalRateView(SuperView):
 
 class LatestQueriesView(SuperView):
     def get(self, request):
-        latest_queries = core.RateQuery.objects.latest_queries().values('query_hash','rate')
-        context = {'latest_queries':list(latest_queries)}
+        latest_queries = core.RateQuery.objects.latest_queries()
+        list_json_dict = []
+        for l in latest_queries:
+            list_json_dict.append(l.to_json_dict())
+        context = {'latest_queries':list_json_dict}
         return self.render_json(context, True)
 
 class ProfileRateByHashView(SuperView):

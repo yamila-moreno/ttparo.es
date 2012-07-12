@@ -51,14 +51,14 @@ var TtpRouter = Backbone.Router.extend({
 });
 
 var CompareView = Backbone.View.extend({
-    template: _.template($("#compare-result").html()),    
+    template: _.template($("#compare-result").html()),
     render: function() {
         var tabs = new TabsView(3);
         tabs.render();
 
         $("#inner-content").append("<div id='compare-view'></div>");
         $("#compare-view").html(this.template());
-        
+
         setTimeout(function(){
             var bls = $("#compare-view").find('.bl');
 
@@ -232,47 +232,24 @@ var LastProfiles = Backbone.View.extend({
         var self = this;
 
         $.ajax({
-          url: '',
+          url: $('#last').attr('latest_queries'),
+          dataType:'json',
           success: function(data) {
-            data = {'items': [
-                {'time': '10 minutos',
-                'level': '1',
-                'percent': 10,
-                'sex': 'Mujer',
-                'years': '43',
-                'province': 'Santa Cruz de Tenerife',
-                'studies': 'Estudios Universitarios Superiores'
-                },
-                {'time': '20 minutos',
-                'level': '2',
-                'percent': 20,
-                'sex': 'Mujer',
-                'years': '43',
-                'province': 'Madrid',
-                'studies': 'Estudios Universitarios Superiores'
-                },
-                {'time': '30 minutos',
-                'level': '3',
-                'percent': 34,
-                'sex': 'Hombre',
-                'years': '43',
-                'province': 'Barcelona',
-                'studies': 'FP2'
-                },
-                {'time': '50 minutos',
-                'level': '1',
-                'percent': 53,
-                'sex': 'Mujer',
-                'years': '43',
-                'province': 'Málaga',
-                'studies': 'Estudios Universitarios Superiores'
-                }
-            ]};
 
             var last = $("#last");
-
             for(var i=0; i < 4; i++){
-                last.append(self.template_item(data.items[i]));
+                var mydict;
+                mydict =
+                    {'time': data.latest_queries[i].cycle,
+                    'level': data.latest_queries[i].level,
+                    'percent': data.latest_queries[i].rate,
+                    'sex': data.latest_queries[i].sex,
+                    'years': data.latest_queries[i].age,
+                    'province': data.latest_queries[i].province,
+                    'studies': data.latest_queries[i].education,
+                }
+
+                last.append(self.template_item(mydict));
             }
 
             $(".result").tooltip({
@@ -321,7 +298,7 @@ var HomeView = Backbone.View.extend({
           success: function(data) {
               if(data.success) {
                 data = {'result': data.rate_query.rate, 'level': data.rate_query.level, 'leveltxt': data.rate_query.levelText};
-            aux = data;
+                aux = data;
 
                 $("#resulparo").fadeOut(function(){
                     $("#result").html(self.template2(data));

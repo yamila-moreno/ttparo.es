@@ -8,7 +8,7 @@ var TtpRouter = Backbone.Router.extend({
         "profile/" : "profile",
     },
 
-    home: function(){            
+    home: function(){
         $("#inner-content").html("<div id='home-view'></div>");
         var homeview = new HomeView();
         homeview.render();
@@ -74,7 +74,7 @@ var InfoResult = Backbone.View.extend({
 });
 
 var MapView = Backbone.View.extend({
-    template: _.template($("#map-result").html()),    
+    template: _.template($("#map-result").html()),
     render: function() {
         var tabs = new TabsView(2);
         tabs.render();
@@ -137,7 +137,7 @@ var ProfileView = Backbone.View.extend({
         recalcualteview.render();
 
         $.ajax({
-          data: $("#calculate").serialize(),  
+          data: $("#calculate").serialize(),
           url: '',
           success: function(data) {
             //borrar
@@ -160,7 +160,7 @@ var ProfileView = Backbone.View.extend({
         var self = this;
 
         $.ajax({
-          data: $(this).serialize(),    
+          data: $(this).serialize(),
           url: '',
           success: function(data) {
             //delete
@@ -235,12 +235,12 @@ var LastProfiles = Backbone.View.extend({
                 last.append(self.template_item(data.items[i]));
             }
 
-            $(".result").tooltip({ 
+            $(".result").tooltip({
                 'position': 'top center',
                 'margin_bottom': 10,
                 'html': function(self){
                     return "<p>Rellena el formulario para obtener tu tasa de paro</p><div class='arrow'></div></div>";
-                 }                    
+                 }
             });
 
           }
@@ -251,9 +251,9 @@ var LastProfiles = Backbone.View.extend({
 });
 
 var HomeView = Backbone.View.extend({
-    template1: _.template($("#result-empty-template").html()),      
-    template2: _.template($("#result-template").html()), 
-    template3: _.template($("#search-template").html()), 
+    template1: _.template($("#result-empty-template").html()),
+    template2: _.template($("#result-template").html()),
+    template3: _.template($("#search-template").html()),
     el: '#home-view',
     render: function() {
         $(this.el).html(this.template3());
@@ -273,23 +273,24 @@ var HomeView = Backbone.View.extend({
         e.preventDefault();
         var self = this;
         $.ajax({
-          data: $(this).serialize(),    
-          url: $(this).attr('action'),
+          data: $('#calculate').serialize(),
+          url: $('#calculate').attr('action'),
           success: function(data) {
-            data = {'result': 17, 'level': '2', 'leveltxt': 'nivel alto'};
+            if(data['valid'] == true) {
+                data = {'result': data['rate_query'].rate, 'level': data['rate_query'].compare_to_general[0], 'leveltxt': data['rate_query'].compare_to_general[1]};
             aux = data;
 
-            $("#resulparo").fadeOut(function(){
-                $("#result").html(self.template2(data));
-                $("#resulparo").fadeIn();
-            });
-
+                $("#resulparo").fadeOut(function(){
+                    $("#result").html(self.template2(data));
+                    $("#resulparo").fadeIn();
+                });
+            }
           }
         });
     }
 });
 
-$(document).ready(function(){    
+$(document).ready(function(){
     var appTtpRouter = new TtpRouter();
     Backbone.history.start({pushState: true});
 

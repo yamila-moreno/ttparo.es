@@ -85,7 +85,6 @@ class Command(BaseCommand):
                 education = education,
                 province = province,
             )
-
             obj.rate = self.calculate_rate(
                 age and age.id or None,
                 c_cycle,

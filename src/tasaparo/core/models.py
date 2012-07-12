@@ -62,7 +62,7 @@ class MicrodataManager(models.Manager):
         if cycle:
             results = results.filter(cycle=cycle)
         else:
-            results = results.filter(cycle=latest_cycle)
+            results = results.filter(cycle=latest_cycle['cycle__max'])
 
         values = list(results.values_list('aoi__inner_id', 'factorel'))
         total_unemployed = sum(map(lambda x: x[1], filter(lambda x: x[0]=='p' , values)))
@@ -88,7 +88,7 @@ class Microdata(models.Model):
 def generate_hash(age=None, cycle=None, education=None, province=None, sex=None):
     data_normalized = {}
     data_normalized['age'] = age or ''
-    data_normalized['cycle'] = cycle or Microdata.objects.all().aggregate(Max('cycle'))
+    data_normalized['cycle'] = cycle or Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
     data_normalized['education'] = education or ''
     data_normalized['province'] = province or ''
     data_normalized['sex'] = sex or ''
@@ -100,9 +100,10 @@ class RateQueryManager(models.Manager):
 
         if not query_hash:
             query_hash = generate_hash(age,cycle,education,province,sex)
+            print query_hash
         try:
             return RateQuery.objects.get(query_hash=query_hash)
-        except:
+        except RateQuery.DoesNotExist:
             return None
 
     def latest_queries(self):
@@ -159,8 +160,8 @@ class RateQuery(models.Model):
         general_rate = general_qr.rate
         percent = general_rate * 20 / 100
         if self.rate > (general_rate + percent):
-            return '3'
+            return '3', 'nivel alto'
         elif self.rate < (general_rate.rate - percent):
-            return '1'
+            return '1', 'nivel bajo'
         else:
-            return '2'
+            return '2', 'nivel medio'

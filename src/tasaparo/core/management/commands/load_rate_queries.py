@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core import management
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Max
 from django.db import transaction
 from django.forms.models import model_to_dict
 
@@ -64,15 +64,15 @@ class Command(BaseCommand):
         for c in combs:
             #sys.stdout.write("\r{0}".format(counter))
             counter += 1
-            if counter%100==0:
+            if counter%200==0:
                 print 'VAMOS ==>', counter
 
             c_age, c_sex, c_province, c_education, c_cycle = c
 
-            age = age_map[c_age] or None
-            sex = sex_map[c_sex] or None
-            education = education_map[c_education] or None
-            province = self.get_lazy_province(c_province) or None
+            age = c_age and age_map[c_age] or None
+            sex = c_sex and sex_map[c_sex] or None
+            education = c_education and c_education and education_map[c_education] or None
+            province = c_province and self.get_lazy_province(c_province) or None
 
             obj = models.RateQuery(
                 query_hash = generate_hash(c_age, c_cycle, c_education, c_province, c_sex),
@@ -85,7 +85,7 @@ class Command(BaseCommand):
 
             obj.rate = self.calculate_rate(
                 age and age.id or None,
-                cycle,
+                c_cycle,
                 education and education.id or None,
                 province and province.id or None,
                 sex and sex.id or None
@@ -102,7 +102,7 @@ class Command(BaseCommand):
 
     def get_lazy_province(self, province):
         if province not in self.province_cache:
-            self.province_cache[province] = models.Province.objects.get(ine_id=province)
+            self.province_cache[province] = models.Province.objects.get(id=province)
         return self.province_cache[province]
 
     def bulk_insert(self, data):

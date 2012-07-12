@@ -49,6 +49,8 @@ class MicrodataManager(models.Manager):
 
     def calculate_rate(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = Microdata.objects.all()
+        latest_cycle = results.aggregate(Max('cycle'))
+
         if sex:
             results = results.filter(sex__pk=sex)
         if age:
@@ -60,7 +62,6 @@ class MicrodataManager(models.Manager):
         if cycle:
             results = results.filter(cycle=cycle)
         else:
-            latest_cycle = results.aggregate(Max('cycle'))
             results = results.filter(cycle=latest_cycle)
 
         values = list(results.values_list('aoi__inner_id', 'factorel'))
@@ -109,12 +110,8 @@ class RateQueryManager(models.Manager):
 
     def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = RateQuery.objects.all()
+        latest_cycle = results.aggregate(Max('cycle'))
 
-        if cycle:
-            results = results.filter(cycle=cycle)
-        else:
-            latest_cycle = results.aggregate(Max('cycle'))
-            results = results.filter(cycle=latest_cycle['cycle__max'])
         if sex:
             results = results.filter(sex__pk=sex)
         if age:
@@ -123,6 +120,10 @@ class RateQueryManager(models.Manager):
             results = results.filter(education__pk=education)
         if province:
             results = results.filter(province__pk=province)
+        if cycle:
+            results = results.filter(cycle=cycle)
+        else:
+            results = results.filter(cycle=latest_cycle['cycle__max'])
 
         return results
 

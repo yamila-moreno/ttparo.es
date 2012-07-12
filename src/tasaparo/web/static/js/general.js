@@ -21,7 +21,12 @@ var TtpRouter = Backbone.Router.extend({
     },
 
     map: function(){
-        console.log("map");
+        if(aux.result === undefined){
+            this.navigate("", true);
+            return true;
+        }
+        var mapview = new MapView();
+        mapview.render();
     },
 
     compare: function(){
@@ -29,8 +34,25 @@ var TtpRouter = Backbone.Router.extend({
     },
 
     profile: function(){
+        if(aux.result === undefined){
+            this.navigate("", true);
+            return true;
+        }
         var profileview = new ProfileView();
         profileview.render();
+    }
+});
+
+var TabsView = Backbone.View.extend({
+    template: _.template($("#tabs").html()),
+    option: 1,
+    initialize: function (option) {
+        this.option = option;
+    },
+    render: function() {
+        $("#inner-content").html(this.template(aux));
+        $("#tabmenu .t"+this.option).addClass('sel');
+        return this;
     }
 });
 
@@ -38,6 +60,7 @@ var RecalculateView = Backbone.View.extend({
     template: _.template($("#recalculate").html()),
     render: function() {
         $("#left").append(this.template());
+        $('.default').dropkick();
         return this;
     }
 });
@@ -46,9 +69,26 @@ var InfoResult = Backbone.View.extend({
     template: _.template($("#info-result").html()),
     render: function() {
         $("#inner-content").append(this.template());
-        $('.default').dropkick();
-
         return this;
+    }
+});
+
+var MapView = Backbone.View.extend({
+    template: _.template($("#map-result").html()),    
+    render: function() {
+        var tabs = new TabsView(2);
+        tabs.render();
+
+        $("#inner-content").append("<div id='map-view'></div>");
+        $("#map-view").html(this.template());
+
+        var recalcualteview = new RecalculateView();
+        recalcualteview.render();
+
+        var inforesult = new InfoResult();
+        inforesult.render();
+
+        initmap();
     }
 });
 
@@ -86,7 +126,10 @@ var ProfileView = Backbone.View.extend({
         });
     },
     render: function() {
-        $("#inner-content").html("<div id='profile-view'></div>");
+        var tabs = new TabsView(4);
+        tabs.render();
+
+        $("#inner-content").append("<div id='profile-view'></div>");
         $("#profile-view").html(this.template());
         var self = this;
 

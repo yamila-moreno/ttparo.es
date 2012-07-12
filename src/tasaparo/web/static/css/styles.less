@@ -164,6 +164,10 @@ input[type=submit]{
 .r2 { background-color: #e2ba00; span { color: #f7edcb; } }
 .r3 { background-color: #acde5c; span { color: #e8f5d7; } }
 
+.c1 { color: #c74a53 !important; }
+.c2 { color: #e2ba00 !important; }
+.c3 { color: #acde5c !important; }
+
 .tooltip{
     border-radius: 5px;
     background-color: #000;
@@ -197,13 +201,12 @@ input[type=submit]{
 #nav-comp { background: url('../images/graph-option.png') no-repeat; }
 #nav-prov { background: url('../images/circles-option.png') no-repeat; }
 
-#profile-view { padding-bottom: 35px; float: left; width: 100%; }
+#profile-view, #map-view { padding-bottom: 35px; float: left; width: 100%; }
 
 #head2 {
-    position: relative;
-    height: 71px; line-height: 71px; background-color: #fbfbfb; 
-    h1 { font-family:"Open Sans Bold"; font-size: 32px; width:100%; text-align: center; border-bottom: 1px solid #e3e3e2; }
-    a { color: #005eff; font-size: 16px; font-family:"Open Sans Bold"; position: absolute; left: 57px; text-decoration: none;}
+    padding: 27px 0 0 64px;
+    h1 { font-family:"Open Sans Bold"; font-size: 25px; width:100%;  }
+    a { color: #005eff; font-size: 14px; font-family:"Open Sans Semibold"; text-decoration: none; margin-bottom: 25px; display: block; }
 }
 
 #left {
@@ -240,4 +243,77 @@ input[type=submit]{
     line-height: 270px;
     border-radius:123px;
     span { position: absolute; left: 0; top: 33px; width: 100%; display: block; font-family: 'BreeSerif-Regular'; font-size: 18px; text-align: center; line-height: normal; color: #adadad; }
+}
+
+#tabmenu {
+    position: relative;
+    width: 100%;
+    height: 72px;
+    ul { position: absolute; top: 0; left: 0; }
+    margin-top: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    float: left;
+    .t1 a{
+        font-family:"Open Sans Bold";
+        font-size: 16px;
+        text-align: center;
+        line-height: 30px;
+    }
+    .t2 {
+        a { background: url('../images/tab1a.png') no-repeat 30px center; padding-left: 80px; width: 97px; }
+        &.sel { 
+            a {
+                background: #FFF url('../images/tab1b.png') no-repeat 30px center; 
+            }
+        }
+
+    }
+    .t3 {
+        a { background: url('../images/tab2a.png') no-repeat 30px center; padding-left: 80px; width: 128px; }
+        &.sel { 
+            a {
+                background: #FFF url('../images/tab2b.png') no-repeat 30px center; 
+            }
+        }
+    }
+    .t4 {
+        a { background: url('../images/tab3a.png') no-repeat 30px center; padding-left: 103px; width: 100px; }
+        &.sel { 
+            a {
+                background: #FFF url('../images/tab3b.png') no-repeat 30px center; 
+            }
+        }
+    }
+    a {
+        position: relative;
+        top: 1px;
+        border-top: 3px solid #fff;
+        text-decoration: none;
+        display: block;
+        padding-top: 24px;
+        height: 44px; 
+        width: 177px;
+        font-size: 13px;
+        color: #000;
+        font-family:"Open Sans";
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #FFF;
+    }
+    li {
+        border-right: 1px solid #e5e5e5;
+        float: left;
+        &.sel {
+            a {
+                border-bottom: 1px solid #FFF;
+                border-top: 3px solid #0c64fc;
+                background: #FFF url('../images/tab3b.png') no-repeat 30px center; 
+                color: #0c64fc;
+            }
+        }
+    }
+}
+
+#map {
+    width: 600px;
+    float: right;
 }

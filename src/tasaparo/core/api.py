@@ -20,7 +20,7 @@ class ProfileRateView(SuperView):
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
         if rate_query:
-            context = {'rate_query': model_to_dict(rate_query)}
+            context = {'rate_query': rate_query.to_json_dict()}
             return self.render_json(context, True)
 
         return self.render_json({},False)
@@ -33,7 +33,7 @@ class NationalRateView(SuperView):
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_date)
         if rate_query:
-            context = {'rate_query': model_to_dict(rate_query)}
+            context = {'rate_query': rate_query.to_json_dict()}
             return self.render_json(context, True)
 
         return self.render_json({},False)
@@ -49,7 +49,7 @@ class ProfileRateByHashView(SuperView):
         context = {}
         try:
             rate_query = core.RateQuery.objects.get_rate(query_hash=query_hash)
-            context = {'rate_query': model_to_dict(rate_query)}
+            context = {'rate_query': rate_query.to_json_dict()}
             return self.render_json(context, True)
         except:
             return self.render_json(context,False)

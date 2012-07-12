@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Sum, Max
 import hashlib
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
 
 # Create your models here.
 
@@ -87,11 +88,12 @@ class Microdata(models.Model):
 
 def generate_hash(age=None, cycle=None, education=None, province=None, sex=None):
     data_normalized = {}
-    data_normalized['age'] = age or ''
-    data_normalized['cycle'] = cycle or Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
-    data_normalized['education'] = education or ''
-    data_normalized['province'] = province or ''
-    data_normalized['sex'] = sex or ''
+    data_normalized['age'] = age and str(age) or ''
+    data_normalized['cycle'] = cycle and str(cycle) or str(Microdata.objects.all().aggregate(Max('cycle'))['cycle__max'])
+    data_normalized['education'] = education and str(education) or ''
+    data_normalized['province'] = province and str(province) or ''
+    data_normalized['sex'] = sex and str(sex) or ''
+
     return hashlib.md5(str(data_normalized)).hexdigest()
 
 class RateQueryManager(models.Manager):
@@ -99,8 +101,7 @@ class RateQueryManager(models.Manager):
     def get_rate(self, query_hash=None, age=None, cycle=None, education=None, province=None, sex=None):
 
         if not query_hash:
-            query_hash = generate_hash(age,cycle,education,province,sex)
-            print query_hash
+            query_hash = generate_hash(age=age,cycle=cycle,education=education,province=province,sex=sex)
         try:
             return RateQuery.objects.get(query_hash=query_hash)
         except RateQuery.DoesNotExist:
@@ -153,15 +154,23 @@ class RateQuery(models.Model):
     def get_sharing_url(self):
         return ('api:profile-rate-by-hash', (), {'query_hash': self.query_hash})
 
+    def to_json_dict(self):
+        json_dict = model_to_dict(self)
+        json_dict.update({
+            'level':self.compare_to_general[0],
+            'levelText':self.compare_to_general[1]
+        })
+        return json_dict
+
     @property
     def compare_to_general(self):
         general_hash = generate_hash()
-        general_qr = self.get_rate(general_hash)
+        general_qr = RateQuery.objects.get_rate(query_hash=general_hash)
         general_rate = general_qr.rate
         percent = general_rate * 20 / 100
         if self.rate > (general_rate + percent):
-            return '3', 'nivel alto'
-        elif self.rate < (general_rate.rate - percent):
-            return '1', 'nivel bajo'
+            return '1', 'nivel alto'
+        elif self.rate < (general_rate - percent):
+            return '3', 'nivel bajo'
         else:
             return '2', 'nivel medio'

@@ -281,9 +281,10 @@ var HomeView = Backbone.View.extend({
         $.ajax({
           data: $('#calculate').serialize(),
           url: $('#calculate').attr('action'),
+          dataType:'json',
           success: function(data) {
-            if(data['valid'] == true) {
-                data = {'result': data['rate_query'].rate, 'level': data['rate_query'].compare_to_general[0], 'leveltxt': data['rate_query'].compare_to_general[1]};
+              if(data.success) {
+                data = {'result': data.rate_query.rate, 'level': data.rate_query.level, 'leveltxt': data.rate_query.levelText};
             aux = data;
 
                 $("#resulparo").fadeOut(function(){

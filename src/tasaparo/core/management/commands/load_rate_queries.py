@@ -78,7 +78,7 @@ class Command(BaseCommand):
             province = c_province and self.get_lazy_province(c_province) or None
 
             obj = models.RateQuery(
-                query_hash = generate_hash(c_age, c_cycle, c_education, c_province, c_sex),
+                query_hash = generate_hash(age=c_age, cycle=c_cycle, education=c_education, province=c_province, sex=c_sex),
                 cycle = c_cycle,
                 age = age,
                 sex = sex,

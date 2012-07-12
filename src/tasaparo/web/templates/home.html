@@ -30,7 +30,7 @@
                 <form id="calculate" mehod="post" action="">
                     <div class="field">
                         <label>Provincia</label>
-                        <select name="x1" class="default">
+                        <select id="field-province" name="province" class="default">
                             <option>sss</option>
                             <option>xx</option>
                             <option>yyy</option>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="field">
                         <label>Sexo</label>
-                        <select name="x2" class="default">
+                        <select id="field-sex" name="sex" class="default">
                             <option>sss</option>
                             <option>xx</option>
                             <option>yyy</option>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="field">
                         <label>Edad</label>
-                        <select name="x3" class="default">
+                        <select id="field-age" name="age" class="default">
                             <option>sss</option>
                             <option>xx</option>
                             <option>yyy</option>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="field">
                         <label>Nivel de estudios</label>
-                        <select name="x4" class="default">
+                        <select id="field-studies" name="studies" class="default">
                             <option>sss</option>
                             <option>xx</option>
                             <option>yyy</option>
@@ -64,8 +64,54 @@
                 </form>
                 <div class="deco"></div>
             </div>
-            <div id="question">
-                <img src="{{ STATIC_URL }}images/q.png" />
+            <div id="result">
+                <div id="resulparo" class="r1">?</div>
+            </div>
+            <div id="info">
+                <h2>El paro en perfiles</h2>
+                <div class="item">
+                    <h3>Perfil Alto</h3>
+                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+                </div>
+                <div class="item">
+                    <h3>Perfil Alto</h3>
+                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+                </div>
+                <div class="item">
+                    <h3>Perfil Alto</h3>
+                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+                </div>
+                <div class="item">
+                    <h3>Perfil Alto</h3>
+                    <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+                </div>
+            </div>
+            <div id="last">
+                <h2>Últimos perfiles calculados</h2>
+                <div class="lresults">
+                    <div class="result r2">17</div>
+                    <div class="txt">
+                        Mujer, 43 años<br/>
+                        Santa Cruz de Tenerife<br/>
+                        Estudios Universitarios Superiores
+                    </div>
+                </div>
+                <div class="lresults">
+                    <div class="result r1">17</div>
+                    <div class="txt">
+                        Mujer, 43 años<br/>
+                        Santa Cruz de Tenerife<br/>
+                        Estudios Universitarios Superiores
+                    </div>
+                </div>
+                <div class="lresults">
+                    <div class="result r3">17</div>
+                    <div class="txt">
+                        Mujer, 43 años<br/>
+                        Santa Cruz de Tenerife<br/>
+                        Estudios Universitarios Superiores
+                    </div>
+                </div>
             </div>
             <div id="footer">
                 <p>Tu tasa de Paro © 2012</p>
@@ -78,12 +124,22 @@
             </div>
         </div>
     </div>
+<script type="text/template" id="result-template">
+    <div id="resulparo" style="display: none;" class="<%- level %>"><%- result %><span><%- leveltxt %></span></div>
+    <div id="nav-results">
+        <a href="" id="nav-map">Tu perfil<br/>en España</a>
+        <a href="" id="nav-comp">Comparativa<br/>en tu provincia</a>
+        <a href="" id="nav-prov">Evolución<br/>de tu perfil</a>
+    </div>
+</script>
+
 {% compress js %}
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery.dropkick-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/backbone-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/tooltip.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>
 {% endcompress %}
 </body>

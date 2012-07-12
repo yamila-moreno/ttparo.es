@@ -6,11 +6,21 @@ from superview.views import SuperView
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+
 from tasaparo.core import models as core
+from tasaparo.core.forms import FilterForm
 
 class HomeView(SuperView):
     def get(self, request):
         template = 'home.html'
+
+        context = {}
+        context['form'] = FilterForm()
+        context['general_rate'] = core.RateQuery.objects.get_rate()
+        context['get_profile_rate_url'] = reverse('api:profile-rate')
+
+
+
         """
         context = {}
         context['ages'] = list(core.Age.objects.values('ine_id','name'))
@@ -19,5 +29,5 @@ class HomeView(SuperView):
         context['provinces'] = list(core.Province.objects.values('ine_id','name'))
         context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
         """
-        return self.render_to_response(template)
+        return self.render_to_response(template, context)
 

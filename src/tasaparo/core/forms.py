@@ -12,10 +12,10 @@ class FilterForm(forms.Form):
     PROVINCE_CHOICES = list(models.Province.objects.all().values_list('id','name'))
     SEX_CHOICES = list(models.Sex.objects.all().values_list('id','name'))
 
-    age = forms.TypedChoiceField(required=False, choices=AGE_CHOICES)
-    cycle = forms.TypedChoiceField(required=False, choices=CYCLE_CHOICES)
-    education = forms.TypedChoiceField(required=False, choices=EDUCATION_CHOICES)
-    province = forms.TypedChoiceField(required=False, choices=PROVINCE_CHOICES)
-    sex = forms.TypedChoiceField(required=False, choices=SEX_CHOICES)
+    age = forms.TypedChoiceField(required=False, choices=AGE_CHOICES, widget=forms.Select(attrs={'class':'default'}))
+    cycle = forms.TypedChoiceField(required=False, choices=CYCLE_CHOICES, widget=forms.Select(attrs={'class':'default'}))
+    education = forms.TypedChoiceField(required=False, choices=EDUCATION_CHOICES, widget=forms.Select(attrs={'class':'default'}))
+    province = forms.TypedChoiceField(required=False, choices=PROVINCE_CHOICES, widget=forms.Select(attrs={'class':'default'}))
+    sex = forms.TypedChoiceField(required=False, choices=SEX_CHOICES, widget=forms.Select(attrs={'class':'default'}))
 
 

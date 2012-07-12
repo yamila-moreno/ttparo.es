@@ -97,9 +97,9 @@ def generate_hash(age=None, cycle=None, education=None, province=None, sex=None)
 class RateQueryManager(models.Manager):
 
     def get_rate(self, query_hash=None, age=None, cycle=None, education=None, province=None, sex=None):
+
         if not query_hash:
             query_hash = generate_hash(age,cycle,education,province,sex)
-
         try:
             return RateQuery.objects.get(query_hash=query_hash)
         except:

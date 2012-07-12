@@ -6,11 +6,11 @@ from tasaparo.core import models
 
 class FilterForm(forms.Form):
 
-    AGE_CHOICES = list(models.Age.objects.all().values('id','name'))
+    AGE_CHOICES = list(models.Age.objects.all().values_list('id','name'))
     CYCLE_CHOICES = models.Microdata.objects.all().order_by('cycle').distinct('cycle').values_list('cycle', 'cycle')
-    EDUCATION_CHOICES = list(models.Education.objects.all().values('id','name'))
-    PROVINCE_CHOICES = list(models.Province.objects.all().values('id','name'))
-    SEX_CHOICES = list(models.Sex.objects.all().values('id','name'))
+    EDUCATION_CHOICES = list(models.Education.objects.all().values_list('id','name'))
+    PROVINCE_CHOICES = list(models.Province.objects.all().values_list('id','name'))
+    SEX_CHOICES = list(models.Sex.objects.all().values_list('id','name'))
 
     age = forms.TypedChoiceField(required=False, choices=AGE_CHOICES)
     cycle = forms.TypedChoiceField(required=False, choices=CYCLE_CHOICES)

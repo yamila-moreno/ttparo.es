@@ -19,8 +19,11 @@ class ProfileRateView(SuperView):
             return self.render_json({}, False)
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
-        context = {'rate_query': model_to_dict(rate_query)}
-        return self.render_json(context, True)
+        if rate_query:
+            context = {'rate_query': model_to_dict(rate_query)}
+            return self.render_json(context, True)
+
+        return self.render_json({},False)
 
 class NationalRateView(SuperView):
     def get(self, request):
@@ -29,9 +32,11 @@ class NationalRateView(SuperView):
             return self.render_json({}, False)
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_date)
-        context = {'rate_query': model_to_dict(rate_query)}
-        return self.render_json(context, True)
+        if rate_query:
+            context = {'rate_query': model_to_dict(rate_query)}
+            return self.render_json(context, True)
 
+        return self.render_json({},False)
 
 class LatestQueriesView(SuperView):
     def get(self, request):
@@ -66,5 +71,8 @@ class CompareRatesView(SuperView):
             return self.render_json({}, False)
 
         rates = core.RateQuery.objects.get_rates(**form.cleaned_data).values()
-        context = {'rates': list(rates)}
-        return self.render_json(context, True)
+        if rates:
+            context = {'rates': list(rates)}
+            return self.render_json(context, True)
+
+        return self.render_json({}, False)

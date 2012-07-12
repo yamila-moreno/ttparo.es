@@ -159,7 +159,7 @@ var ProfileView = Backbone.View.extend({
         e.preventDefault();
         var self = this;
 
-        recalculate();
+        recalculate('');
 
         $.ajax({
           data: $(this).serialize(),    
@@ -291,10 +291,10 @@ var HomeView = Backbone.View.extend({
     }
 });
 
-function recalculate(){
+function recalculate(url){
     $.ajax({
       data: $("#calculate").serialize(),    
-      url: '',
+      url: url,
       success: function(data) {
         //borrar
         data = {'result': 25, 'level': '3', 'leveltxt': 'nivel alto'};

@@ -40,7 +40,7 @@
 
 <script type="text/template" id="tabs">
 <ul id="tabmenu">
-    <li class="t1"><a class="link c<%- level %>" href="{% url home %}">Tu tasa: <%- result %>%</a></li>
+    <li class="t1"><a class="link c<%- level %>" href="{% url home %}">Tu tasa: <span><%- result %>%</span></a></li>
     <li class="t2"><a class="link" href="{% url map %}">Tu perfil<br/>en España</a></li>
     <li class="t3"><a class="link" href="{% url home %}">Comparativa<br/> en tu Provincia</a></li>
     <li class="t4"><a class="link" href="{% url profile %}">Evolución<br/> de tu perfil</a></li>
@@ -273,7 +273,7 @@ R.path('M270,305, 267,310, 261,320, 258,324, 253,328, 245,327, 239,331, 232,329,
                     st[0].style.cursor = "pointer";
                     st[0].onmouseover = function () {
                         current && pro[current].animate({fill: "#e5e5e5"}, 500);
-                        st.animate({fill: st.color, stroke: "#ccc", "stroke-width": 4}, 500);
+                        st.animate({fill: st.color, "stroke-width": 4}, 500);
                         st.toFront();
                         R.safari();
                         current = i;
@@ -291,7 +291,6 @@ R.path('M270,305, 267,310, 261,320, 258,324, 253,328, 245,327, 239,331, 232,329,
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/raphael-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/elycharts.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery.dropkick-1.0.0.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/backbone-min.js"></script>

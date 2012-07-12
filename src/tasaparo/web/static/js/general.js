@@ -31,7 +31,13 @@ var TtpRouter = Backbone.Router.extend({
     },
 
     compare: function(){
-        console.log("compare");
+        if(aux.result === undefined){
+            this.navigate("", true);
+            return true;
+        }
+
+        var compareview = new CompareView();
+        compareview.render();
     },
 
     profile: function(){
@@ -41,6 +47,37 @@ var TtpRouter = Backbone.Router.extend({
         }
         var profileview = new ProfileView();
         profileview.render();
+    }
+});
+
+var CompareView = Backbone.View.extend({
+    template: _.template($("#compare-result").html()),    
+    render: function() {
+        var tabs = new TabsView(3);
+        tabs.render();
+
+        $("#inner-content").append("<div id='compare-view'></div>");
+        $("#compare-view").html(this.template());
+        
+        setTimeout(function(){
+            var bls = $("#compare-view").find('.bl');
+
+            for(var z=0; z<bls.length; z++){
+                (function (bl, time) {
+                    setTimeout(function(){
+                        $(bl).fadeIn();
+                    },time);
+                })(bls[z], z*1000);
+            }
+        },500);
+
+        var recalcualteview = new RecalculateView();
+        recalcualteview.render();
+
+        var inforesult = new InfoResult();
+        inforesult.render();
+
+        initmap();
     }
 });
 
@@ -60,7 +97,6 @@ var TabsView = Backbone.View.extend({
 var RecalculateView = Backbone.View.extend({
     template: _.template($("#recalculate").html()),
     render: function() {
-        console.log(form);
         $("#left").append(this.template());
         //$('.default').dropkick();
         return this;

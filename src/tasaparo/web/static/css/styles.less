@@ -201,7 +201,7 @@ input[type=submit]{
 #nav-comp { background: url('../images/graph-option.png') no-repeat; }
 #nav-prov { background: url('../images/circles-option.png') no-repeat; }
 
-#profile-view, #map-view { padding-bottom: 35px; float: left; width: 100%; }
+#profile-view, #map-view, #compare-view { padding-bottom: 35px; float: left; width: 100%; }
 
 #head2 {
     padding: 27px 0 0 64px;
@@ -322,4 +322,18 @@ form select {
     width: 150px;
     margin-bottom: 18px;
     height: 30px;
+}
+
+#compare {
+    float: right;
+    margin-top: 40px;
+    width: 500px;   
+    .bl { float: left; }
+    span { color: #FFF; font-family: 'BreeSerif-Regular'; width: 100%; text-align: center; display: block; float: left; }
+}
+
+#compare-nav {
+    margin-right: 75px;
+    float: right;
+    li { cursor: pointer; float: left; margin-right: 10px; border-radius: 4px; font-family:"Open Sans Semibold"; padding: 9px 19px; color: #FFF; background-color: #3d83fd; &.sel { background-color: #ccc; } }
 }

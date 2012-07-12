@@ -82,7 +82,7 @@ body { background: url('../images/ttpbg.jpg') no-repeat; }
     background: url('../images/bgtitle.png') repeat-x;
     border-bottom: 1px solid #e5e5e5;
     form { margin-left: 62px; }
-    .deco { position: absolute; left: 455px; bottom: -23px; background: url('../images/decoarrow.png') no-repeat; width: 75px; height: 23px; }
+    .deco { position: absolute; left: 598px; bottom: -23px; background: url('../images/decoarrow.png') no-repeat; width: 75px; height: 23px; }
 }
 
 input[type=submit]{
@@ -102,17 +102,19 @@ input[type=submit]{
 #result { width: 100%; height:316px; float: left; padding-bottom: 68px; position: relative; }
 
 #resulparo {
-    position: relative;
+    position: absolute;
     overflow: hidden;
     color: #FFF;
     text-align: center;
-    margin: 70px auto 0 auto;
+    top: 60px;
+    right: 230px;
     font-family: 'BreeSerif-Regular';
     font-size: 147px;
     width: 246px;
     height: 246px;
     line-height: 215px;
     border-radius:123px;
+    z-index: 99;
     span { position: absolute; left: 0; bottom: 35px; width: 100%; display: block; font-family: 'BreeSerif-Regular'; font-size: 17px; text-align: center; line-height: normal; }
 }
 
@@ -131,34 +133,35 @@ input[type=submit]{
 #info {
     width: 926px;
     float: left;
-    background-color: #f7f7f7;
     border-top: 1px solid #dedede;
-    padding: 25px 37px 45px 37px;
+    padding: 25px 37px 33px 55px;
     h2 { font-size: 24px; font-family: 'BreeSerif-Regular'; width: 100%; padding-left: 24px; margin-bottom: 25px; }
-    h3 { font-family:"Open Sans Semibold"; font-size: 13px; margin-bottom: 13px; text-transform: uppercase; }
-    .item { padding-left: 24px; width: 180px; float: left; margin-right: 25px; }
-    p, span { font-size: 11px; font-family:"Open Sans Light"; color: #717171; }
+    h3 { font-family:"Open Sans Semibold"; font-size: 14px; margin-bottom: 7px; text-transform: uppercase; }
+    .item { padding-left: 38px; width: 205px; float: left; margin-right: 65px; position: relative; }
+    .ball { width: 22px; height: 28px; border-radius: 6px; position: absolute; left: 0; top: 0; }
+    p, span { font-size: 12px; font-family:"Open Sans Light"; }
     span { color: #000; }
 }
 
 #last {
     width: 926px;
     float: left;
-    background-color: #f7f7f7;
     border-top: 1px solid #dedede;
-    padding: 45px 37px 45px 37px;
+    padding: 37px 37px 55px 37px;
     h2 { font-size: 24px; font-family: 'BreeSerif-Regular'; width: 100%; padding-left: 24px; margin-bottom: 25px; }
 }
 
 .lresults {
+    width: 204px;
     padding-left: 24px;
     float: left;
-    .txt { font-size: 11px; font-family:"Open Sans Italic"; padding-left: 17px; width: 182px; float: left; margin-top: 19px; }
-    .result { width: 82px; height: 82px; border-radius: 41px; line-height: 82px; font-size: 43px; font-family: 'BreeSerif-Regular'; color: #FFF; text-align: center; float: left; cursor: pointer; }
+    .txt { font-size: 11px; font-family:"Open Sans Italic"; width: 100%; float: left; margin-top: 19px; }
+    .result { width: 116px; height: 116px; border-radius: 58px; line-height: 116px; font-size: 61px; font-family: 'BreeSerif-Regular'; color: #FFF; text-align: center; float: left; cursor: pointer; }
+    .tm { font-size: 11px; font-family:"Open Sans Italic"; margin-bottom: 10px; text-align: center; width: 116px; color: #a1a1a1; }
 }
 
 .r1 { background-color: #c74a53; span { color: #e4b4b6; } }
-.r2 { background-color: #e8cc4a; span { color: #f7edcb; } }
+.r2 { background-color: #e2ba00; span { color: #f7edcb; } }
 .r3 { background-color: #acde5c; span { color: #e8f5d7; } }
 
 .tooltip{
@@ -184,10 +187,10 @@ input[type=submit]{
     -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);
 }
 #nav-results {
-    a { width: 127px; height: 73px; font-family:"Open Sans"; display: block; color: #000; font-size: 14px; text-decoration: none; padding: 20px 0 0 120px; }
+    a { width: 142px; height: 53px; margin-bottom: 10px; font-family:"Open Sans"; display: block; color: #000; font-size: 14px; text-decoration: none; padding: 20px 0 0 200px; }
     position: absolute;
-    top: 56px;
-    right: 114px;
+    top: 67px;
+    right: 20px;
 }
 
 #nav-map { background: url('../images/map-option.png') no-repeat; }
@@ -216,3 +219,25 @@ input[type=submit]{
     padding: 45px 43px 0 0;    
 }
 #chart { width: 690px; height: 285px; }
+
+.question {
+    line-height: 256px !important;
+    span { top: 39px; }
+}
+
+#actual {
+    color: #858585;
+    background-color: #f2f2f2;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    top: 60px;
+    left: 245px;
+    font-family: 'BreeSerif-Regular';
+    font-size: 80px;
+    width: 246px;
+    height: 246px;
+    line-height: 270px;
+    border-radius:123px;
+    span { position: absolute; left: 0; top: 33px; width: 100%; display: block; font-family: 'BreeSerif-Regular'; font-size: 18px; text-align: center; line-height: normal; color: #adadad; }
+}

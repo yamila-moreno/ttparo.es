@@ -132,20 +132,35 @@ class RateQuery(models.Model):
     rate = models.IntegerField(null=True, default=None)
     date = models.DateTimeField(auto_now=True)
 
-    cycle = models.IntegerField(null=True)
     age = models.ForeignKey(Age, null=True)
-    sex = models.ForeignKey(Sex, null=True)
+    cycle = models.IntegerField(null=True)
     education = models.ForeignKey(Education, null=True)
     province = models.ForeignKey(Province, null=True)
+    sex = models.ForeignKey(Sex, null=True)
 
     objects = RateQueryManager()
 
     def __unicode__(self):
-        return u'%(cycle)s %(age)s %(sex)s %(education)s %(province)s %(rate)s' % \
-            {'cycle':self.cycle, 'age':self.age, 'sex':self.sex, 'education':self.education, 'province':self.province, 'rate':self.rate}
+        return u'%(age)s %(cycle)s %(education)s %(province)s %(sex)s: %(rate)s' % \
+            {'age':self.age, 'cycle':self.cycle, 'education':self.education, 'province':self.province, 'sex':self.sex, 'rate':self.rate}
 
     class Meta:
         ordering = ['date']
+        unique_together = ['age','cycle','education','province','sex']
 
+    @models.permalink
     def get_sharing_url(self):
-        return reverse('api:profile-rate-by-hash',args=[self.query_hash])
+        return ('api:profile-rate-by-hash', (), {'query_hash': self.query_hash})
+
+    @property
+    def compare_to_general(self):
+        general_hash = generate_hash()
+        general_qr = self.get_rate(general_hash)
+        general_rate = general_qr.rate
+        percent = general_rate * 20 / 100
+        if self.rate > (general_rate + percent):
+            return 'high'
+        elif self.rate < (general_rate.rate - percent):
+            return 'low'
+        else:
+            return 'medium'

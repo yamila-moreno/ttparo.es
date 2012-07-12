@@ -60,7 +60,7 @@ var RecalculateView = Backbone.View.extend({
     template: _.template($("#recalculate").html()),
     render: function() {
         $("#left").append(this.template());
-        $('.default').dropkick();
+        //$('.default').dropkick();
         return this;
     }
 });
@@ -158,6 +158,8 @@ var ProfileView = Backbone.View.extend({
     submit: function(e){
         e.preventDefault();
         var self = this;
+
+        recalculate();
 
         $.ajax({
           data: $(this).serialize(),    
@@ -264,7 +266,7 @@ var HomeView = Backbone.View.extend({
             $("#resulparo").fadeIn();
         }
 
-        $('.default').dropkick();
+        //$('.default').dropkick();
         $("#calculate").bind("submit", $.proxy( this.submit, this ));
 
         return this;
@@ -288,6 +290,22 @@ var HomeView = Backbone.View.extend({
         });
     }
 });
+
+function recalculate(){
+    $.ajax({
+      data: $("#calculate").serialize(),    
+      url: '',
+      success: function(data) {
+        //borrar
+        data = {'result': 25, 'level': '3', 'leveltxt': 'nivel alto'};
+
+        var tabmenu = $("#tabmenu");
+        var link = tabmenu.find('.t1 a');
+        link.attr('class', 'link c'+data.level);
+        tabmenu.find('span').html(data.result+"%");
+      }
+    });
+}
 
 $(document).ready(function(){    
     var appTtpRouter = new TtpRouter();

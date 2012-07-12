@@ -15,7 +15,7 @@
     <div id="headerbg"></div>
     <div id="container">
         <div id="header">
-            <img src="{{ STATIC_URL }}images/logo.png" alt="logo" />
+            <a title="home" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
             <ul id="menu">
                 <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
                 <li><a title="Conócenos" href="">Conócenos</a></li>
@@ -128,65 +128,53 @@
         <div class="deco"></div>
     </div>
     <div id="result">
-        <div id="resulparo" class="r1">?</div>
+        <div id="actual"><span>Paro actual<br/> en España</span>25%</div>
+        <div id="resulparo" class="r1 question"><span>tu tasa</span>?</div>
     </div>
 </script>
 <script type="text/template" id="info-result">
     <div id="info">
-        <h2>El paro en perfiles</h2>
         <div class="item">
-            <h3>Perfil Alto</h3>
-            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+            <div class="ball r1"></div>
+            <h3>Nivel Alto</h3>
+            <p>Bastante por encima de la media Española</p>
         </div>
         <div class="item">
-            <h3>Perfil Alto</h3>
-            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+            <div class="ball r2"></div>
+            <h3>Nivel Medio</h3>
+            <p>Variación de un 10% arriba o abajo de la media Española</p>
         </div>
         <div class="item">
-            <h3>Perfil Alto</h3>
-            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
-        </div>
-        <div class="item">
-            <h3>Perfil Alto</h3>
-            <p><span>+90%</span> de las personas con este perfil estan en el paro</p>
+            <div class="ball r3"></div>
+            <h3>Nivel Bajo</h3>
+            <p>Bastante por debajo de la media Española</p>
         </div>
     </div>
 </script>
 <script type="text/template" id="result-template">
+    <div id="actual"><span>Paro actual<br/> en España</span>25%</div>
     <div id="resulparo" style="display: none;" class="<%- level %>"><%- result %><span><%- leveltxt %></span></div>
     <div id="nav-results">
         <a href="" id="nav-map">Tu perfil<br/>en España</a>
         <a href="" id="nav-comp">Comparativa<br/>en tu provincia</a>
-        <a href="" id="nav-prov">Evolución<br/>de tu perfil</a>
+        <a href="{% url profile %}" id="nav-prov">Evolución<br/>zerfil</a>
+    </div>
+</script>
+
+<script type="text/template" id="last-profiles-item">
+    <div class="lresults">
+        <p class="tm">hace <%- time %></p>
+        <div class="result r<%- level%>"><%- percent %></div>
+        <div class="txt">
+            <%- sex %>, <%- years %> años<br/>
+            <%- province %><br/>
+            <%- studies %>
+        </div>
     </div>
 </script>
 <script type="text/template" id="last-profiles">
         <div id="last">
-            <h2>Últimos perfiles calculados</h2>
-            <div class="lresults">
-                <div class="result r2">17</div>
-                <div class="txt">
-                    Mujer, 43 años<br/>
-                    Santa Cruz de Tenerife<br/>
-                    Estudios Universitarios Superiores
-                </div>
-            </div>
-            <div class="lresults">
-                <div class="result r1">17</div>
-                <div class="txt">
-                    Mujer, 43 años<br/>
-                    Santa Cruz de Tenerife<br/>
-                    Estudios Universitarios Superiores
-                </div>
-            </div>
-            <div class="lresults">
-                <div class="result r3">17</div>
-                <div class="txt">
-                    Mujer, 43 años<br/>
-                    Santa Cruz de Tenerife<br/>
-                    Estudios Universitarios Superiores
-                </div>
-            </div>
+            <h2>Últimas consultas</h2>
         </div>
 </script>
 {% compress js %}

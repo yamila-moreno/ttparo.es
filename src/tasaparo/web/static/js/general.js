@@ -129,8 +129,67 @@ var ProfileView = Backbone.View.extend({
 
 var LastProfiles = Backbone.View.extend({
     template: _.template($("#last-profiles").html()),
+    template_item: _.template($("#last-profiles-item").html()),
+
     render: function() {
         $("#inner-content").append(this.template());
+        var self = this;
+
+        $.ajax({
+          url: '',
+          success: function(data) {
+            data = {'items': [
+                {'time': '10 minutos',
+                'level': '1',
+                'percent': 10,
+                'sex': 'Mujer',
+                'years': '43',
+                'province': 'Santa Cruz de Tenerife',
+                'studies': 'Estudios Universitarios Superiores'
+                },
+                {'time': '20 minutos',
+                'level': '2',
+                'percent': 20,
+                'sex': 'Mujer',
+                'years': '43',
+                'province': 'Madrid',
+                'studies': 'Estudios Universitarios Superiores'
+                },
+                {'time': '30 minutos',
+                'level': '3',
+                'percent': 34,
+                'sex': 'Hombre',
+                'years': '43',
+                'province': 'Barcelona',
+                'studies': 'FP2'
+                },
+                {'time': '50 minutos',
+                'level': '1',
+                'percent': 53,
+                'sex': 'Mujer',
+                'years': '43',
+                'province': 'Málaga',
+                'studies': 'Estudios Universitarios Superiores'
+                }
+            ]};
+
+            var last = $("#last");
+
+            for(var i=0; i < 4; i++){
+                last.append(self.template_item(data.items[i]));
+            }
+
+            $(".result").tooltip({ 
+                'position': 'top center',
+                'margin_bottom': 10,
+                'html': function(self){
+                    return "<p>Rellena el formulario para obtener tu tasa de paro</p><div class='arrow'></div></div>";
+                 }                    
+            });
+
+          }
+        });
+
         return this;
     }
 });
@@ -172,13 +231,10 @@ $(document).ready(function(){
     var appTtpRouter = new TtpRouter();
     Backbone.history.start({pushState: true});
 
-    $(".result").tooltip({ 
-        'position': 'top center',
-        'margin_bottom': 10,
-        'html': function(self){
-            return "<p>Rellena el formulario para obtener tu tasa de paro</p><div class='arrow'></div></div>";
-         }                    
-    });
+    $("body").on("click", "a", function(e){
+        e.preventDefault();
+        appTtpRouter.navigate($(this).attr('href'), true);
+    })
 });
 
 

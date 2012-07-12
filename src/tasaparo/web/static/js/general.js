@@ -1,4 +1,5 @@
 var aux = {};
+var form = {};
 
 var TtpRouter = Backbone.Router.extend({
     routes: {
@@ -59,6 +60,7 @@ var TabsView = Backbone.View.extend({
 var RecalculateView = Backbone.View.extend({
     template: _.template($("#recalculate").html()),
     render: function() {
+        console.log(form);
         $("#left").append(this.template());
         //$('.default').dropkick();
         return this;
@@ -273,10 +275,12 @@ var HomeView = Backbone.View.extend({
     },
     submit: function(e){
         e.preventDefault();
+        form = $("#calculate").serializeObject();
         var self = this;
+
         $.ajax({
-          data: $(this).serialize(),    
-          url: $(this).attr('action'),
+          data: form,    
+          url: $(this).serialize(),
           success: function(data) {
             data = {'result': 17, 'level': '2', 'leveltxt': 'nivel alto'};
             aux = data;
@@ -292,12 +296,15 @@ var HomeView = Backbone.View.extend({
 });
 
 function recalculate(url){
+    form = $("#calculate").serializeObject();
+
     $.ajax({
-      data: $("#calculate").serialize(),    
+      data: $("#calculate").serialize(),  
       url: url,
       success: function(data) {
         //borrar
         data = {'result': 25, 'level': '3', 'leveltxt': 'nivel alto'};
+        aux = data;
 
         var tabmenu = $("#tabmenu");
         var link = tabmenu.find('.t1 a');
@@ -306,6 +313,23 @@ function recalculate(url){
       }
     });
 }
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 
 $(document).ready(function(){    
     var appTtpRouter = new TtpRouter();

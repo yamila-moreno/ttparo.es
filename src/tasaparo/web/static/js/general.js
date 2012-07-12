@@ -1,3 +1,5 @@
+var aux = {};
+
 var TtpRouter = Backbone.Router.extend({
     routes: {
         "" : "home",
@@ -86,11 +88,22 @@ var ProfileView = Backbone.View.extend({
     render: function() {
         $("#inner-content").html("<div id='profile-view'></div>");
         $("#profile-view").html(this.template());
-
-        this.initchart();
+        var self = this;
 
         var recalcualteview = new RecalculateView();
         recalcualteview.render();
+
+        $.ajax({
+          data: $("#calculate").serialize(),  
+          url: '',
+          success: function(data) {
+            //borrar
+            data = self.values;
+
+            self.values = data;
+            self.initchart();
+         }
+        });
 
         $("#calculate").bind("submit", $.proxy( this.submit, this ));
 
@@ -105,7 +118,7 @@ var ProfileView = Backbone.View.extend({
 
         $.ajax({
           data: $(this).serialize(),    
-          url: $(this).attr('action'),
+          url: '',
           success: function(data) {
             //delete
              data =  {
@@ -197,28 +210,34 @@ var LastProfiles = Backbone.View.extend({
 var HomeView = Backbone.View.extend({
     template1: _.template($("#result-empty-template").html()),      
     template2: _.template($("#result-template").html()), 
-    data: false,    
+    template3: _.template($("#search-template").html()), 
     el: '#home-view',
     render: function() {
-        $(this.el).html(this.template1());
+        $(this.el).html(this.template3());
+        if(aux.result === undefined){
+            $(this.el).append(this.template1());
+        }else{
+            $(this.el).append(this.template2(aux));
+            $("#resulparo").fadeIn();
+        }
 
         $('.default').dropkick();
-        $("#calculate").bind("submit", this.submit);
+        $("#calculate").bind("submit", $.proxy( this.submit, this ));
 
         return this;
     },
     submit: function(e){
         e.preventDefault();
-
+        var self = this;
         $.ajax({
           data: $(this).serialize(),    
           url: $(this).attr('action'),
           success: function(data) {
-            data = {'result': 17, 'level': 'r2', 'leveltxt': 'nivel alto'};
+            data = {'result': 17, 'level': '2', 'leveltxt': 'nivel alto'};
+            aux = data;
 
             $("#resulparo").fadeOut(function(){
-                var template = _.template($("#result-template").html());
-                $("#result").html(template(data));
+                $("#result").html(self.template2(data));
                 $("#resulparo").fadeIn();
             });
 
@@ -231,7 +250,7 @@ $(document).ready(function(){
     var appTtpRouter = new TtpRouter();
     Backbone.history.start({pushState: true});
 
-    $("body").on("click", "a", function(e){
+    $("body").on("click", ".link", function(e){
         e.preventDefault();
         appTtpRouter.navigate($(this).attr('href'), true);
     })

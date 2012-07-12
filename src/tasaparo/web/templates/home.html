@@ -15,7 +15,7 @@
     <div id="headerbg"></div>
     <div id="container">
         <div id="header">
-            <a title="home" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
+            <a title="home" class="link" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
             <ul id="menu">
                 <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
                 <li><a title="Conócenos" href="">Conócenos</a></li>
@@ -86,8 +86,7 @@
         <div id="chart"></div>
     </div>
 </script>
-
-<script type="text/template" id="result-empty-template">
+<script type="text/template" id="search-template">
     <div id="search">
         <h1>Calcula tu tasa de paro</h1>
         <form id="calculate" mehod="post" action="">
@@ -127,6 +126,8 @@
         </form>
         <div class="deco"></div>
     </div>
+</script>
+<script type="text/template" id="result-empty-template">
     <div id="result">
         <div id="actual"><span>Paro actual<br/> en España</span>25%</div>
         <div id="resulparo" class="r1 question"><span>tu tasa</span>?</div>
@@ -152,12 +153,14 @@
     </div>
 </script>
 <script type="text/template" id="result-template">
-    <div id="actual"><span>Paro actual<br/> en España</span>25%</div>
-    <div id="resulparo" style="display: none;" class="<%- level %>"><%- result %><span><%- leveltxt %></span></div>
-    <div id="nav-results">
-        <a href="" id="nav-map">Tu perfil<br/>en España</a>
-        <a href="" id="nav-comp">Comparativa<br/>en tu provincia</a>
-        <a href="{% url profile %}" id="nav-prov">Evolución<br/>zerfil</a>
+    <div id="result">
+        <div id="actual"><span>Paro actual<br/> en España</span>25%</div>
+        <div id="resulparo" style="display: none;" class="r<%- level %>"><%- result %><span><%- leveltxt %></span></div>
+        <div id="nav-results">
+            <a class="link" href="" id="nav-map">Tu perfil<br/>en España</a>
+            <a class="link" href="" id="nav-comp">Comparativa<br/>en tu provincia</a>
+            <a class="link" href="{% url profile %}" id="nav-prov">Evolución<br/>zerfil</a>
+        </div>
     </div>
 </script>
 

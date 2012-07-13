@@ -134,6 +134,19 @@ class RateQueryManager(models.Manager):
 
         return results
 
+    def compare_rates(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
+        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+
+        age = age or None
+        education = education or None
+        province = province or None
+
+        # implementing only sex comparision
+        rq = RateQuery.objects.filter(cycle=latest_cycle['cycle__max'], age__pk=age, education__pk=education, province__pk=province).exclude(sex__isnull=True).order_by('-sex')
+
+        return rq
+
+
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)
     rate = models.IntegerField(null=True, default=None)

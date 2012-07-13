@@ -19,6 +19,7 @@ class HomeView(SuperView):
         context['general_rate'] = core.RateQuery.objects.get_rate()
         context['get_profile_rate_url'] = reverse('api:profile-rate')
         context['get_lastest_queries_url'] = reverse('api:latest-queries')
+        context['get_compare_rates_url'] = reverse('api:compare-rates')
 
 
 

@@ -20,6 +20,8 @@ var TtpRouter = Backbone.Router.extend({
 
         var lastprofiles = new LastProfiles();
         lastprofiles.render();
+
+        updateform();
     },
 
     home_with_hash: function(){
@@ -102,7 +104,10 @@ var RecalculateView = Backbone.View.extend({
     render: function() {
         $("#left").append(this.template());
         //$('.default').dropkick();
-        $("#recalculate").bind("submit", $.proxy( this.submit, this ));
+        updateform();
+
+        $("#recalculate").bind("submit", $.proxy( this.submit, this )).submit();
+
         return this;
     },
     submit: function(e){
@@ -403,6 +408,15 @@ var HomeWithHashView = HomeView.extend({
         });
     }
 });
+
+function updateform(){
+    if (form.province !== undefined) {
+        $("#id_province").val(form.province);
+        $("#id_education").val(form.education);
+        $("#id_age").val(form.age);
+        $("#id_sex").val(form.sex);
+    }
+}
 
 function recalculate(url){
     form = $("#calculate").serializeObject();

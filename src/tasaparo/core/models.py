@@ -188,6 +188,7 @@ class RateQuery(models.Model):
     @property
     def compare_to_general(self):
         general_hash = generate_hash()
+        print general_hash
         general_qr = RateQuery.objects.get_rate(query_hash=general_hash)
         general_rate = general_qr.rate
         percent = general_rate * 20 / 100

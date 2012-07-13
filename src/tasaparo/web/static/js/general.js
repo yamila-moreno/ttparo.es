@@ -73,18 +73,6 @@ var CompareView = Backbone.View.extend({
         $("#inner-content").append("<div id='compare-view'></div>");
         $("#compare-view").html(this.template());
 
-        setTimeout(function(){
-            var bls = $("#compare-view").find('.bl');
-
-            for(var z=0; z<bls.length; z++){
-                (function (bl, time) {
-                    setTimeout(function(){
-                        $(bl).fadeIn();
-                    },time);
-                })(bls[z], z*1000);
-            }
-        },500);
-
         var recalcualteview = new RecalculateView();
         recalcualteview.render();
 
@@ -110,10 +98,57 @@ var TabsView = Backbone.View.extend({
 
 var RecalculateView = Backbone.View.extend({
     template: _.template($("#recalculate").html()),
+    template_item: _.template($("#compare-item").html()),
+
     render: function() {
         $("#left").append(this.template());
         //$('.default').dropkick();
+        $("#recalculate").bind("submit", $.proxy( this.submit, this ));
         return this;
+    },
+    submit: function(e){
+        e.preventDefault();
+        form = $("#recalculate").serializeObject();
+        var self = this;
+
+        $.ajax({
+            data: $('#recalculate').serialize(),
+            url: $('#recalculate').attr('action'),
+            dataType:'json',
+            success: function(data) {
+                if(data.success) {
+                    var comp = $("#compare");
+
+                    $("#compare").html('');
+
+                    var rates_long = data.rates.length;
+                    for(var i=0; i < rates_long; i++){
+                        console.log(data.rates[i]);
+
+                        var mydict;
+                        mydict =
+                            {'percent': data.rates[i].rate,
+                            'sex': data.rates[i].sex,
+                            'level': data.rates[i].level,
+                        }
+
+                        comp.append(self.template_item(mydict));
+
+                        setTimeout(function(){
+                            var bls = $("#compare-view").find('.bl');
+
+                            for(var z=0; z<bls.length; z++){
+                                (function (bl, time) {
+                                    setTimeout(function(){
+                                        $(bl).fadeIn();
+                                    },time);
+                                })(bls[z], z*350);
+                            }
+                        },200);
+                    }
+                }
+            }
+        });
     }
 });
 

@@ -32,7 +32,7 @@ class NationalRateView(SuperView):
         if not form.is_valid():
             return self.render_json({}, False)
 
-        rate_query = core.RateQuery.objects.get_rate(**form.cleaned_date)
+        rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
         if rate_query:
             context = {'rate_query': rate_query.to_json_dict()}
             return self.render_json(context, True)
@@ -64,9 +64,13 @@ class CompareRatesView(SuperView):
         if not form.is_valid():
             return self.render_json({}, False)
 
-        rates = core.RateQuery.objects.get_rates(**form.cleaned_data).values()
+        rates = core.RateQuery.objects.compare_rates(**form.cleaned_data)
         if rates:
-            context = {'rates': list(rates)}
+            list_json_dict = []
+            for r in rates:
+                list_json_dict.append(r.to_json_dict())
+
+            context = {'rates': list_json_dict}
             return self.render_json(context, True)
 
         return self.render_json({}, False)

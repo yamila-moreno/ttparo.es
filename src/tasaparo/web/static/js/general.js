@@ -101,7 +101,6 @@ var RecalculateView = Backbone.View.extend({
 
     render: function() {
         $("#left").append(this.template());
-        //$('.default').dropkick();
         $("#recalculate").bind("submit", $.proxy( this.submit, this ));
         return this;
     },

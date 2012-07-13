@@ -42,7 +42,7 @@
 <ul id="tabmenu">
     <li class="t1"><a class="link c<%- level %>" href="{% url home %}">Tu tasa: <span><%- result %>%</span></a></li>
     <li class="t2"><a class="link" href="{% url map %}">Tu perfil<br/>en España</a></li>
-    <li class="t3"><a class="link" href="{% url compare %}">Comparativa<br/> en tu Provincia</a></li>
+    <li class="t3"><a class="link" href="{% url compare %}">Comparativas</a></li>
     <li class="t4"><a class="link" href="{% url profile %}">Evolución<br/> de tu perfil</a></li>
 </ul>
 </script>
@@ -50,7 +50,7 @@
 <script type="text/template" id="map-result">
     <div id="head2">
         <a class="link" href="{% url home %}">&lt; volver</a>
-        <h1>Tu tasa de paro en españa</h1>
+        <h1>Tu tasa de paro en España</h1>
     </div>
     <div id="left"></div>
     <div id="right">
@@ -61,7 +61,7 @@
 <script type="text/template" id="compare-result">
     <div id="head2">
         <a class="link" href="{% url home %}">&lt; volver</a>
-        <h1>Comparativa de datos en provincia</h1>
+        <h1>Comparativa</h1>
     </div>
     <div id="left"></div>
     <div id="right">
@@ -117,7 +117,8 @@
 </script>
 
 <script type="text/template" id="search-template">
-    <div id="search">
+    <div id="search"
+        {% if calculated_query %}level="{{calculated_query.compare_to_general.0}}" leveltxt="{{calculated_query.compare_to_general.1}}" rate="{{calculated_query.rate}}"{% endif %}>
         <h1>Calcula tu tasa de paro</h1>
         <form id="calculate" mehod="post" action="{{get_profile_rate_url}}">
             <div class="field">
@@ -172,19 +173,16 @@
 <script type="text/template" id="result-template">
     <div id="result">
         <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
-        <div id="resulparo" style="display: none;" class="r<%- level %>"><%- result %>%<span><%- leveltxt %></span></div>
+        <div id="resulparo" style="display: none;" class="r<%- level %>"><%- rate %>%<span><%- leveltxt %></span></div>
         <div id="nav-results">
             <a class="link" href="{% url map %}" id="nav-map">Tu perfil<br/>en España</a>
-            <a class="link" href="{% url compare %}" id="nav-comp">Comparativa<br/>en tu provincia</a>
+            <a class="link" href="{% url compare %}" id="nav-comp">Comparativas</a>
             <a class="link" href="{% url profile %}" id="nav-prov">Evolución<br/>perfil</a>
         </div>
-    </div>
-    <div id="compartir">
-        <a href="https://twitter.com/share" class="twitter-share-button"
-           data-url="{{rate_query.get_absolute_url}}" data-text="Mi tasa de paro es del {{rate_query.rate}}%" data-via="kaleidosnet" data-size="large" data-hashtags="tasaparo">Tweet</a>
-        <script>
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-        </script>
+        <div id="compartir">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="/" data-text="Mi tasa de paro es" data-via="kaleidosnet" data-hashtags="tasaparo">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
     </div>
 </script>
 

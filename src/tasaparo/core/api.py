@@ -69,6 +69,33 @@ class CompareRatesView(SuperView):
             for r in rates:
                 list_json_dict.append(r.to_json_dict())
 
+            profile_rates = core.RateQuery.objects.get_profile_rates(**form.cleaned_data)
+
+            if profile_rates:
+                list_json_dict_profile = []
+                for r in profile_rates:
+                    list_json_dict_profile.append(r.to_json_dict())
+
+                context = {'rates': list_json_dict, 'profile_rates': list_json_dict_profile}
+                return self.render_json(context, True)
+
+            context = {'rates': list_json_dict}
+            return self.render_json(context, True)
+
+        return self.render_json({}, False)
+
+class ProfileChartView(SuperView):
+    def get(self, request):
+        form = FilterForm(request.GET)
+        if not form.is_valid():
+            return self.render_json({}, False)
+
+        rates = core.RateQuery.objects.get_profile_rates(**form.cleaned_data)
+        if rates:
+            list_json_dict = []
+            for r in rates:
+                list_json_dict.append(r.to_json_dict())
+
             context = {'rates': list_json_dict}
             return self.render_json(context, True)
 

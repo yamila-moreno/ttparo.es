@@ -146,6 +146,17 @@ class RateQueryManager(models.Manager):
 
         return rq
 
+    def get_profile_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
+        age = age or None
+        education = education or None
+        province = province or None
+        sex = sex or None
+
+        rq = RateQuery.objects.filter(age__pk=age, education__pk=education, province__pk=province, sex__pk=sex).order_by('cycle')
+
+        print 'hay tantos como ciclos ', rq.count()
+
+        return rq
 
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)

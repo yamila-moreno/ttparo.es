@@ -185,10 +185,12 @@ var ProfileView = Backbone.View.extend({
       serie2 : [17, 57, 4, 85, 17, 57, 4, 85],
       serie3 : [27, 67, 7, 35, 27, 67, 7, 35],
     },
+    labels : ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"],
     initchart: function(){
+        console.log(this.labels);
         $("#chart").chart({
          type : "line",
-         labels : ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"],
+         labels : this.labels,
          values : this.values,
          margins : [10, 15, 20, 50],
         series: {
@@ -221,20 +223,8 @@ var ProfileView = Backbone.View.extend({
         var recalcualteview = new RecalculateView();
         recalcualteview.render();
 
-        $.ajax({
-          data: $("#calculate").serialize(),
-          url: '',
-          success: function(data) {
-            //borrar
-            data = self.values;
-
-            self.values = data;
-            self.initchart();
-         }
-        });
-
-        $("#calculate").bind("submit", $.proxy( this.submit, this ));
-
+        $("#recalculate").bind("submit", $.proxy( this.submit, this ));
+        $("#recalculate").submit();
         var inforesult = new InfoResult();
         inforesult.render();
 
@@ -242,30 +232,37 @@ var ProfileView = Backbone.View.extend({
     },
     submit: function(e){
         e.preventDefault();
+        form = $("#recalculate").serializeObject();
         var self = this;
 
         recalculate('');
 
         $.ajax({
-          data: $(this).serialize(),
-          url: '',
-          success: function(data) {
-            //delete
-             data =  {
-              serie1 : [19, 35, 29, 18, 19, 35, 9, 18],
-              serie2 : [37, 57, 4, 15, 17, 17, 34, 85],
-              serie3 : [7, 67, 7, 35, 57, 67, 7, 35],
-            };
+            data: $('#recalculate').serialize(),
+            url: $('#recalculate').attr('action'),
+            dataType:'json',
+            success: function(data) {
+                profile_serie = [];
+                profile_labels = [];
+                for each (cycle in data.profile_rates) {
+                    profile_serie.push(cycle.rate);
+                }
 
-            self.values = data;
+                //delete
+                data_submit =  {
+                    serie1 : profile_serie,
+                };
 
-            $("#chart").fadeOut(function(){
-                $(this).remove();
-                $("#right").html("<div id='chart'></div>");
-                self.initchart();
-            });
+                self.values = data_submit;
+                self.labels = ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012"],
 
-          }
+                $("#chart").fadeOut(function(){
+                    $(this).remove();
+                    $("#right").html("<div id='chart'></div>");
+                    self.initchart();
+                });
+
+            }
         });
     }
 });

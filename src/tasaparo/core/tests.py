@@ -66,20 +66,6 @@ class MicroDataTest(TestCase):
         self.assertTrue(json_parsed['success'])
         self.assertEqual(len(json_parsed['latest_queries']),2)
 
-    def test_profile_rate_by_hash_call(self):
-        core.RateQuery.objects.create(query_hash='test',rate=25)
-        url = reverse('api:profile-rate-by-hash',args=['test'])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        json_parsed = simplejson.loads(response.content)
-        self.assertTrue(json_parsed['success'])
-
-    def test_profile_rate_by_hash_data_fail(self):
-        url = reverse('api:profile-rate-by-hash',args=['not_found'])
-        response = self.client.get(url)
-        json_parsed = simplejson.loads(response.content)
-        self.assertFalse(json_parsed['success'])
-
     def test_form_data_call(self):
         url = reverse('api:form-data')
         response = self.client.get(url)

@@ -169,8 +169,8 @@ class RateQuery(models.Model):
         unique_together = ['age','cycle','education','province','sex']
 
     @models.permalink
-    def get_sharing_url(self):
-        return ('api:profile-rate-by-hash', (), {'query_hash': self.query_hash})
+    def get_absolute_url(self):
+        return ('profile-rate-by-hash', (), {'query_hash': self.query_hash})
 
     def to_json_dict(self):
         json_dict = {
@@ -180,7 +180,8 @@ class RateQuery(models.Model):
             'education': self.education and self.education.name or 'formación indiferente',
             'rate':self.rate,
             'level':self.compare_to_general[0],
-            'levelText':self.compare_to_general[1]
+            'levelText':self.compare_to_general[1],
+            'absolute_url':self.get_absolute_url()
         }
         return json_dict
 

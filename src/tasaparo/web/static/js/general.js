@@ -7,6 +7,7 @@ var TtpRouter = Backbone.Router.extend({
         "map/" : "map",
         "compare/" : "compare",
         "profile/" : "profile",
+        "*actions": "home_with_hash"
     },
 
     home: function(){
@@ -21,8 +22,20 @@ var TtpRouter = Backbone.Router.extend({
         lastprofiles.render();
     },
 
+    home_with_hash: function(){
+        $("#inner-content").html("<div id='home-view'></div>");
+        var homeview = new HomeWithHashView();
+        homeview.render();
+
+        var inforesult = new InfoResult();
+        inforesult.render();
+
+        var lastprofiles = new LastProfiles();
+        lastprofiles.render();
+    },
+
     map: function(){
-        if(aux.result === undefined){
+        if(aux.rate === undefined){
             this.navigate("", true);
             return true;
         }
@@ -31,7 +44,7 @@ var TtpRouter = Backbone.Router.extend({
     },
 
     compare: function(){
-        if(aux.result === undefined){
+        if(aux.rate === undefined){
             this.navigate("", true);
             return true;
         }
@@ -41,7 +54,7 @@ var TtpRouter = Backbone.Router.extend({
     },
 
     profile: function(){
-        if(aux.result === undefined){
+        if(aux.rate === undefined){
             this.navigate("", true);
             return true;
         }
@@ -53,6 +66,7 @@ var TtpRouter = Backbone.Router.extend({
 var CompareView = Backbone.View.extend({
     template: _.template($("#compare-result").html()),
     render: function() {
+        console.log('LDFASKLJDFSKLJDFSKLJFS');
         var tabs = new TabsView(3);
         tabs.render();
 
@@ -308,7 +322,7 @@ var HomeView = Backbone.View.extend({
     el: '#home-view',
     render: function() {
         $(this.el).html(this.template3());
-        if(aux.result === undefined){
+        if(aux.rate === undefined){
             $(this.el).append(this.template1());
         }else{
             $(this.el).append(this.template2(aux));
@@ -331,9 +345,60 @@ var HomeView = Backbone.View.extend({
           dataType:'json',
           success: function(data) {
               if(data.success) {
-                 data = {'result': data.rate_query.rate, 'level': data.rate_query.level, 'leveltxt': data.rate_query.levelText};
+                data = data.rate_query;
                 aux = data;
                 $("#resulparo").fadeOut(function(){
+                    $("#compartir a").attr('data-url', data.absolute_url);
+                    $("#compartir a").attr('data-text', 'Mi tasa de paro es ' & data.absolute_url & '%');
+                    $("#result").html(self.template2(data));
+                    $("#resulparo").fadeIn();
+                });
+            }
+          }
+        });
+    }
+});
+
+var HomeWithHashView = HomeView.extend({
+    render: function(){
+        var self = this;
+        $(this.el).html(this.template3());
+        $(this.el).append(this.template1());
+        $("#calculate").bind("submit", $.proxy( this.submit, this ));
+        $.ajax({
+          data: $('#calculate').serialize(),
+          url: $('#calculate').attr('action'),
+          dataType:'json',
+          success: function(data) {
+              if(data.success) {
+                data = data.rate_query;
+                aux = data;
+                $("#resulparo").fadeOut(function(){
+                    $("#compartir a").attr('data-url', data.absolute_url);
+                    $("#compartir a").attr('data-text', 'Mi tasa de paro es ' & data.absolute_url & '%');
+                    $("#result").html(self.template2(data));
+                    $("#resulparo").fadeIn();
+                });
+            }
+          }
+        });
+    },
+    submit: function(e){
+        e.preventDefault();
+        form = $("#calculate").serializeObject();
+        var self = this;
+
+        $.ajax({
+          data: $('#calculate').serialize(),
+          url: $('#calculate').attr('action'),
+          dataType:'json',
+          success: function(data) {
+              if(data.success) {
+                data = data.rate_query;
+                aux = data;
+                $("#resulparo").fadeOut(function(){
+                    $("#compartir a").attr('data-url', data.absolute_url);
+                    $("#compartir a").attr('data-text', 'Mi tasa de paro es ' & data.absolute_url & '%');
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();
                 });

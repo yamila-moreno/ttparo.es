@@ -21,6 +21,7 @@ class ProfileRateView(SuperView):
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
         if rate_query:
             context = {'rate_query': rate_query.to_json_dict()}
+            print context['rate_query']
             return self.render_json(context, True)
 
         return self.render_json({},False)

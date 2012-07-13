@@ -180,7 +180,7 @@ class RateQuery(models.Model):
             'education': self.education and self.education.name or 'formación indiferente',
             'rate':self.rate,
             'level':self.compare_to_general[0],
-            'levelText':self.compare_to_general[1],
+            'leveltxt':self.compare_to_general[1],
             'absolute_url':self.get_absolute_url()
         }
         return json_dict

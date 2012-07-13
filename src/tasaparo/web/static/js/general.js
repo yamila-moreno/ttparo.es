@@ -376,6 +376,7 @@ var HomeWithHashView = HomeView.extend({
                 data = data.rate_query;
                 aux = data;
                 $("#resulparo").fadeOut(function(){
+                    appTtpRouter.navigate(data.absolute_url, false);
                     data.url = window.location.href;
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();
@@ -399,8 +400,6 @@ var HomeWithHashView = HomeView.extend({
                 $("#resulparo").fadeOut(function(){
                     appTtpRouter.navigate(data.absolute_url, false);
                     data.url = window.location.href;
-                    //$("#compartir a").attr('data-url', data.absolute_url);
-                    //$("#compartir a").attr('data-text', 'Mi tasa de paro es ' & data.absolute_url & '%');
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();
                 });

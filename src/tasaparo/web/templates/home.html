@@ -27,14 +27,16 @@
             <div id="inner-content"></div>
             <div id="footer">
                 <p>Tu tasa de Paro © 2012</p>
+                <div class="logos">
+                    <img src="{{STATIC_URL}}images/logo_kaleidos.png" >
+                    <img src="{{STATIC_URL}}images/logo_secuoyas.png" >
+                </div>
                 <ul>
                     <li><a href="">Mas info</a>  |</li>
                     <li><a href="">Conócenos</a>  |</li>
                     <li><a href="">Descarga el Widget</a>  |</li>
                     <li><a href="">API</a></li>
                 </ul>
-                <img src="{{STATIC_URL}}images/logo_kaleidos.png" >
-                <img src="{{STATIC_URL}}images/logo_secuoyas.png" >
             </div>
         </div>
     </div>
@@ -181,8 +183,7 @@
             <a class="link" href="{% url profile %}" id="nav-prov">Evolución<br/>perfil</a>
         </div>
         <div id="compartir">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="/" data-text="Mi tasa de paro es" data-via="kaleidosnet" data-hashtags="tasaparo">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url=<%- url %>" style="width:130px; height:20px;"></iframe>
         </div>
     </div>
 </script>

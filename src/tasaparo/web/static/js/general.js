@@ -192,7 +192,6 @@ var ProfileView = Backbone.View.extend({
     },
     labels : ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"],
     initchart: function(){
-        console.log(this.labels);
         $("#chart").chart({
          type : "line",
          labels : this.labels,

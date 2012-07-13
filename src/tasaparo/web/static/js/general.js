@@ -20,6 +20,8 @@ var TtpRouter = Backbone.Router.extend({
 
         var lastprofiles = new LastProfiles();
         lastprofiles.render();
+
+        updateform();
     },
 
     home_with_hash: function(){
@@ -102,7 +104,10 @@ var RecalculateView = Backbone.View.extend({
     render: function() {
         $("#left").append(this.template());
         //$('.default').dropkick();
-        $("#recalculate").bind("submit", $.proxy( this.submit, this ));
+        updateform();
+
+        $("#recalculate").bind("submit", $.proxy( this.submit, this )).submit();
+
         return this;
     },
     submit: function(e){
@@ -368,6 +373,7 @@ var HomeWithHashView = HomeView.extend({
                 data = data.rate_query;
                 aux = data;
                 $("#resulparo").fadeOut(function(){
+                    appTtpRouter.navigate(data.absolute_url, false);
                     data.url = window.location.href;
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();
@@ -380,7 +386,6 @@ var HomeWithHashView = HomeView.extend({
         e.preventDefault();
         form = $("#calculate").serializeObject();
         var self = this;
-
         $.ajax({
           data: $('#calculate').serialize(),
           url: $('#calculate').attr('action'),
@@ -390,8 +395,8 @@ var HomeWithHashView = HomeView.extend({
                 data = data.rate_query;
                 aux = data;
                 $("#resulparo").fadeOut(function(){
-                    $("#compartir a").attr('data-url', data.absolute_url);
-                    $("#compartir a").attr('data-text', 'Mi tasa de paro es ' & data.absolute_url & '%');
+                    appTtpRouter.navigate(data.absolute_url, false);
+                    data.url = window.location.href;
                     $("#result").html(self.template2(data));
                     $("#resulparo").fadeIn();
                 });
@@ -400,6 +405,15 @@ var HomeWithHashView = HomeView.extend({
         });
     }
 });
+
+function updateform(){
+    if (form.province !== undefined) {
+        $("#id_province").val(form.province);
+        $("#id_education").val(form.education);
+        $("#id_age").val(form.age);
+        $("#id_sex").val(form.sex);
+    }
+}
 
 function recalculate(url){
     form = $("#calculate").serializeObject();

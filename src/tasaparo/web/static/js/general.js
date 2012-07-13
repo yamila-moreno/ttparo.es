@@ -248,8 +248,10 @@ var ProfileView = Backbone.View.extend({
             success: function(data) {
                 profile_serie = [];
                 profile_labels = [];
-                for each (cycle in data.profile_rates) {
-                    profile_serie.push(cycle.rate);
+
+                var rates_long = data.profile_rates.length;
+                for(var i=0; i < rates_long; i++){
+                    profile_serie.push(data.profile_rates[i].rate);
                 }
 
                 //delete

@@ -47,18 +47,18 @@ class Command(BaseCommand):
         for rq in rqs:
             rq.delete()
 
-        #age_ids = list(models.Age.objects.values_list('pk', flat=True))
-        age_ids = [7,8,9]
+        age_ids = list(models.Age.objects.values_list('pk', flat=True))
+        #age_ids = [7,8,9]
         age_ids.append(None)
         sex_ids = list(models.Sex.objects.values_list('pk', flat=True))
         sex_ids.append(None)
-        #province_ids = list(models.Province.objects.values_list('pk', flat=True))
-        province_ids = [27, 28, 29]
+        province_ids = list(models.Province.objects.values_list('pk', flat=True))
+        #province_ids = [27, 28, 29]
         province_ids.append(None)
         education_ids = list(models.Education.objects.values_list('pk', flat=True))
         education_ids.append(None)
-        #cycles = models.Microdata.objects.order_by('cycle').distinct('cycle').values_list('cycle', flat=True)
-        cycles = [100, 125, 158]
+        cycles = models.Microdata.objects.order_by('cycle').distinct('cycle').values_list('cycle', flat=True)
+        #cycles = [100, 125, 158]
 
         combs = itertools.product(age_ids, sex_ids, province_ids, education_ids, cycles)
 

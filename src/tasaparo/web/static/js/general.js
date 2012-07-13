@@ -128,7 +128,7 @@ var RecalculateView = Backbone.View.extend({
                                     setTimeout(function(){
                                         $(bl).fadeIn();
                                     },time);
-                                })(bls[z], z*350);
+                                })(bls[z], z*500);
                             }
                         },200);
                     }

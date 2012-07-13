@@ -66,7 +66,6 @@ var TtpRouter = Backbone.Router.extend({
 var CompareView = Backbone.View.extend({
     template: _.template($("#compare-result").html()),
     render: function() {
-        console.log('LDFASKLJDFSKLJDFSKLJFS');
         var tabs = new TabsView(3);
         tabs.render();
 
@@ -123,7 +122,6 @@ var RecalculateView = Backbone.View.extend({
 
                     var rates_long = data.rates.length;
                     for(var i=0; i < rates_long; i++){
-                        console.log(data.rates[i]);
 
                         var mydict;
                         mydict =

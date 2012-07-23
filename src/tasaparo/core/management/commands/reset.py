@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
 
     def load_microdata_sql(self, sql):
-        subprocess.Popen(['psql', '-f', sql, 'tasaparo']).communicate()
+        subprocess.Popen(['psql', '-f', sql, '-U', 'tasaparo', 'tasaparo']).communicate()
 
     @transaction.commit_on_success
     def load_micdrodata_csv(self, csv):

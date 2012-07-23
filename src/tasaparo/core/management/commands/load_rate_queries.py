@@ -35,7 +35,7 @@ class Command(BaseCommand):
             self.load_rate_queries_from_scratch()
 
     def load_ratequeries_sql(self, sql):
-        subprocess.Popen(['psql', '-f', sql, 'tasaparo']).communicate()
+        subprocess.Popen(['psql', '-f', sql, '-U', 'tasaparo', 'tasaparo']).communicate()
 
     def load_rate_queries_from_scratch(self):
 

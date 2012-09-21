@@ -154,8 +154,6 @@ class RateQueryManager(models.Manager):
 
         rq = RateQuery.objects.filter(age__pk=age, education__pk=education, province__pk=province, sex__pk=sex).order_by('cycle')
 
-        print 'hay tantos como ciclos ', rq.count()
-
         return rq
 
 class RateQuery(models.Model):

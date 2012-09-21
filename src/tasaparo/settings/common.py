@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'tasaparo.core',
     'tasaparo.web',
     'compressor',
+    'superview',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -160,3 +161,5 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_OUTPUT_DIR = ''
+SV_CONTEXT_VARNAME = 'menu'
+SV_CSS_MENU_ACTIVE = 'sel'

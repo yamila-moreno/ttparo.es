@@ -22,8 +22,8 @@ urlpatterns = patterns('',
     url(r'^api/', include('tasaparo.core.urls', namespace='api')),
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^(?P<query_hash>[\w-]+)/$', HomeView.as_view(), name = 'profile-rate-by-hash',
-    ),
+    url(r'about/', AboutView.as_view(), name='about'),
+    url(r'^(?P<query_hash>[\w-]+)/$', HomeView.as_view(), name='profile-rate-by-hash'),
 
 
 )

@@ -1,46 +1,8 @@
-{% load compress %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Tasa paro</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="" type="image/x-icon" />
-    <meta name="description" content="" />
-    {% compress css %}
-    <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" />
-    {% endcompress %}
-</head>
-<body>
-    <div id="headerbg"></div>
-    <div id="container">
-        <div id="header">
-            <a title="home" class="link" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
-            <ul id="menu">
-                <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
-                <li><a title="Conócenos" href="">Conócenos</a></li>
-                <li><a title="Más info" href="">Más info</a></li>
-                <li><a title="Descargar el Widget" href="">Descargar el Widget</a></li>
-                <li><a title="Api" href="">Api</a></li>
-            </ul>
-        </div>
-        <div id="content">
-            <div id="inner-content"></div>
-            <div id="footer">
-                <p>Tu tasa de Paro © 2012 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carlos Gil Bellosta</p>
-                <div class="logos">
-                    <img src="{{STATIC_URL}}images/logo_kaleidos.png" >
-                    <img src="{{STATIC_URL}}images/logo_secuoyas.png" >
-                </div>
-                <ul>
-                    <li><a href="">Mas info</a>  |</li>
-                    <li><a href="">Conócenos</a>  |</li>
-                    <li><a href="">Descarga el Widget</a>  |</li>
-                    <li><a href="">API</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+{% extends 'base.html' %}
 
+{% block content %}
+
+<div id="inner-content"></div>
 <script type="text/template" id="tabs">
 <ul id="tabmenu">
     <li class="t1"><a class="link c<%- level %>" href="{% url home %}">Tu tasa: <span><%- rate %>%</span></a></li>
@@ -207,7 +169,11 @@
         </div>
 </script>
 
-{% compress js %}
+
+{% endblock %}
+
+{% block backbone %}
+
 <script type="text/javascript">
 function initmap(){
 var R = Raphael("map", 600, 500);
@@ -320,16 +286,6 @@ R.path('M270,305, 267,310, 261,320, 258,324, 253,328, 245,327, 239,331, 232,329,
                 })(pro[i], i);
             }*/
 }
-
 </script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/raphael-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/elycharts.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/json2.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/underscore-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/backbone-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/tooltip.js"></script>
-<script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>
-{% endcompress %}
-</body>
-</html>
+
+{% endblock %}

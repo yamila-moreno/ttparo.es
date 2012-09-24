@@ -1,0 +1,20 @@
+<form id="recalculate" method="get" action="{{get_compare_rates_url}}">
+    {% csrf_token %}
+    <div class="field">
+        <label>Provincia</label>
+        {{form.province}}
+    </div>
+    <div class="field">
+        <label>Género</label>
+        {{form.sex}}
+    </div>
+    <div class="field">
+        <label>Edad</label>
+        {{form.age}}
+    </div>
+    <div class="field">
+        <label>Nivel de estudios</label>
+        {{form.education}}
+    </div>
+    <input type="submit" value="RECALCULAR" />
+</form>  

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% include "menu.html" with option='compare' %} 
+    <div id='compare-view'>
+        <div id="head2">
+            <a class="link" href="{% url profile-rate-by-hash query_hash %}">&lt; volver</a>
+            <h1>Comparativa</h1>
+        </div>
+        <div id="left">
+            {% include "recalculate-form.html" %}      
+        </div>
+        <div id="right">
+            <ul id="compare-nav">
+                <li class="sel">Por género</li>
+                <li>Por edades</li>
+                <li>Por niveles de estudio</li>
+            </ul>
+            <div id="compare">
+            </div>
+        </div>    
+    </div>
+    {% include "info.html" %} 
+    <script type="text/template" id="compare-item">
+        <div class="bl r<%- level %>" style="display: none; height: 200px; width: 200px; border-radius: 100px; margin-right:10px">
+            <span class="percer" style="font-size: 79px; margin-top: 30px;"><%- rate %>%</span>
+            <span class="txt" style="font-size: 28px"><%- sex %></span>
+        </div>
+    </script>        
+{% endblock %}
+{% block extrajs %}
+{% endblock %}

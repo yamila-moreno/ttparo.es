@@ -1,0 +1,67 @@
+{% load compress %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Tasa paro</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="description" content="" />
+    {% compress css %}
+    <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}css/styles.less" />
+    {% endcompress %}
+</head>
+<body>
+    <div id="headerbg"></div>
+    <div id="container">
+        <div id="header">
+            <a title="home" class="link" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
+            <ul id="menu">
+                <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
+                <li><a title="Conócenos" href="">Conócenos</a></li>
+                <li><a title="Más info" href="">Más info</a></li>
+                <li><a title="Descargar el Widget" href="">Descargar el Widget</a></li>
+                <li><a title="Api" href="">Api</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="inner-content">
+                {% block content %}{% endblock %}
+            </div>
+            <div id="footer">
+                <p>Tu tasa de Paro © 2012 <span class="name">Carlos Gil Bellosta</span></p>
+                <div class="logos">
+                    <img src="{{STATIC_URL}}images/logo_kaleidos.png" >
+                    <img src="{{STATIC_URL}}images/logo_secuoyas.png" >
+                </div>
+                <ul>
+                    <li><a href="">Mas info</a>  |</li>
+                    <li><a href="">Conócenos</a>  |</li>
+                    <li><a href="">Descarga el Widget</a>  |</li>
+                    <li><a href="">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/template" id="result-empty-template">
+        <div id="result">
+            <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
+            <div id="resulparo" class="r1 question"><span>tu tasa</span>?</div>
+        </div>
+    </script>
+    
+    {% compress js %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/raphael-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/elycharts.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/json2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/underscore.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/backbone.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/tooltip.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/views.js"></script>
+    {% endcompress %}
+    <script type="text/javascript" charset="utf-8">
+    {% block extrajs %}{% endblock %}
+    </script>
+</body>
+</html>

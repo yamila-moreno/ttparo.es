@@ -16,14 +16,14 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^$', HomeView.as_view(), name = 'home'),
-    url(r'^map/$', HomeView.as_view(), name='map'),
-    url(r'^compare/$', HomeView.as_view(), name='compare'),
-    url(r'^profile/$', HomeView.as_view(), name='profile'),
     url(r'^api/', include('tasaparo.core.urls', namespace='api')),
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'about/', AboutView.as_view(), name='about'),
-    url(r'^(?P<query_hash>[\w-]+)/$', HomeView.as_view(), name='profile-rate-by-hash'),
+    url(r'^(?P<query_hash>[\w-]+)/profile/$', ProfileView.as_view(), name='profile'),
+    url(r'^(?P<query_hash>[\w-]+)/compare/$', CompareView.as_view(), name='compare'),
+    url(r'^(?P<query_hash>[\w-]+)/map/$', MapView.as_view(), name = 'map'),
+    url(r'^(?P<query_hash>[\w-]+)/$', HomeView.as_view(), name = 'profile-rate-by-hash'),
 
+    url(r'about/', AboutView.as_view(), name='about'),
 
 )

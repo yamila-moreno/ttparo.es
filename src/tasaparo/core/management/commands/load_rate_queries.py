@@ -47,6 +47,7 @@ class Command(BaseCommand):
         for rq in rqs:
             rq.delete()
 
+        # TODO: se hace solo con unos pocos datos, hay que meter todos!!
         #age_ids = list(models.Age.objects.values_list('pk', flat=True))
         age_ids = [7,8,9]
         age_ids.append(None)

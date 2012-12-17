@@ -75,7 +75,7 @@ def worker(queue, event):
 def handle():
     #The expected format is:
     #ciclo	edad	sexo	nforma	prov	aoi	factorel
-    csv_path = "/home/niwi/datos_epa.csv"
+    csv_path = sys.argv[1]
 
     queue = JoinableQueue()
     event = Event()

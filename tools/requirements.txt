@@ -4,3 +4,4 @@ PIL
 django-superview
 django-compressor
 gevent==0.13.8
+psycogreen

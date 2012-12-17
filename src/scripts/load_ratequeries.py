@@ -159,7 +159,7 @@ def handle():
 
     greenlets = []
 
-    for i in range(200):
+    for i in range(50):
         gv = gevent.spawn(worker, queue, event)
         greenlets.append(gv)
 

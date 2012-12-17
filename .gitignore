@@ -3,4 +3,5 @@ src/tasaparo/settings/local.py
 *.mo
 *.swp
 *.csv
+tasaparo.sql
 src/media

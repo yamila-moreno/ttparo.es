@@ -44,21 +44,21 @@
         <div id="resulparo" class="r1 question"><span>tu tasa</span>?</div>
         {% endif %}
     </div>
-    {% include "info.html" %} 
+    {% include "info.html" %}
     <div id="last">
         <h2>Últimas consultas</h2>
-        {% for querie in latest_queries %}
+        {% for query in latest_queries %}
         <div class="lresults">
-            <div class="result r{{querie.level}}">{{querie.rate}}%</div>
+            <div class="result r{{query.level}}" rel="{{ query.absolute_url }}">{{query.rate}}%</div>
             <div class="txt">
-                {{querie.sex}}<br/>
-                {{querie.age}}<br/>
-                {{querie.province}}<br/>
-                {{querie.education}}
+                {{query.sex}}<br/>
+                {{query.age}}<br/>
+                {{query.province}}<br/>
+                {{query.education}}
             </div>
-        </div>        
+        </div>
         {% endfor %}
-    </div>    
+    </div>
 </div>
 {% endblock %}
 {% block extrajs %}

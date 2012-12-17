@@ -3,19 +3,23 @@ app.views = {};
 
 $(document).on('ready', function(){
     //info tooltips
-    $(".result").tooltip({
-        'position': 'top center',
-        'margin_bottom': 10,
-        'html': function(self){
-            return "<p>Rellena el formulario para obtener tu tasa de paro</p><div class='arrow'></div></div>";
-         }
-    });    
-    
+    //$(".result").tooltip({
+        //'position': 'top center',
+        //'margin_bottom': 10,
+        //'html': function(self){
+            //return "";
+         //}
+    //});
+
+    $(".result").click({
+        //TODO on click cargar este query_hash en la home
+    });
+
     //home calculate ajax get & redirect
     $("#calculate").on('submit', function(e){
         e.preventDefault();
         var target = $(e.target);
-                
+
         $.ajax({
           data: target.serialize(),
           url: target.attr('action'),
@@ -25,14 +29,14 @@ $(document).on('ready', function(){
                 window.location.href = data.rate_query.absolute_url;
             }
           }
-        });    
+        });
     });
-    
+
     //map view
     if($("#map-view").length){
         initmap();
     }
-    
+
     //compare view
     if($("#compare-view").length){
         var template = _.template($("#compare-item").html());
@@ -64,23 +68,23 @@ $(document).on('ready', function(){
                             },200);
                         }
                     }
-                }   
+                }
             });
         }
-        
+
         recalculate();
         $("#recalculate").on('submit', function(e){
             e.preventDefault();
             recalculate();
         });
     }
-    
+
     //profile view
     if($("#profile-view").length){
         var conf = {
-            
+
         };
-                
+
         var initchart = function(values){
             $("#chart").chart({
                 type : "line",
@@ -106,7 +110,7 @@ $(document).on('ready', function(){
                 }
             });
         }
-        
+
         var recalculate = function(){
             $.ajax({
                 data: $('#recalculate').serialize(),
@@ -133,15 +137,15 @@ $(document).on('ready', function(){
                     });
 
                 }
-            });            
+            });
         }
-        
+
         recalculate();
         $("#recalculate").on('submit', function(e){
             e.preventDefault();
             recalculate();
         });
-    }    
+    }
 });
 
 

@@ -6,6 +6,7 @@ from superview.views import SuperView
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from tasaparo.core import models as core
 from tasaparo.core import api
@@ -18,6 +19,8 @@ class HomeView(SuperView):
         context['form'] = FilterForm()
         if query_hash:
             context['calculated_query'] = core.RateQuery.objects.get_rate(query_hash=query_hash)
+            if not context['calculated_query']:
+                return HttpResponseRedirect(reverse('home'))
             initial = {
                 'age':context['calculated_query'].age and context['calculated_query'].age.id or None,
                 'education':context['calculated_query'].education and context['calculated_query'].education.id or None,
@@ -28,7 +31,7 @@ class HomeView(SuperView):
             context['form'] = FilterForm(initial=initial)
 
         context['query_hash'] = query_hash
-        context['general_rate'] = core.RateQuery.objects.get_rate()
+        context['general_rate'] = core.RateQuery.objects.get_general_rate()
         context['get_profile_rate_url'] = reverse('api:profile-rate')
 
         latest_queries = core.RateQuery.objects.latest_queries()

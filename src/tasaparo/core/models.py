@@ -109,11 +109,15 @@ class RateQueryManager(models.Manager):
         except RateQuery.DoesNotExist:
             return None
 
+    def get_general_rate(self):
+        return self.get_rate()
+
     def latest_queries(self):
         latest_cycle = Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
-        return RateQuery.objects.filter(rate__isnull=False).\
-            exclude(age__isnull=True,sex__isnull=True,education__isnull=True,province__isnull=True,cycle=latest_cycle).\
-            order_by('-date')[:4]
+        # TODO. ¿por qué excluimos las RQ que tienen algún criterio a null? ¿qué más da?
+        return RateQuery.objects.filter(rate__isnull=False)\
+            .exclude(age__isnull=True,sex__isnull=True,education__isnull=True,province__isnull=True,cycle=latest_cycle)\
+            .order_by('-date')[:4]
 
     def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = RateQuery.objects.all()
@@ -137,23 +141,18 @@ class RateQueryManager(models.Manager):
     def compare_rates(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
         latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
 
-        age = age or None
-        education = education or None
-        province = province or None
-
-        # implementing only sex comparision
-        rq = RateQuery.objects.filter(cycle=latest_cycle['cycle__max'], age__pk=age, education__pk=education, province__pk=province).exclude(sex__isnull=True).order_by('-sex')
-
+        # TODO implementing only sex comparision
+        rq = RateQuery.objects.filter(
+            cycle=latest_cycle['cycle__max'],
+            age__pk=age,
+            education__pk=education,
+            province__pk=province)\
+            .exclude(sex__isnull=True)\
+            .order_by('-sex')
         return rq
 
     def get_profile_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
-        age = age or None
-        education = education or None
-        province = province or None
-        sex = sex or None
-
         rq = RateQuery.objects.filter(age__pk=age, education__pk=education, province__pk=province, sex__pk=sex).order_by('cycle')
-
         return rq
 
 class RateQuery(models.Model):
@@ -190,7 +189,7 @@ class RateQuery(models.Model):
             'rate':self.rate,
             'level':self.compare_to_general[0],
             'leveltxt':self.compare_to_general[1],
-            'absolute_url':self.get_absolute_url()
+            'absolute_url':self.get_absolute_url(),
         }
         return json_dict
 

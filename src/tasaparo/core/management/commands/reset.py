@@ -29,8 +29,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            subprocess.Popen(['dropdb', '-U', 'tasaparo', 'tasaparo']).communicate()
-            subprocess.Popen(['createdb', '-U', 'tasaparo', 'tasaparo']).communicate()
+            subprocess.Popen(['dropdb', 'tasaparo']).communicate()
+            subprocess.Popen(['createdb', 'tasaparo']).communicate()
         except:
             pass
 
@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
 
     def load_microdata_sql(self, sql):
-        subprocess.Popen(['psql', '-f', sql, '-U', 'tasaparo', 'tasaparo']).communicate()
+        subprocess.Popen(['psql', '-f', sql, 'tasaparo']).communicate()
 
     @transaction.commit_on_success
     def load_micdrodata_csv(self, csv):

@@ -1,5 +1,6 @@
-Django
-psycopg2
+Django==1.4.3
+psycopg2==2.4.6
 PIL
 django-superview
 django-compressor
+gevent==0.13.8

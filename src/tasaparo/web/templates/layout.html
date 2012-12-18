@@ -1,4 +1,5 @@
 {% load compress %}
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,19 +48,7 @@
         </div>
     </script>
 
-    {% compress js %}
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/jquery.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/raphael-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/elycharts.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/json2.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/underscore.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/backbone.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/libs/tooltip.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/general.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/views.js"></script>
-    {% endcompress %}
-    <script type="text/javascript" charset="utf-8">
-    {% block extrajs %}{% endblock %}
-    </script>
+    <script src="{% static 'js/main.min.js' %}"></script>
+    <script src="{% static 'js/tasaparo.js"></script>
 </body>
 </html>

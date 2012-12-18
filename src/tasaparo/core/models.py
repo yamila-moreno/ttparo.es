@@ -102,6 +102,7 @@ class RateQueryManager(models.Manager):
 
         if not query_hash:
             query_hash = generate_hash(age=age,cycle=cycle,education=education,province=province,sex=sex)
+
         try:
             rq = RateQuery.objects.get(query_hash=query_hash)
             rq.save()
@@ -110,7 +111,8 @@ class RateQueryManager(models.Manager):
             return None
 
     def get_general_rate(self):
-        return self.get_rate()
+        rate = self.get_rate()
+        return rate
 
     def latest_queries(self):
         latest_cycle = Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
@@ -155,6 +157,17 @@ class RateQueryManager(models.Manager):
         rq = RateQuery.objects.filter(age__pk=age, education__pk=education, province__pk=province, sex__pk=sex).order_by('cycle')
         return rq
 
+    def get_province_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
+        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+
+        rq = RateQuery.objects.filter(
+            cycle=latest_cycle['cycle__max'],
+            age__pk=age,
+            education__pk=education,
+            sex__pk=sex)\
+            .exclude(province__isnull=True)
+        return rq
+
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)
     rate = models.IntegerField(null=True, default=None)
@@ -195,8 +208,7 @@ class RateQuery(models.Model):
 
     @property
     def compare_to_general(self):
-        general_hash = generate_hash()
-        general_qr = RateQuery.objects.get_rate(query_hash=general_hash)
+        general_qr = RateQuery.objects.get_general_rate()
         general_rate = general_qr.rate
         percent = general_rate * 20 / 100
         if self.rate > (general_rate + percent):

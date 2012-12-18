@@ -1,5 +1,4 @@
 <form id="recalculate" method="get" action="{{get_compare_rates_url}}">
-    {% csrf_token %}
     <div class="field">
         <label>Provincia</label>
         {{form.province}}
@@ -17,4 +16,4 @@
         {{form.education}}
     </div>
     <input type="submit" value="RECALCULAR" />
-</form>  
+</form>

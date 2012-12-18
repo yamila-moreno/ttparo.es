@@ -125,9 +125,9 @@ def worker(queue, event):
         hash = generate_hash(connection, age=c_age, cycle=c_cycle,
                 education=c_education, province=c_province, sex=c_sex),
 
-        params = [hash, c_cycle, c_age, c_sex, c_education, c_province]
-        cursor.execute("INSERT INTO core_ratequery (query_hash, cycle, age_id, sex_id, education_id, province_id, date) "
-                       "VALUES (%s, %s, %s, %s, %s, %s, now())", params)
+        params = [hash, rate, c_cycle, c_age, c_sex, c_education, c_province]
+        cursor.execute("INSERT INTO core_ratequery (query_hash, rate, cycle, age_id, sex_id, education_id, province_id, date) "
+                       "VALUES (%s, %s, %s, %s, %s, %s, %s, now())", params)
 
         queue.task_done()
 

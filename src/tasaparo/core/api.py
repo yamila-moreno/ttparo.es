@@ -100,3 +100,21 @@ class ProfileChartView(SuperView):
             return self.render_json(context, True)
 
         return self.render_json({}, False)
+
+class MapView(SuperView):
+    def get(self, request):
+        form = FilterForm(request.GET)
+        if not form.is_valid():
+            return self.render_json({}, False)
+
+        rts = core.RateQuery.objects.get_province_rates(**form.cleaned_data)
+        if rts:
+            list_json_dict = []
+            for r in rts:
+                list_json_dict.append(r.to_json_dict())
+
+            context = {'rates': list_json_dict}
+            return self.render_json(context, True)
+
+        return self.render_json({}, False)
+

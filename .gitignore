@@ -3,5 +3,8 @@ src/tasaparo/settings/local.py
 *.mo
 *.swp
 *.csv
-tasaparo.sql
+tasaparo_fulldb.sql
+styles.css
+tasaparo.min.js
 src/media
+node_modules

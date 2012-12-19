@@ -121,7 +121,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'tasaparo.core',
     'tasaparo.web',
-    'compressor',
     'superview',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

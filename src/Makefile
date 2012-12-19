@@ -1,7 +1,11 @@
-all: mainjs tasaparojs
+all: mainjs tasaparojs compileless
 
 dependences:
 	npm install uglify-js less jshint
+
+
+compileless:
+	./node_modules/less/bin/lessc --yui-compress tasaparo/web/static/css/styles.less tasaparo/web/static/css/styles.css
 
 
 mainjs:

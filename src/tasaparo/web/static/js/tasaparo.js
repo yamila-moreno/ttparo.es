@@ -48,20 +48,16 @@ $(document).ajaxSend(function(event, xhr, settings) {
             "submit form#calculate": "onMainFormSubmit"
         },
 
+        setup: function() {},
+
         initialize: function() {
             _.bindAll(this);
+            this.setup();
         },
 
-        submit: function(target, url) {
-            url = url || target.attr('action');
-            $.get(url, target.serialize(),
+        submit: function(target) {
+            $.get(target.attr('action'), target.serialize(),
                                 this.submitSuccess, 'json');
-        },
-
-        onMainFormSubmit: function(event) {
-            event.preventDefault();
-            var target = $(event.currentTarget);
-            this.submit(target);
         },
 
         submitSuccess: function(data) {
@@ -69,25 +65,39 @@ $(document).ajaxSend(function(event, xhr, settings) {
             if (data.success) {
                 window.location.href = data.rate_query.absolute_url;
             }
+        },
+
+        onMainFormSubmit: function(event) {
+            event.preventDefault();
+            var target = $(event.currentTarget);
+            this.submit(target);
         }
     });
 
     Tasaparo.CompateView = Tasaparo.HomeView.extend({
         el: "#compare-view",
 
-        initialize: function() {
-            _.bindAll(this);
+        setup: function() {
             this.template = _.template($("#compare-item").html());
+
+            var form = this.$("form#calculate");
+            this.submit(form);
         },
 
         submitSuccess: function(data) {
             if (!data.success) return;
 
             var compareDom = this.$("#compare").empty();
-            var ratesLength = data.rates.length;
+            var timeout = 0;
+            var template = this.template
 
             _.each(data.rates, function(item) {
-                console.log(item);
+                _.delay(function() {
+                    var dom = $(template(item));
+                    compareDom.append(dom)
+                    dom.fadeIn();
+                }, timeout)
+                timeout += 500;
             }, this);
         }
     });
@@ -95,13 +105,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
     Tasaparo.MapView = Tasaparo.CompateView.extend({
         el: "#map-view",
 
-        events: {
-            "submit form#calculate": "onMainFormSubmit"
-        },
-
-        initialize: function() {
-            _.bindAll(this);
-
+        setup: function() {
             this.r = Raphael("map", 600, 500);
             this.map = app.drawMap(this.r);
 
@@ -109,15 +113,15 @@ $(document).ajaxSend(function(event, xhr, settings) {
             this.submit(form);
         },
 
-        submit: function(target) {
-            $.get(this.$el.data('url'), target.serialize(),
-                                this.submitSuccess, 'json');
-        },
-
         onMainFormSubmit: function(event) {
             event.preventDefault();
             var target = $(event.currentTarget);
             this.submit(target);
+        },
+
+        submit: function(target) {
+            $.get(this.$el.data('url'), target.serialize(),
+                                this.submitSuccess, 'json');
         },
 
         submitSuccess: function(data) {

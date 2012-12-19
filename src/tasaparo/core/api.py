@@ -60,7 +60,9 @@ class FormDataView(SuperView):
         context['cycles'] = list(core.Microdata.objects.distinct('cycle').values('cycle'))
         return self.render_json(context, True)
 
+
 class CompareRatesView(SuperView):
+    @method_decorator(cache_page(60*60*24))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():
@@ -86,6 +88,7 @@ class CompareRatesView(SuperView):
             return self.render_json(context, True)
 
         return self.render_json({}, False)
+
 
 class ProfileChartView(SuperView):
     def get(self, request):

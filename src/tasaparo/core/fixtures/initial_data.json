@@ -1,29 +1,5 @@
 [
     {
-        "pk": 1,
-        "model": "core.age",
-        "fields": {
-            "ine_id": 0,
-            "name": "de 0 A 4 a\u00f1os"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "core.age",
-        "fields": {
-            "ine_id": 5,
-            "name": "de 5 A 9 a\u00f1os"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "core.age",
-        "fields": {
-            "ine_id": 10,
-            "name": "de 10 A 15 a\u00f1os"
-        }
-    },
-    {
         "pk": 4,
         "model": "core.age",
         "fields": {

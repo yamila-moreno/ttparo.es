@@ -13,4 +13,7 @@ urlpatterns = patterns('',
     url(r'^profile/chart/$', ProfileChartView.as_view(), name = 'profile-chart'),
 
     url(r'^provinces/rates/$', MapView.as_view(), name = 'map'),
+
+    url(r'^widgethtml/$', WidgetHTMLView.as_view(), name = 'get-widget-html'),
+    url(r'^widgetjs/$', WidgetJSView.as_view(), name = 'get-widget-js'),
 )

@@ -115,3 +115,13 @@ class AboutView(SuperView):
     def get(self, request):
         context = {}
         return self.render_to_response(self.template, context)
+
+class WidgetView(SuperView):
+    template = 'widget.html'
+    menu = ['widget']
+
+    def get(self, request):
+        context = {}
+        context['form'] = FilterForm()
+        context['get_widget_html'] = reverse('api:get-widget-html')
+        return self.render_to_response(self.template, context)

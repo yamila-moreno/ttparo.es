@@ -10,6 +10,8 @@
             app.currentView = new Tasaparo.MapView();
         } else if($("#profile-view").length > 0) {
             app.currentView = new Tasaparo.ProfileView();
+        } else if($("#widget-view").length > 0) {
+            app.currentView = new Tasaparo.WidgetView();
         }
     };
 }).call(this);

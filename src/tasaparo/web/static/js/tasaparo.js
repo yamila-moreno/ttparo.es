@@ -74,10 +74,16 @@ $(document).ajaxSend(function(event, xhr, settings) {
         }
     });
 
-    Tasaparo.CompateView = Tasaparo.HomeView.extend({
+    Tasaparo.CompareView = Tasaparo.HomeView.extend({
         el: "#compare-view",
 
         setup: function() {
+
+            $("#id_sex").attr('disabled','disabled');
+            $("#id_province").removeAttr('disabled');
+            $("#id_age").removeAttr('disabled');
+            $("#id_education").removeAttr('disabled');
+
             this.template = _.template($("#compare-item").html());
 
             var form = this.$("form#calculate");
@@ -102,10 +108,16 @@ $(document).ajaxSend(function(event, xhr, settings) {
         }
     });
 
-    Tasaparo.MapView = Tasaparo.CompateView.extend({
+    Tasaparo.MapView = Tasaparo.CompareView.extend({
         el: "#map-view",
 
         setup: function() {
+
+            $("#id_province").attr('disabled','disabled');
+            $("#id_sex").removeAttr('disabled');
+            $("#id_age").removeAttr('disabled');
+            $("#id_education").removeAttr('disabled');
+
             this.r = Raphael("map", 600, 500);
             this.map = app.drawMap(this.r);
 
@@ -135,6 +147,25 @@ $(document).ajaxSend(function(event, xhr, settings) {
                 }, this);
             }, this);
         }
+    });
+
+    Tasaparo.WidgetView = Tasaparo.HomeView.extend({
+        el: "#widget-view",
+
+        setup: function() {
+            $("#calculate input").attr('value','Widget!');
+        },
+
+        submit: function(target) {
+            $.get(this.$el.data('url'), target.serialize(),
+                                this.submitSuccess, 'json');
+        },
+
+        submitSuccess: function(data) {
+            if (!data.success) return;
+            $("#widget-html").text(data.widget_html);
+        }
+
     });
 
     Tasaparo.ProfileView = Tasaparo.HomeView.extend({

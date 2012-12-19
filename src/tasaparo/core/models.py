@@ -200,11 +200,11 @@ class RateQuery(models.Model):
 
     def to_json_dict(self):
         json_dict = {
-            'age': self.age and self.age.name or 'edad indiferente',
-            'sex': self.sex and self.sex.name or 'género indiferente',
-            'province': self.province and self.province.name or 'provincia indiferente',
+            'age': self.age and self.age.name or u'edad indiferente',
+            'sex': self.sex and self.sex.name or u'género indiferente',
+            'province': self.province and self.province.name or u'provincia indiferente',
             'province_id': self.province and self.province.ine_id or None,
-            'education': self.education and self.education.name or 'formación indiferente',
+            'education': self.education and self.education.name or u'formación indiferente',
             'rate':self.rate,
             'level':self.compare_to_general[0],
             'leveltxt':self.compare_to_general[1],

@@ -21,10 +21,7 @@
         <div id="header">
             <a title="home" class="link" href="{% url home %}"><img src="{{ STATIC_URL }}images/logo.png" alt="logo" /></a>
             <ul id="menu">
-                <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
-                <li><a title="Conócenos" href="">Conócenos</a></li>
-                <li><a title="Más info" href="">Más info</a></li>
-                <li><a title="Descargar el Widget" href="">Descargar el Widget</a></li>
+                {% block menu %}{% endblock %}
             </ul>
         </div>
         <div id="content">

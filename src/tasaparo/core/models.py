@@ -203,7 +203,7 @@ class RateQuery(models.Model):
             'age': self.age and self.age.name or 'edad indiferente',
             'sex': self.sex and self.sex.name or 'género indiferente',
             'province': self.province and self.province.name or 'provincia indiferente',
-            'province_id': self.province.ine_id or None,
+            'province_id': self.province and self.province.ine_id or None,
             'education': self.education and self.education.name or 'formación indiferente',
             'rate':self.rate,
             'level':self.compare_to_general[0],

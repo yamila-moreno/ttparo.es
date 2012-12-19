@@ -8,6 +8,8 @@
             app.currentView = new Tasaparo.CompateView();
         } else if ($("#map-view").length > 0) {
             app.currentView = new Tasaparo.MapView();
+        } else if($("#profile-view").length > 0) {
+            app.currentView = new Tasaparo.ProfileView();
         }
     };
 }).call(this);

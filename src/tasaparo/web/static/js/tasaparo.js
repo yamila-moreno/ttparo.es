@@ -136,4 +136,55 @@ $(document).ajaxSend(function(event, xhr, settings) {
             }, this);
         }
     });
+
+    Tasaparo.ProfileView = Tasaparo.HomeView.extend({
+        el: "#profile-view",
+
+        setupChart: function(values) {
+            this.$("#chart").chart({
+                type : "line",
+                labels : ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012"],
+                values: values,
+                margins : [10, 15, 20, 50],
+                series: {
+                    serie1 : {
+                        color : "red"
+                    },
+                    serie2 : {
+                        color : "blue"
+                    }
+                },
+                defaultAxis : {
+                    labels : true
+                },
+                features : {
+                    grid : {
+                        draw : true,
+                        forceBorder : true
+                    }
+                }
+            });
+        },
+
+        setup: function() {
+            var form = this.$("form#calculate");
+            this.submit(form);
+        },
+
+        submitSuccess: function(data) {
+            if (!data.success) return;
+
+            var data_submit = {serie1:  _.map(data.profile_rates, function(item) {
+                return item.rate
+            })};
+
+            var self = this;
+
+            this.$("#chart").fadeOut(function() {
+                $(this).remove();
+                self.$("#right").html("<div id='chart'></div>");
+                self.setupChart(data_submit);
+            });
+        }
+    });
 }).call(this);

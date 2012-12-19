@@ -42,8 +42,8 @@ $(document).on('ready', function(){
         var template = _.template($("#compare-item").html());
         var recalculate = function(){
             $.ajax({
-                data: $('#recalculate').serialize(),
-                url: $('#recalculate').attr('action'),
+                data: $('#calculate').serialize(),
+                url: $('#calculate').attr('action'),
                 dataType:'json',
                 success: function(data) {
                     if(data.success) {

@@ -2,15 +2,18 @@
 
 from django.views.generic import View
 
-from superview.views import SuperView
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
+from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from django.forms.models import model_to_dict
+from django.views.decorators.cache import cache_page
 
+from superview.views import SuperView
 from tasaparo.core import models as core
 from tasaparo.core.forms import FilterForm
+
 
 class ProfileRateView(SuperView):
     def get(self, request):
@@ -101,7 +104,11 @@ class ProfileChartView(SuperView):
 
         return self.render_json({}, False)
 
+
+
+
 class MapView(SuperView):
+    @method_decorator(cache_page(60*60*24))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():

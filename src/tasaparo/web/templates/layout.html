@@ -54,11 +54,10 @@
     </script>
 
     <script src="{% static 'js/main.min.js' %}"></script>
-
-    {% if DEBUG %}
-    <script src="{% static 'js/tasaparo.js"></script>
-    <script src="{% static 'js/mapdata.js"></script>
-    <script src="{% static 'js/app.js"></script>
+    {% if debug %}
+    <script src="{% static 'js/tasaparo.js' %}"></script>
+    <script src="{% static 'js/mapdata.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
     {% else %}
     <script src="{% static 'js/tasaparo.min.js' %}"></script>
     {% endif %}

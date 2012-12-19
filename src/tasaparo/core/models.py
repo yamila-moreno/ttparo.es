@@ -146,15 +146,19 @@ class RateQueryManager(models.Manager):
         # TODO implementing only sex comparision
         rq = RateQuery.objects.filter(
             cycle=latest_cycle['cycle__max'],
-            age__pk=age,
-            education__pk=education,
-            province__pk=province)\
+            age__pk=age or None,
+            education__pk=education or None,
+            province__pk=province or None)\
             .exclude(sex__isnull=True)\
             .order_by('-sex')
         return rq
 
     def get_profile_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
-        rq = RateQuery.objects.filter(age__pk=age, education__pk=education, province__pk=province, sex__pk=sex).order_by('cycle')
+        rq = RateQuery.objects.filter(
+            age__pk = age or None,
+            education__pk = education or None,
+            province__pk = province or None,
+            sex__pk = sex or None).order_by('cycle')
         return rq
 
     def get_province_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
@@ -162,10 +166,11 @@ class RateQueryManager(models.Manager):
 
         rq = RateQuery.objects.filter(
             cycle=latest_cycle['cycle__max'],
-            age__pk=age,
-            education__pk=education,
-            sex__pk=sex)\
-            .exclude(province__isnull=True)
+            age__pk=age or None,
+            education__pk=education or None,
+            sex__pk=sex or None)
+
+        rq = rq.exclude(province__isnull=True)
         return rq
 
 class RateQuery(models.Model):
@@ -198,6 +203,7 @@ class RateQuery(models.Model):
             'age': self.age and self.age.name or 'edad indiferente',
             'sex': self.sex and self.sex.name or 'género indiferente',
             'province': self.province and self.province.name or 'provincia indiferente',
+            'province_id': self.province.ine_id or None,
             'education': self.education and self.education.name or 'formación indiferente',
             'rate':self.rate,
             'level':self.compare_to_general[0],

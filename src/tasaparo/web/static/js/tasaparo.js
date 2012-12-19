@@ -52,15 +52,20 @@ $(document).ajaxSend(function(event, xhr, settings) {
             _.bindAll(this);
         },
 
+        submit: function(target, url) {
+            url = url || target.attr('action');
+            $.get(url, target.serialize(),
+                                this.submitSuccess, 'json');
+        },
+
         onMainFormSubmit: function(event) {
             event.preventDefault();
             var target = $(event.currentTarget);
-
-            $.post(target.attr('action'), target.serialize(),
-                                this.onSubmitSuccess, 'json');
+            this.submit(target);
         },
 
-        onSubmitSuccess: function(data) {
+        submitSuccess: function(data) {
+            console.log(data);
             if (data.success) {
                 window.location.href = data.rate_query.absolute_url;
             }
@@ -73,17 +78,6 @@ $(document).ajaxSend(function(event, xhr, settings) {
         initialize: function() {
             _.bindAll(this);
             this.template = _.template($("#compare-item").html());
-        },
-
-        onMainFormSubmit: function(event) {
-            event.preventDefault();
-            var target = $(event.currentTarget);
-            this.submit(target);
-        },
-
-        submit: function(target) {
-            $.get(target.attr('action'), target.serialize(),
-                                this.submitSuccess, 'json');
         },
 
         submitSuccess: function(data) {
@@ -101,17 +95,41 @@ $(document).ajaxSend(function(event, xhr, settings) {
     Tasaparo.MapView = Tasaparo.CompateView.extend({
         el: "#map-view",
 
+        events: {
+            "submit form#calculate": "onMainFormSubmit"
+        },
+
         initialize: function() {
             _.bindAll(this);
 
-            this.form = this.$("form#calculate");
-            this.submit(form);
             this.r = Raphael("map", 600, 500);
             this.map = app.drawMap(this.r);
+
+            var form = this.$("form#calculate");
+            this.submit(form);
+        },
+
+        submit: function(target) {
+            $.get(this.$el.data('url'), target.serialize(),
+                                this.submitSuccess, 'json');
+        },
+
+        onMainFormSubmit: function(event) {
+            event.preventDefault();
+            var target = $(event.currentTarget);
+            this.submit(target);
         },
 
         submitSuccess: function(data) {
             if (!data.success) return;
+
+            _.each(data.rates, function(rate) {
+                var attrs = app.levelAttrs[rate.level];
+                var provinceData = this.map[rate.province_id];
+                _.each(provinceData, function(item) {
+                    item.attr(attrs);
+                }, this);
+            }, this);
         }
     });
 }).call(this);

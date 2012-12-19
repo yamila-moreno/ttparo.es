@@ -32,6 +32,8 @@ TIME_ZONE = 'Europe/Madrid'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -76,8 +78,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'compressor.finders.CompressorFinder',
+    #'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -87,7 +88,6 @@ SECRET_KEY = '&amp;*41hgnooms&amp;*9=n89$s7%!3^w3rm-ju%=zh_b+1b&amp;cg(f!p-j'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (

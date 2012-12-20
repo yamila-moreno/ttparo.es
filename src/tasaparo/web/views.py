@@ -66,23 +66,26 @@ class MapView(SuperView):
         return self.render_to_response(template, context)
 
 class CompareView(SuperView):
-    def get(self, request, query_hash=None):
+    def get(self, request, query_hash):
         template = 'compare.html'
+
         context = {}
         context['form'] = FilterForm()
-        if query_hash:
-            context['calculated_query'] = core.RateQuery.objects.get_rate(query_hash=query_hash)
-            initial = {
-                'age':context['calculated_query'].age and context['calculated_query'].age.id or None,
-                'education':context['calculated_query'].education and context['calculated_query'].education.id or None,
-                'sex':context['calculated_query'].sex and context['calculated_query'].sex.id or None,
-                'province':context['calculated_query'].province and context['calculated_query'].province.id or None,
-                'cycle':context['calculated_query'].cycle
-            }
-            context['form'] = FilterForm(initial=initial)
+        context['calculated_query'] = core.RateQuery.objects.get_rate(query_hash=query_hash)
 
+        initial = {
+            'age':context['calculated_query'].age and context['calculated_query'].age.id or None,
+            'education':context['calculated_query'].education and context['calculated_query'].education.id or None,
+            'sex':context['calculated_query'].sex and context['calculated_query'].sex.id or None,
+            'province':context['calculated_query'].province and context['calculated_query'].province.id or None,
+            'cycle':context['calculated_query'].cycle
+        }
+        context['form'] = FilterForm(initial=initial)
         context['query_hash'] = query_hash
-        context['get_compare_rates_url'] = reverse('api:compare-rates')
+
+        context['get_compare_sex_url'] = reverse('api:compare-rates', args=['sex'])
+        context['get_compare_age_url'] = reverse('api:compare-rates', args=['age'])
+        context['get_compare_education_url'] = reverse('api:compare-rates', args=['education'])
 
         return self.render_to_response(template, context)
 
@@ -132,4 +135,6 @@ class MoreInfoView(SuperView):
 
     def get(self, request):
         context = {}
+        context['form'] = FilterForm()
+        context['get_widget_html'] = reverse('api:get-widget-html')
         return self.render_to_response(self.template, context)

@@ -83,17 +83,55 @@ $(document).ajaxSend(function(event, xhr, settings) {
     Tasaparo.CompareView = Tasaparo.HomeView.extend({
         el: "#compare-view",
 
+        events: {
+            "click #by-sex": "compareBySex",
+            "click #by-age": "compareByAge",
+            "click #by-education": "compareByEducation",
+        },
+
         setup: function() {
+            this.submit(this.$("#by-sex"));
+        },
 
-            $("#id_sex").attr('disabled','disabled');
-            $("#id_province").removeAttr('disabled');
-            $("#id_age").removeAttr('disabled');
-            $("#id_education").removeAttr('disabled');
+        compareBySex: function(event){
 
+            this.$("#by-sex").addClass('sel');
+            this.$("#by-age").removeClass('sel');
+            this.$("#by-education").removeClass('sel');
+
+            // recolocar los combos
+            var target = $(event.currentTarget);
+            this.submit(target);
+        },
+
+        compareByAge: function(event){
+
+            this.$("#by-sex").removeClass('sel');
+            this.$("#by-age").addClass('sel');
+            this.$("#by-education").removeClass('sel');
+
+            // recolocar los combos
+            var target = $(event.currentTarget);
+            this.submit(target);
+        },
+
+        compareByEducation: function(event){
+
+            this.$("#by-sex").removeClass('sel');
+            this.$("#by-age").removeClass('sel');
+            this.$("#by-education").addClass('sel');
+
+            // recolocar los combos
+            var target = $(event.currentTarget);
+            this.submit(target);
+        },
+
+        submit: function(target) {
             this.template = _.template($("#compare-item").html());
-
             var form = this.$("form#calculate");
-            this.submit(form);
+
+            $.get(this.$el.data('url'), target.serialize(),
+                                this.submitSuccess, 'json');
         },
 
         submitSuccess: function(data) {
@@ -101,7 +139,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
             var compareDom = this.$("#compare").empty();
             var timeout = 0;
-            var template = this.template
+            var template = this.template;
 
             _.each(data.rates, function(item) {
                 _.delay(function() {
@@ -111,7 +149,9 @@ $(document).ajaxSend(function(event, xhr, settings) {
                 }, timeout)
                 timeout += 500;
             }, this);
-        }
+        },
+
+
     });
 
     Tasaparo.MapView = Tasaparo.CompareView.extend({

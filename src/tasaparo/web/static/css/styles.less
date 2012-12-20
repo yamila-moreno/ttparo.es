@@ -85,6 +85,83 @@ body { background: url('../images/ttpbg.jpg') no-repeat; }
     .deco { position: absolute; left: 598px; bottom: -23px; background: url('../images/decoarrow.png') no-repeat; width: 75px; height: 23px; }
 }
 
+#info-ttdp{
+    h1 { font-family:"Open Sans Bold"; font-size: 32px; width: 935px; margin: 35px auto 0 auto; text-align: center; padding-bottom: 25px; border-bottom: 1px solid #e3e3e2; margin-bottom: 30px; }
+    p{font-family:"Open Sans"; padding: 0.5em 37px 0.5em 55px;}
+    a{ 
+        color: #858585;
+        text-decoration: none;
+        &:hover{
+            color: #E17863;
+        }
+    }
+    ul{
+        font-family:"Open Sans";
+        padding: 0.5em 37px .5em 55px;
+        overflow: hidden;
+        &:last-child{
+            padding: 0.5em 37px 55px 55px;
+            li{
+                border-bottom: none;
+            }
+        }
+        li{
+            width: 30%;
+            float: left;
+            display: block;
+            margin: 5px 1% 5px 0;
+            padding: 0 0 10px 10px;
+            border-bottom: 1px dotted #DEDEDE;
+            border-left: 3px solid #DEDEDE;
+            &:last-child{
+                margin-right: 0;
+            }
+            h3{
+                font-family: "Open Sans Semibold";
+                font-size: 14px;
+                margin-bottom: 7px;
+                text-transform: uppercase;
+                a{ 
+                    color: #858585;
+                    text-decoration: none;
+                    &:hover{
+                        color: #E17863;
+                    }
+                }
+            }
+            a{ 
+                color: #858585;
+                text-decoration: none;
+                &:hover{
+                    color: #E17863;
+                }
+            }
+        }
+    }
+    #calculate{
+        padding: 0.5em 37px 15px 55px;
+    }
+    #widget-wrapper{
+        display: none;
+        margin: 0.5em 37px 55px 55px;
+        -webkit-border-radius: 4px; /* Safari 3-4, iOS 1-3.2, Android ≤1.6 */
+        border-radius: 4px; /* Opera 10.5, IE9+, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
+        /* useful if you don't want a bg color from leaking outside the border: */
+        -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+        p{
+            padding-left: 0;
+        }
+        #widget-html{
+            width: 100%;
+            min-height: 85px;
+            border: 1px solid #ADADAD;
+            -moz-box-shadow:    inset 0 0 10px #ADADAD;
+            -webkit-box-shadow: inset 0 0 10px #ADADAD;
+            box-shadow:         inset 0 0 10px #ADADAD;
+        }
+    }
+}
+
 input[type=submit]{
     margin: 13px 0 0 30px;
     border: 1px solid #005eff;

@@ -169,7 +169,8 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
         submitSuccess: function(data) {
             if (!data.success) return;
-            this.$("#widget-html").text(data.widget_html);
+            this.$("#widget-wrapper").show();
+            this.$("#widget-html").text(data.widget_html).select();
         }
 
     });

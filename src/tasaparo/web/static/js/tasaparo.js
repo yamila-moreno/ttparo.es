@@ -153,7 +153,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
         el: "#widget-view",
 
         setup: function() {
-            $("#calculate input").attr('value','Widget!');
+            this.$("#calculate input").attr('value','Widget!');
         },
 
         submit: function(target) {
@@ -163,7 +163,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
         submitSuccess: function(data) {
             if (!data.success) return;
-            $("#widget-html").text(data.widget_html);
+            this.$("#widget-html").text(data.widget_html);
         }
 
     });

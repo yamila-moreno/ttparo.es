@@ -1,14 +1,16 @@
 @font-face {font-family:"Open Sans Italic";src:url("../fonts/OpenSans-Italic.eot?") format("eot"),url("../fonts/OpenSans-Italic.woff") format("woff"),url("../fonts/OpenSans-Italic.ttf") format("truetype"),url("../fonts/OpenSans-Italic.svg#OpenSans-Italic") format("svg");font-weight:normal;font-style:normal;}
+@font-face {font-family: 'BreeSerif-Regular';src: url('../fonts/bsr.eot');src: url('../fonts/bsr.eot?#iefix') format('embedded-opentype'),url('../fonts/bsr.woff') format('woff'),url('../fonts/bsr.ttf') format('truetype'),url('../fonts/bsr.svg#bsr') format('svg');font-weight: normal;font-style: normal;}
 
 div#kaleidos-tasaparo {
     width: 116px;
-    height:228px;
+    height:151px;
     margin: 10px;
 }
 
 .lresults .txt {
-    font-size: 11px;
+    font-size: 20px;
     font-family:"Open Sans Italic";
+    padding-left : 20px;
     width: 100%;
     margin-top: 10px;
     float: left;
@@ -31,4 +33,9 @@ div#kaleidos-tasaparo {
 .r1 { background-color: #c74a53;}
 .r2 { background-color: #e2ba00;}
 .r3 { background-color: #acde5c;}
+
+a {
+    color: #646464;
+    text-decoration: none;
+}
 

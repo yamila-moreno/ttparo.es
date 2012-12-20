@@ -1,18 +1,46 @@
-var kaleidos_div = document.getElementById("kaleidos-tasaparo");
+(function() {
+    var kaleidosDiv = document.getElementById("kaleidos-tasaparo");
 
-var rate_div = document.createElement('div');
-rate_div.className = "lresults";
-kaleidos_div.appendChild(rate_div);
+    var moreInfoLink = document.createElement('a');
+    moreInfoLink.className =
+    moreInfoLink.href = "http://127.0.0.1:8000{{ absolute_url }}";
+    moreInfoLink.target = "_new";
+    kaleidosDiv.appendChild(moreInfoLink);
 
-var rate_value = document.createElement('div');
-rate_value.className = "result r" + {{ level }};
-rate_value.textContent = {{ rate }}
-rate_div.appendChild(rate_value);
+    var rateDiv = document.createElement('div');
+    rateDiv.className = "lresults";
+    moreInfoLink.appendChild(rateDiv);
 
-var params = document.createElement('div');
-params.className = "txt";
-//TODO: hacer que los parámetros se separen por <br>
-params.textContent = "{{ sex }} {{ age }} {{ province }} {{ education }}";
-rate_div.appendChild(params);
+    var rateValue = document.createElement('div');
+    rateValue.className = "result r" + {{ level }};
+    rateValue.textContent = {{ rate }}+"%";
+    rateDiv.appendChild(rateValue);
 
-document.write('<link rel="stylesheet" href="http://127.0.0.1:8000/static/css/widget.css" type="text/css" media="handheld, all" />');
+    //var params = document.createElement('div');
+    //params.className = "txt";
+    //params.innerHTML = "{{ sex }}<br />{{ age }}<br />{{ province }}<br />{{ education }}";
+    //rateDiv.appendChild(params);
+
+    var moreInfoText = document.createElement('div');
+    moreInfoText.className = "txt";
+    moreInfoText.innerHTML = "+ INFO";
+    rateDiv.appendChild(moreInfoText);
+
+    var stylesheet = document.createElement('link');
+    stylesheet.href = "http://127.0.0.1:8000/static/css/widget.css";
+    stylesheet.rel = "stylesheet";
+    stylesheet.type = "text/css";
+    //stylesheet.media = "handheld, all";
+    kaleidosDiv.appendChild(stylesheet);
+
+}).call(this);
+
+
+//<div id="kaleidos-tasaparo"> kaleidosDiv
+    // <a href>+ info</a>
+   //<div class="lresults">    rateDiv
+        //<div class="result r3">7%</div> rateValue
+       //<div class="txt">género indiferente<br>de 55 A 59 años<br>Málaga<br>Universidad (Licenciatura o Diplomatura)</div> params
+  //</div>
+  //<link href="http://127.0.0.1:8000/static/css/widget.css" rel="stylesheet" type="text/css" media="handheld, all">
+//</div>

@@ -105,7 +105,7 @@ class ProfileView(SuperView):
             context['form'] = FilterForm(initial=initial)
 
         context['query_hash'] = query_hash
-        context['get_compare_rates_url'] = reverse('api:compare-rates')
+        context['get_profile_chart_url'] = reverse('api:profile-chart')
 
         return self.render_to_response(template, context)
 

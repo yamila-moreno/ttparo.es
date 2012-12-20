@@ -78,9 +78,6 @@ class CompareRatesView(SuperView):
         else:
             return HttpResponseRedirect(reverse('home'))
 
-        print '+'*20
-        print rates
-
         if rates:
             list_json_dict = []
             for rate in rates:
@@ -93,9 +90,6 @@ class CompareRatesView(SuperView):
                 list_json_dict.append(json_dict)
 
             context = {'rates': list_json_dict}
-
-            print '*'*20
-            print list_json_dict
 
             return self.render_json(context, True)
 
@@ -115,6 +109,7 @@ class ProfileChartView(SuperView):
                 list_json_dict.append(r.to_json_dict())
 
             context = {'rates': list_json_dict}
+
             return self.render_json(context, True)
 
         return self.render_json({}, False)

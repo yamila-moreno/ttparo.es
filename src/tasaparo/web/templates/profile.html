@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
     {% include "menu.html" with option='profile' %}
-    <div id='profile-view'>
+    <div id='profile-view' data-url="{{ get_profile_chart_url }}">
         <div id="head2">
             <a class="link" href="{% url profile-rate-by-hash query_hash %}">&lt; volver</a>
             <h1>Evolución de la tasa por perfiles</h1>

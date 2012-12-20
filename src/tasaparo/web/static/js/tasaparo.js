@@ -135,8 +135,6 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
             _.each(data.rates, function(item) {
 
-                console.log(item);
-
                 _.delay(function() {
                     var dom = $(template(item));
                     compareDom.append(dom)
@@ -213,6 +211,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
         el: "#profile-view",
 
         setupChart: function(values) {
+
             this.$("#chart").chart({
                 type : "line",
                 labels : ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012"],
@@ -243,12 +242,17 @@ $(document).ajaxSend(function(event, xhr, settings) {
             this.submit(form);
         },
 
+        submit: function(target) {
+            $.get(this.$el.data('url'), target.serialize(),
+                                this.submitSuccess, 'json');
+        },
+
         submitSuccess: function(data) {
             if (!data.success) return;
-
-            var data_submit = {serie1:  _.map(data.profile_rates, function(item) {
-                return item.rate
-            })};
+            var data_submit = {
+                serie1:  _.map(data.profile_rates, function(item) {
+                    return item.rate
+                })};
 
             var self = this;
 

@@ -60,7 +60,6 @@ class MapView(SuperView):
             context['form'] = FilterForm(initial=initial)
 
         context['query_hash'] = query_hash
-        context['get_compare_rates_url'] = reverse('api:compare-rates')
         context['get_province_rates_url'] = reverse('api:map')
 
         return self.render_to_response(template, context)

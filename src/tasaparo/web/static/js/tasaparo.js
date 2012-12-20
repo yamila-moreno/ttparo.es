@@ -86,42 +86,36 @@ $(document).ajaxSend(function(event, xhr, settings) {
         events: {
             "click #by-sex": "compareBySex",
             "click #by-age": "compareByAge",
-            "click #by-education": "compareByEducation",
+            "click #by-education": "compareByEducation"
         },
 
         setup: function() {
-            this.submit(this.$("#by-sex"));
+            this.rearrangeButtons(this.$("#by-sex"));
+            var target = this.$("#by-sex");
+            this.submit(target);
+        },
+
+        rearrangeButtons: function(btn){
+            this.$("#by-sex").removeClass('sel');
+            this.$("#by-age").removeClass('sel');
+            this.$("#by-education").removeClass('sel');
+            btn.addClass('sel');
         },
 
         compareBySex: function(event){
-
-            this.$("#by-sex").addClass('sel');
-            this.$("#by-age").removeClass('sel');
-            this.$("#by-education").removeClass('sel');
-
-            // recolocar los combos
+            this.rearrangeButtons(this.$("#by-sex"));
             var target = $(event.currentTarget);
             this.submit(target);
         },
 
         compareByAge: function(event){
-
-            this.$("#by-sex").removeClass('sel');
-            this.$("#by-age").addClass('sel');
-            this.$("#by-education").removeClass('sel');
-
-            // recolocar los combos
+            this.rearrangeButtons(this.$("#by-age"));
             var target = $(event.currentTarget);
             this.submit(target);
         },
 
         compareByEducation: function(event){
-
-            this.$("#by-sex").removeClass('sel');
-            this.$("#by-age").removeClass('sel');
-            this.$("#by-education").addClass('sel');
-
-            // recolocar los combos
+            this.rearrangeButtons(this.$("#by-education"));
             var target = $(event.currentTarget);
             this.submit(target);
         },
@@ -129,19 +123,20 @@ $(document).ajaxSend(function(event, xhr, settings) {
         submit: function(target) {
             this.template = _.template($("#compare-item").html());
             var form = this.$("form#calculate");
-
-            $.get(this.$el.data('url'), target.serialize(),
+            $.get(target.data('url'), form.serialize(),
                                 this.submitSuccess, 'json');
         },
 
         submitSuccess: function(data) {
             if (!data.success) return;
-
             var compareDom = this.$("#compare").empty();
             var timeout = 0;
             var template = this.template;
 
             _.each(data.rates, function(item) {
+
+                console.log(item);
+
                 _.delay(function() {
                     var dom = $(template(item));
                     compareDom.append(dom)
@@ -151,18 +146,17 @@ $(document).ajaxSend(function(event, xhr, settings) {
             }, this);
         },
 
+        onMainFormSubmit: function(event) {
+            event.preventDefault();
+            this.submit(this.$("#by-sex"));
+        }
 
     });
 
-    Tasaparo.MapView = Tasaparo.CompareView.extend({
+    Tasaparo.MapView = Tasaparo.HomeView.extend({
         el: "#map-view",
 
         setup: function() {
-
-            $("#id_province").attr('disabled','disabled');
-            $("#id_sex").removeAttr('disabled');
-            $("#id_age").removeAttr('disabled');
-            $("#id_education").removeAttr('disabled');
 
             this.r = Raphael("map", 600, 500);
             this.map = app.drawMap(this.r);

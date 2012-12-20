@@ -140,10 +140,9 @@ class RateQueryManager(models.Manager):
 
         return results
 
-    def compare_rates(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
+    def compare_rates_by_sex(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
         latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
 
-        # TODO implementing only sex comparision
         rq = RateQuery.objects.filter(
             cycle=latest_cycle['cycle__max'],
             age__pk=age or None,
@@ -151,6 +150,30 @@ class RateQueryManager(models.Manager):
             province__pk=province or None)\
             .exclude(sex__isnull=True)\
             .order_by('-sex')
+        return rq
+
+    def compare_rates_by_age(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
+        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+
+        rq = RateQuery.objects.filter(
+            cycle=latest_cycle['cycle__max'],
+            sex__pk=sex or None,
+            education__pk=education or None,
+            province__pk=province or None)\
+            .exclude(age__isnull=True)\
+            .order_by('-age')
+        return rq
+
+    def compare_rates_by_education(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
+        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+
+        rq = RateQuery.objects.filter(
+            cycle=latest_cycle['cycle__max'],
+            sex__pk=sex or None,
+            age__pk=age or None,
+            province__pk=province or None)\
+            .exclude(education__isnull=True)\
+            .order_by('-education')
         return rq
 
     def get_profile_rates(self, age=None, cycle=None, education=None, province=None, sex=None):

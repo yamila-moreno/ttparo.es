@@ -63,28 +63,40 @@ class FormDataView(SuperView):
 
 class CompareRatesView(SuperView):
     @method_decorator(cache_page(60*60*24))
-    def get(self, request):
+    def get(self, request, by='education'):
+
         form = FilterForm(request.GET)
         if not form.is_valid():
             return self.render_json({}, False)
 
-        rates = core.RateQuery.objects.compare_rates(**form.cleaned_data)
+        if by == 'sex':
+            rates = core.RateQuery.objects.compare_rates_by_sex(**form.cleaned_data)
+        elif by == 'age':
+            rates = core.RateQuery.objects.compare_rates_by_age(**form.cleaned_data)
+        elif by == 'education':
+            rates = core.RateQuery.objects.compare_rates_by_education(**form.cleaned_data)
+        else:
+            return HttpResponseRedirect(reverse('home'))
+
+        print '+'*20
+        print rates
+
         if rates:
             list_json_dict = []
-            for r in rates:
-                list_json_dict.append(r.to_json_dict())
+            for rate in rates:
+                json_dict = rate.to_json_dict()
 
-            profile_rates = core.RateQuery.objects.get_profile_rates(**form.cleaned_data)
+                if by == 'sex': json_dict.update({'byLabel':unicode(rate.sex.name)})
+                if by == 'age': json_dict.update({'byLabel':unicode(rate.age)})
+                if by == 'education': json_dict.update({'byLabel':unicode(rate.education)})
 
-            if profile_rates:
-                list_json_dict_profile = []
-                for r in profile_rates:
-                    list_json_dict_profile.append(r.to_json_dict())
-
-                context = {'rates': list_json_dict, 'profile_rates': list_json_dict_profile}
-                return self.render_json(context, True)
+                list_json_dict.append(json_dict)
 
             context = {'rates': list_json_dict}
+
+            print '*'*20
+            print list_json_dict
+
             return self.render_json(context, True)
 
         return self.render_json({}, False)

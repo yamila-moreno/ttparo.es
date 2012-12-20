@@ -5,7 +5,7 @@
         if ($("#home-view").length > 0) {
             app.currentView = new Tasaparo.HomeView();
         } else if ($("#compare-view").length > 0) {
-            app.currentView = new Tasaparo.CompateView();
+            app.currentView = new Tasaparo.CompareView();
         } else if ($("#map-view").length > 0) {
             app.currentView = new Tasaparo.MapView();
         } else if($("#profile-view").length > 0) {

@@ -45,7 +45,8 @@ $(document).ajaxSend(function(event, xhr, settings) {
         el: "#home-view",
 
         events: {
-            "submit form#calculate": "onMainFormSubmit"
+            "submit form#calculate": "onMainFormSubmit",
+            "click .lresults": "showResult"
         },
 
         setup: function() {},
@@ -61,7 +62,6 @@ $(document).ajaxSend(function(event, xhr, settings) {
         },
 
         submitSuccess: function(data) {
-            console.log(data);
             if (data.success) {
                 window.location.href = data.rate_query.absolute_url;
             }
@@ -71,7 +71,13 @@ $(document).ajaxSend(function(event, xhr, settings) {
             event.preventDefault();
             var target = $(event.currentTarget);
             this.submit(target);
+        },
+
+        showResult: function(event){
+            var target = $(event.currentTarget);
+            window.location.href = target.attr('rel');
         }
+
     });
 
     Tasaparo.CompareView = Tasaparo.HomeView.extend({

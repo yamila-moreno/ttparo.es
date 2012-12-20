@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'about/', AboutView.as_view(), name='about'),
     url(r'widget/', WidgetView.as_view(), name='widget'),
+    url(r'moreinfo/', MoreInfoView.as_view(), name='moreinfo'),
 
     url(r'^(?P<query_hash>[\w-]+)/profile/$', ProfileView.as_view(), name='profile'),
     url(r'^(?P<query_hash>[\w-]+)/compare/$', CompareView.as_view(), name='compare'),

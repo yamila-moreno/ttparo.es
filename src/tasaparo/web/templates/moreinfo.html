@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block menu %}
+    <li><a title="Inicio" href="{% url home %}">Inicio</a></li>
+    <li><a title="Conócenos" href="{% url about %}">Conócenos</a></li>
+    <li><a class="sel" title="Más info" href="{% url widget %}">Más info</a></li>
+    <li><a title="Descargar el Widget" href="{% url widget %}">Descargar el Widget</a></li>
+{% endblock %}
+{% block content %}
+<div id="home-view">
+    <div id="search">
+        <h1>Más info</h1>
+        <p>
+
+        </p>
+    </div>
+</div>
+
+
+{% endblock %}

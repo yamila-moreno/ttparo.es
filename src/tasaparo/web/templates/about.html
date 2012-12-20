@@ -2,23 +2,28 @@
 {% block menu %}
     <li><a title="Inicio" href="{% url home %}">Inicio</a></li>
     <li><a class="sel" title="Conócenos" href="{% url about %}">Conócenos</a></li>
-    <li><a title="Más info" href="">Más info</a></li>
+    <li><a title="Más info" href="{% url moreinfo %}">Más info</a></li>
     <li><a title="Descargar el Widget" href="{% url widget %}">Descargar el Widget</a></li>
 {% endblock %}
 {% block content %}
 <div id="home-view">
     <div id="search">
         <h1>Quiénes somos</h1>
-        <p>Tu Tasa de Paro es un proyecto desarrollado en el marco de la <a href="">PiWeek</a> de <a href="">Kaleidos</a>.</p>
+        <p>Tu Tasa de Paro es un proyecto desarrollado en el marco de la <a href="">PiWeek</a> de <a href="">Kaleidos</a>.
+        En la primera edición hicimos un prototipo funcional con diseño y datos parciales.</p>
+        <p>En esta segunda edición hemos mejorado la carga de datos convirtiéndolo en un proceso rápido; gracias a esto, tenemos todos los datos disponibles.
+        También publicamos la opción de incrustar un pequeño widget con un perfil en webs externas.</p>
+        <p>Y en el tintero nos dejamos mejorar las opciones de filtrado, optimizar las velocidades y lo que venga...</p>
         <p>Los que hemos desarrollado el proyecto:</p>
         <ul>
-            <li><a href="">Yamila Moreno</a> (Kaleidos)</li>
+            <li>Yamila Moreno <a href="http://twitter.com/yamila_moreno" target="_new">@yamila_moreno</a></li>
             <li><a href="">JuanFran Alcántara</a> (Kaleidos)</li>
-            <li><a href="">Eva Pérez</a> (Secuoyas)</li>
-            <li><a href="">Francis Vega</a> (Secuoyas)</li>
-            <li><a href="">Luis García Castro</a></li>
-            <li><a href="">Carlos Gil Bellosta</a></li>
-            <li><a href="">Jesús Espino</a></li>
+            <li>Eva Pérez <a href="http://twitter.com/evampp" target="_new">@evampp</a></li>
+            <li>Francis Vega <a href="http://twitter.com/francis_vega" target="_new">@francis_vega</a></li>
+            <li>Luis García Castro <a href="http://twitter.com/luiyo" target="_new">@luiyo</a></li>
+            <li>Carlos Gil Bellosta <a href="http://twitter.com/gilbellosta" target="_new">@gilbellosta</a>
+                (<a href="http://www.datanalytics.com/" target="_new">Web</a>)</li>
+            <li>Andrey Antoukh <a href="http://twitter.com/niwibe" target="_new">@niwibe</a></li>
         </ul>
     </div>
 </div>

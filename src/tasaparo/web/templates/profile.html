@@ -2,7 +2,7 @@
 {% block menu %}
     <li><a class="sel" title="Inicio" href="{% url home %}">Inicio</a></li>
     <li><a title="Conócenos" href="{% url about %}">Conócenos</a></li>
-    <li><a title="Más info" href="">Más info</a></li>
+    <li><a title="Más info" href="{% url moreinfo %}">Más info</a></li>
     <li><a title="Descargar el Widget" href="{% url widget %}">Descargar el Widget</a></li>
 {% endblock %}
 {% block content %}

@@ -3,7 +3,7 @@
 
     var moreInfoLink = document.createElement('a');
     moreInfoLink.className =
-    moreInfoLink.href = "http://127.0.0.1:8000{{ absolute_url }}";
+    moreInfoLink.href = "{{ host }}/{{ absolute_url }}";
     moreInfoLink.target = "_new";
     kaleidosDiv.appendChild(moreInfoLink);
 
@@ -27,20 +27,10 @@
     rateDiv.appendChild(moreInfoText);
 
     var stylesheet = document.createElement('link');
-    stylesheet.href = "http://127.0.0.1:8000/static/css/widget.css";
+    stylesheet.href = "{{ host }}/static/css/widget.css";
     stylesheet.rel = "stylesheet";
     stylesheet.type = "text/css";
     //stylesheet.media = "handheld, all";
     kaleidosDiv.appendChild(stylesheet);
 
 }).call(this);
-
-
-//<div id="kaleidos-tasaparo"> kaleidosDiv
-    // <a href>+ info</a>
-   //<div class="lresults">    rateDiv
-        //<div class="result r3">7%</div> rateValue
-       //<div class="txt">género indiferente<br>de 55 A 59 años<br>Málaga<br>Universidad (Licenciatura o Diplomatura)</div> params
-  //</div>
-  //<link href="http://127.0.0.1:8000/static/css/widget.css" rel="stylesheet" type="text/css" media="handheld, all">
-//</div>

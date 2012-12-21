@@ -125,8 +125,10 @@ class WidgetJSView(SuperView):
             return self.render_json({}, False)
 
         rate_query = core.RateQuery.objects.get_rate(**form.cleaned_data)
+
         if rate_query:
             context = rate_query.to_json_dict()
+            context.update({'host':request.get_host()})
 
         return  self.render_to_response(self.template, context)
 
@@ -142,12 +144,13 @@ class WidgetHTMLView(SuperView):
         sex = form.cleaned_data['sex'] or ''
         age = form.cleaned_data['age'] or ''
         education = form.cleaned_data['education'] or ''
+        url = request.get_host()
 
         context = {}
         context['widget_html'] = u"""
                 <div id="kaleidos-tasaparo"></div>
-                <script src="http://127.0.0.1:8000/api/widgetjs/?province={0}&sex={1}&age={2}&education={3}"></script>
-            """.format(province, sex, age, education)
+                <script src="{0}/?province={1}&sex={2}&age={3}&education={4}"></script>
+            """.format(url,province, sex, age, education)
 
         return self.render_json(context, True)
 

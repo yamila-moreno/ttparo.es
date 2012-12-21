@@ -84,6 +84,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
         el: "#compare-view",
 
         events: {
+            "submit form#calculate": "onMainFormSubmit",
             "click #by-sex": "compareBySex",
             "click #by-age": "compareByAge",
             "click #by-education": "compareByEducation"

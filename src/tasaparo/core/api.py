@@ -84,8 +84,8 @@ class CompareRatesView(SuperView):
                 json_dict = rate.to_json_dict()
 
                 if by == 'sex': json_dict.update({'byLabel':unicode(rate.sex.name)})
-                if by == 'age': json_dict.update({'byLabel':unicode(rate.age)})
-                if by == 'education': json_dict.update({'byLabel':unicode(rate.education)})
+                if by == 'age': json_dict.update({'byLabel':unicode(rate.age.short_name)})
+                if by == 'education': json_dict.update({'byLabel':unicode(rate.education.short_name)})
 
                 list_json_dict.append(json_dict)
 

@@ -9,6 +9,7 @@ from django.forms.models import model_to_dict
 
 class Age(models.Model):
     name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=100)
     ine_id = models.IntegerField(db_index=True)
 
     def __unicode__(self):
@@ -25,6 +26,7 @@ class Sex(models.Model):
 
 class Education(models.Model):
     name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=100)
     inner_id = models.CharField(max_length=100, db_index=True)
 
     def __unicode__(self):

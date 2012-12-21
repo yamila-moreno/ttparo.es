@@ -4,7 +4,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 16,
-            "name": "de 16 A 19 a\u00f1os"
+            "name": "de 16 A 19 a\u00f1os",
+            "short_name" : "16-19"
         }
     },
     {
@@ -12,7 +13,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 20,
-            "name": "de 20 A 24 a\u00f1os"
+            "name": "de 20 A 24 a\u00f1os",
+            "short_name" : "20-24"
         }
     },
     {
@@ -20,7 +22,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 25,
-            "name": "de 25 A 29 a\u00f1os"
+            "name": "de 25 A 29 a\u00f1os",
+            "short_name" : "25-29"
         }
     },
     {
@@ -28,7 +31,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 30,
-            "name": "de 30 A 34 a\u00f1os"
+            "name": "de 30 A 34 a\u00f1os",
+            "short_name" : "30-34"
         }
     },
     {
@@ -36,7 +40,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 35,
-            "name": "de 35 A 39 a\u00f1os"
+            "name": "de 35 A 39 a\u00f1os",
+            "short_name" : "35-39"
         }
     },
     {
@@ -44,7 +49,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 40,
-            "name": "de 40 A 44 a\u00f1os"
+            "name": "de 40 A 44 a\u00f1os",
+            "short_name" : "40-44"
         }
     },
     {
@@ -52,7 +58,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 45,
-            "name": "de 45 A 49 a\u00f1os"
+            "name": "de 45 A 49 a\u00f1os",
+            "short_name" : "45-49"
         }
     },
     {
@@ -60,7 +67,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 50,
-            "name": "de 50 A 54 a\u00f1os"
+            "name": "de 50 A 54 a\u00f1os",
+            "short_name" : "50-54"
         }
     },
     {
@@ -68,7 +76,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 55,
-            "name": "de 55 A 59 a\u00f1os"
+            "name": "de 55 A 59 a\u00f1os",
+            "short_name" : "55-59"
         }
     },
     {
@@ -76,7 +85,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 60,
-            "name": "de 60 A 64 a\u00f1os"
+            "name": "de 60 A 64 a\u00f1os",
+            "short_name" : "60-64"
         }
     },
     {
@@ -84,7 +94,8 @@
         "model": "core.age",
         "fields": {
             "ine_id": 65,
-            "name": "65 o m\u00e1s a\u00f1os"
+            "name": "65 o m\u00e1s a\u00f1os",
+            "short_name" : "65 +"
         }
     },
     {
@@ -108,7 +119,8 @@
         "model": "core.education",
         "fields": {
             "name": "Nada Completado",
-            "inner_id": "o"
+            "inner_id": "o",
+            "short_name" : "Nada"
         }
     },
     {
@@ -116,7 +128,8 @@
         "model": "core.education",
         "fields": {
             "name": "ESO / EGB",
-            "inner_id": "p"
+            "inner_id": "p",
+            "short_name" : "ESO"
         }
     },
     {
@@ -124,7 +137,8 @@
         "model": "core.education",
         "fields": {
             "name": "FP (Grado Medio o Grado Superior)",
-            "inner_id": "fp"
+            "inner_id": "fp",
+            "short_name" : "FP"
         }
     },
     {
@@ -132,7 +146,8 @@
         "model": "core.education",
         "fields": {
             "name": "Bachiller / BUP",
-            "inner_id": "b"
+            "inner_id": "b",
+            "short_name" : "Bachiller"
         }
     },
     {
@@ -140,7 +155,8 @@
         "model": "core.education",
         "fields": {
             "name": "Universidad (Licenciatura o Diplomatura)",
-            "inner_id": "u"
+            "inner_id": "u",
+            "short_name" : "Universidad"
         }
     },
     {

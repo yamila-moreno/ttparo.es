@@ -120,6 +120,7 @@ class WidgetJSView(SuperView):
     template = "widget.js"
 
     def get(self, request):
+
         form = FilterForm(request.GET)
         if not form.is_valid():
             return self.render_json({}, False)
@@ -128,7 +129,9 @@ class WidgetJSView(SuperView):
 
         if rate_query:
             context = rate_query.to_json_dict()
-            context.update({'host':request.get_host()})
+            context.update({'url': 'http://' + request.get_host()})
+
+        print context
 
         return  self.render_to_response(self.template, context)
 
@@ -144,12 +147,12 @@ class WidgetHTMLView(SuperView):
         sex = form.cleaned_data['sex'] or ''
         age = form.cleaned_data['age'] or ''
         education = form.cleaned_data['education'] or ''
-        url = request.get_host()
+        url = request.get_host() + reverse('api:get-widget-js')
 
         context = {}
         context['widget_html'] = u"""
                 <div id="kaleidos-tasaparo"></div>
-                <script src="{0}/?province={1}&sex={2}&age={3}&education={4}"></script>
+                <script src="http://{0}?province={1}&sex={2}&age={3}&education={4}"></script>
             """.format(url,province, sex, age, education)
 
         return self.render_json(context, True)

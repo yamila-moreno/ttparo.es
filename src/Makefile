@@ -20,4 +20,7 @@ mainjs:
 					      	-o tasaparo/web/static/js/main.min.js
 tasaparojs:
 	./node_modules/uglify-js/bin/uglifyjs  tasaparo/web/static/js/tasaparo.js \
-						-c -o  tasaparo/web/static/js/tasaparo.min.js
+										   tasaparo/web/static/js/mapdata.js \
+										   tasaparo/web/static/js/app.js \
+											-c -o  tasaparo/web/static/js/tasaparo.min.js
+

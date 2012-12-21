@@ -131,8 +131,6 @@ class WidgetJSView(SuperView):
             context = rate_query.to_json_dict()
             context.update({'url': 'http://' + request.get_host()})
 
-        print context
-
         return  self.render_to_response(self.template, context)
 
 

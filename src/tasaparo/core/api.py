@@ -104,13 +104,19 @@ class ProfileChartView(SuperView):
             return self.render_json({}, False)
 
         rates = core.RateQuery.objects.get_profile_rates(**form.cleaned_data)
-
-        if rates:
+        general_rates = core.RateQuery.objects.get_profile_rates()
+        if rates and general_rates:
             list_json_dict = []
             for r in rates:
                 list_json_dict.append(r.to_json_dict())
 
             context = {'rates': list_json_dict}
+
+            list_json_dict = []
+            for r in general_rates:
+                list_json_dict.append(r.to_json_dict())
+
+            context.update({'general_rates': list_json_dict})
 
             return self.render_json(context, True)
 

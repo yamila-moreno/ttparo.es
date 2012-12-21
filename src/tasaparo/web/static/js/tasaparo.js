@@ -217,13 +217,14 @@ $(document).ajaxSend(function(event, xhr, settings) {
                 type : "line",
                 labels : ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012", "",""],
                 values: values,
+                tooltips : values,
                 margins : [10, 15, 20, 50],
                 series: {
                     serie1 : {
-                        color : "red"
+                        color : "red",
                     },
                     serie2 : {
-                        color : "blue"
+                        color : "blue",
                     }
                 },
                 defaultAxis : {
@@ -234,7 +235,8 @@ $(document).ajaxSend(function(event, xhr, settings) {
                         draw : true,
                         forceBorder : true
                     }
-                }
+                },
+                legend : ["Evolución de tu perfil","Evolución general"]
             });
         },
 
@@ -254,12 +256,18 @@ $(document).ajaxSend(function(event, xhr, settings) {
                 serie1:  _.map(data.rates, function(item) {
                     return item.rate
                 })};
+            var data2_submit = {
+                serie2:  _.map(data.general_rates, function(item) {
+                    return item.rate
+                })};
+
             var self = this;
 
             this.$("#chart").fadeOut(function() {
                 $(this).remove();
                 self.$("#right").html("<div id='chart'></div>");
                 self.setupChart(data_submit);
+                self.setupChart(data2_submit);
             });
         }
     });

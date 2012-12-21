@@ -11,7 +11,7 @@
     <div id="search"
         {% if calculated_query %}level="{{calculated_query.compare_to_general.0}}" leveltxt="{{calculated_query.compare_to_general.1}}" rate="{{calculated_query.rate}}"{% endif %}>
         <h1>Calcula tu tasa de paro</h1>
-        <form id="calculate" method="post" action="{{get_profile_rate_url}}">
+        <form id="calculate" method="get" action="{{get_profile_rate_url}}">
             <div class="field">
                 <label>Provincia</label>
                 {{form.province}}

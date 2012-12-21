@@ -3,7 +3,7 @@
 
     var moreInfoLink = document.createElement('a');
     moreInfoLink.className =
-    moreInfoLink.href = "{{ url }}/{{ absolute_url }}";
+    moreInfoLink.href = "{{ url }}{{ absolute_url }}";
     moreInfoLink.target = "_new";
     kaleidosDiv.appendChild(moreInfoLink);
 

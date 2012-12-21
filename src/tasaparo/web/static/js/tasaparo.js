@@ -214,7 +214,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
             this.$("#chart").chart({
                 type : "line",
-                labels : ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012"],
+                labels : ["2005", "", "", "", "2006", "", "", "", "2007", "", "", "", "2008", "", "", "", "2009", "", "", "", "2010", "", "", "", "2011", "", "", "", "2012", "",""],
                 values: values,
                 margins : [10, 15, 20, 50],
                 series: {
@@ -250,10 +250,9 @@ $(document).ajaxSend(function(event, xhr, settings) {
         submitSuccess: function(data) {
             if (!data.success) return;
             var data_submit = {
-                serie1:  _.map(data.profile_rates, function(item) {
+                serie1:  _.map(data.rates, function(item) {
                     return item.rate
                 })};
-
             var self = this;
 
             this.$("#chart").fadeOut(function() {

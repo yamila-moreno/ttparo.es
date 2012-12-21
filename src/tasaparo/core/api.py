@@ -97,12 +97,14 @@ class CompareRatesView(SuperView):
 
 
 class ProfileChartView(SuperView):
+    @method_decorator(cache_page(60*60*24))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():
             return self.render_json({}, False)
 
         rates = core.RateQuery.objects.get_profile_rates(**form.cleaned_data)
+
         if rates:
             list_json_dict = []
             for r in rates:

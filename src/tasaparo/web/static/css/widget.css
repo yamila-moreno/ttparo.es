@@ -5,6 +5,9 @@ div#kaleidos-tasaparo {
     width: 116px;
     height:151px;
     margin: 10px;
+/*
+    background: url('../images/bgheader.png') repeat-x;
+*/
 }
 
 .lresults .txt {

@@ -164,6 +164,10 @@ $(document).ajaxSend(function(event, xhr, settings) {
     Tasaparo.MapView = Tasaparo.HomeView.extend({
         el: "#map-view",
 
+        events: {
+            "submit form#calculate": "onMainFormSubmit",
+        },
+
         setup: function() {
 
             this.r = Raphael("map", 600, 500);
@@ -195,6 +199,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
                 }, this);
             }, this);
         }
+
     });
 
     Tasaparo.WidgetView = Tasaparo.HomeView.extend({
@@ -213,6 +218,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
             if (!data.success) return;
             this.$("#widget-wrapper").show();
             this.$("#widget-html").text(data.widget_html).select();
+            this.$("#example-widget").html(data.widget_html);
         }
 
     });

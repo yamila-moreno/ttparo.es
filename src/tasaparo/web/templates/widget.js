@@ -2,7 +2,6 @@
     var kaleidosDiv = document.getElementById("kaleidos-tasaparo");
 
     var moreInfoLink = document.createElement('a');
-    moreInfoLink.className =
     moreInfoLink.href = "{{ url }}{{ absolute_url }}";
     moreInfoLink.target = "_new";
     kaleidosDiv.appendChild(moreInfoLink);
@@ -10,6 +9,10 @@
     var rateDiv = document.createElement('div');
     rateDiv.className = "lresults";
     moreInfoLink.appendChild(rateDiv);
+
+    var logo = document.createElement('img');
+    logo.src = "{{ url }}/static/images/logo.png";
+    rateDiv.appendChild(logo);
 
     var rateValue = document.createElement('div');
     rateValue.className = "result r" + {{ level }};

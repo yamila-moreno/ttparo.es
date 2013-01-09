@@ -29,10 +29,11 @@
                 {% block content %}{% endblock %}
             </div>
             <div id="footer">
-                <p>Tu tasa de Paro © 2012 <span class="name">Carlos Gil Bellosta</span></p>
+                <p>Tu tasa de Paro © 2012
                 <div class="logos">
-                    <img src="{% static 'images/logo_kaleidos.png' %}" >
-                    <img src="{% static 'images/logo_secuoyas.png' %}" >
+                    <a href="" target="_new"><span class="name">Carlos Gil Bellosta</span></a>
+                    <a href="http://kaleidos.net" target="_new"><img src="{% static 'images/logo_kaleidos.png' %}" ></a>
+                    <a href="http://www.secuoyas.com" target="_new"><img src="{% static 'images/logo_secuoyas.png' %}" ></a>
                 </div>
                 <ul>
                     <li><a href="{% url about %}">Conócenos</a>  |</li>

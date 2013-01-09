@@ -10,7 +10,7 @@ div#kaleidos-tasaparo {
 */
 }
 
-.lresults .txt {
+.txt {
     font-size: 20px;
     font-family:"Open Sans Italic";
     padding-left : 20px;
@@ -20,7 +20,7 @@ div#kaleidos-tasaparo {
     cursor: pointer;
 }
 
-.lresults .result {
+.result {
     width: 116px;
     height: 116px;
     border-radius: 58px;

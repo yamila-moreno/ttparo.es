@@ -62,7 +62,7 @@ class FormDataView(SuperView):
 
 
 class CompareRatesView(SuperView):
-    @method_decorator(cache_page(60*60*24))
+    @method_decorator(cache_page(60*60*24*10))
     def get(self, request, by='education'):
 
         form = FilterForm(request.GET)
@@ -97,7 +97,7 @@ class CompareRatesView(SuperView):
 
 
 class ProfileChartView(SuperView):
-    @method_decorator(cache_page(60*60*24))
+    @method_decorator(cache_page(60*60*24*10))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():
@@ -124,11 +124,9 @@ class ProfileChartView(SuperView):
 
 
 class WidgetJSView(SuperView):
-
     template = "widget.js"
 
     def get(self, request):
-
         form = FilterForm(request.GET)
         if not form.is_valid():
             return self.render_json({}, False)
@@ -143,7 +141,7 @@ class WidgetJSView(SuperView):
 
 
 class WidgetHTMLView(SuperView):
-
+    @method_decorator(cache_page(60*60*24*10))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():

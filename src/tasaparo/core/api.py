@@ -164,7 +164,7 @@ class WidgetHTMLView(SuperView):
         return self.render_json(context, True)
 
 class MapView(SuperView):
-    @method_decorator(cache_page(60*60*24))
+    @method_decorator(cache_page(60*60*24*10))
     def get(self, request):
         form = FilterForm(request.GET)
         if not form.is_valid():
@@ -178,6 +178,5 @@ class MapView(SuperView):
 
             context = {'rates': list_json_dict}
             return self.render_json(context, True)
-
         return self.render_json({}, False)
 

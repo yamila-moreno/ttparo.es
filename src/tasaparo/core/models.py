@@ -5,6 +5,8 @@ import hashlib
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 
+from django.core.cache import cache
+
 # Create your models here.
 
 class Age(models.Model):
@@ -187,7 +189,8 @@ class RateQueryManager(models.Manager):
         return rq
 
     def get_province_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
-        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+        latest_cycle = self.get_query_set().aggregate(Max('cycle'))
+        #latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
 
         rq = RateQuery.objects.filter(
             cycle=latest_cycle['cycle__max'],
@@ -195,6 +198,7 @@ class RateQueryManager(models.Manager):
             education__pk=education or None,
             sex__pk=sex or None)
 
+        rq = rq.select_related('age', 'sex', 'province', 'education')
         rq = rq.exclude(province__isnull=True)
         return rq
 
@@ -239,8 +243,12 @@ class RateQuery(models.Model):
 
     @property
     def compare_to_general(self):
-        general_qr = RateQuery.objects.get_general_rate()
-        general_rate = general_qr.rate
+        general_rate = cache.get("general-rate")
+        if general_rate is None:
+            general_qr = RateQuery.objects.get_general_rate()
+            general_rate = general_qr.rate
+            cache.set("general-rate", general_rate)
+
         percent = general_rate * 20 / 100
         if self.rate > (general_rate + percent):
             return '1', 'nivel alto'

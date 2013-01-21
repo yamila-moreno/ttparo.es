@@ -7,7 +7,7 @@
     kaleidosDiv.appendChild(moreInfoLink);
 
     var logo = document.createElement('img');
-    logo.src = "{{ url }}/static/images/logo.png";
+    logo.src = "{{ url }}/static/images/logo_widget.png";
     moreInfoLink.appendChild(logo);
 
     var rateValue = document.createElement('div');

@@ -39,7 +39,6 @@
                     <li><a href="{% url about %}">Conócenos</a>  |</li>
                     <li><a href="{% url moreinfo %}">Más info</a>  |</li>
                     <li><a href="{% url widget %}">Descarga el Widget</a></li>
-                    <li>{% if USE_GOOGLE_ANALYTICS %}true :){% else %}false :({% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -61,6 +60,21 @@
     <script src="{% static 'js/app.js' %}"></script>
     {% else %}
     <script src="{% static 'js/tasaparo.min.js' %}"></script>
+    {% endif %}
+    {% if USE_GOOGLE_ANALYTICS %}
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37823556-1']);
+        _gaq.push(['_setDomainName', 'tutasadeparo.es']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
     {% endif %}
 </body>
 </html>

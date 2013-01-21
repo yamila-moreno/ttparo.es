@@ -181,3 +181,11 @@ LOGGING = {
 
 SV_CONTEXT_VARNAME = 'menu'
 SV_CSS_MENU_ACTIVE = 'sel'
+
+
+USE_GOOGLE_ANALYTICS = True
+from django.conf import global_settings
+global_settings.TEMPLATE_CONTEXT_PROCESSORS += (
+    'tasaparo.web.processors.use_google_analytics',
+)
+

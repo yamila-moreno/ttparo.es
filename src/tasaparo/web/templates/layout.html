@@ -39,6 +39,7 @@
                     <li><a href="{% url about %}">Conócenos</a>  |</li>
                     <li><a href="{% url moreinfo %}">Más info</a>  |</li>
                     <li><a href="{% url widget %}">Descarga el Widget</a></li>
+                    <li>{% if USE_GOOGLE_ANALYTICS %}true :){% else %}false :({% endif %}</li>
                 </ul>
             </div>
         </div>

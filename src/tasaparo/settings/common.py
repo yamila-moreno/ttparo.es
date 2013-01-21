@@ -43,6 +43,17 @@ CACHES = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = [
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "tasaparo.web.processors.use_google_analytics",
+]
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -182,10 +193,4 @@ LOGGING = {
 SV_CONTEXT_VARNAME = 'menu'
 SV_CSS_MENU_ACTIVE = 'sel'
 
-
 USE_GOOGLE_ANALYTICS = True
-from django.conf import global_settings
-global_settings.TEMPLATE_CONTEXT_PROCESSORS += (
-    'tasaparo.web.processors.use_google_analytics',
-)
-

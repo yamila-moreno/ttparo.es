@@ -33,9 +33,9 @@
     stylesheet.type = "text/css";
     kaleidosDiv.appendChild(stylesheet);
     
-    $('#kaleidos-tasaparo').click( function() {
-        var link = "{{ url }}{{ absolute_url }}";
+    var element =  document.getElementById('kaleidos-tasaparo');
+    element.onclick = function(){ 
+    var link = "{{ url }}{{ absolute_url }}";
         window.open(link);
-    });
-
+     };
 }).call(this);

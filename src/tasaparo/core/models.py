@@ -250,6 +250,8 @@ class RateQuery(models.Model):
             cache.set("general-rate", general_rate)
 
         percent = general_rate * 20 / 100
+        if not self.rate:
+            return '0', 'sin datos'
         if self.rate > (general_rate + percent):
             return '1', 'nivel alto'
         elif self.rate < (general_rate - percent):

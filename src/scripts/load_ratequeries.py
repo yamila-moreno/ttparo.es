@@ -91,7 +91,7 @@ def calculate_rate(connection, age=None, cycle=None, education=None, province=No
     try:
         return int(round(total_unemployed / total * 100))
     except ZeroDivisionError:
-        return 0
+        return None
 
 
 counter = 0

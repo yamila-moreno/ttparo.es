@@ -13,7 +13,9 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os, sys
+
+sys.path.insert(0, '/home/ubuntu/ttdp/src')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tasaparo.settings")
 

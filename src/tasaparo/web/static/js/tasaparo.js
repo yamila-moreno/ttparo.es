@@ -243,7 +243,10 @@ $(document).ajaxSend(function(event, xhr, settings) {
                         forceBorder : true
                     }
                 },
-                legend : ["Evolución de tu perfil","Evolución general"]
+                legend : {
+                    serie1 : "Evolución de tu perfil",
+                    serie2 : "Evolución general"
+                }
             });
         },
 

@@ -253,8 +253,8 @@ class RateQuery(models.Model):
         if self.rate is None:
             return '0', 'sin datos'
         if self.rate > (general_rate + percent):
-            return '1', 'nivel alto'
+            return '1', 'por encima <br />de la media'
         elif self.rate < (general_rate - percent):
-            return '3', 'nivel bajo'
+            return '3', 'por debajo <br />de la media'
         else:
-            return '2', 'nivel medio'
+            return '2', 'en la media'

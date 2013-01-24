@@ -13,7 +13,7 @@
     logoLink.appendChild(logo);
 
     var rateValue = document.createElement('div');
-    rateValue.className = "result ttdp-r" + {{ level }};
+    rateValue.className = "ttdp-result ttdp-r" + {{ level }};
     rateValue.textContent = {{ rate }}+"%";
     rateValue.setAttribute("href", "{{ url }}{{ absolute_url }}");
     kaleidosDiv.appendChild(rateValue);
@@ -23,6 +23,7 @@
     kaleidosDiv.appendChild(moreInfoText);
     
     var moreInfoLink = document.createElement('a');
+    moreInfoLink.className = "ttdp-moreinfo";
     moreInfoLink.setAttribute("href", "{{ url }}{{ absolute_url }}");
     moreInfoLink.setAttribute("target", "_new");
     moreInfoLink.innerHTML = "+ Info";

@@ -147,6 +147,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
         onMainFormSubmit: function(event) {
             event.preventDefault();
+            this.rearrangeButtons(this.$("#by-sex"));
             this.submit(this.$("#by-sex"));
         }
 

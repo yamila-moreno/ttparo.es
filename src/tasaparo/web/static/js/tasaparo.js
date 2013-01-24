@@ -1,12 +1,3 @@
-$("body").on({
-    ajaxStart: function() {
-        $(this).addClass("loading");
-    },
-    ajaxStop: function() {
-        $(this).removeClass("loading");
-    }
-});
-
 $(document).ajaxSend(function(event, xhr, settings) {
     function getCookie(name) {
         var cookieValue = null;

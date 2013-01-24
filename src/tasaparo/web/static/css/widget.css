@@ -14,45 +14,45 @@ div#kaleidos-tasaparo {
 */
 }
 
-.logo-link{
+.ttdp-logo-link{
     width: 88px;
     margin: 0 auto;
     display: block;
 }
 
-    .logo-link img{
-        width: 100%;
-    }
+.ttdp-logo-link img{
+    width: 100%;
+}
 
-.txt {
+.ttdp-txt {
     margin: 5px auto 0;
     text-align: center;
 }
 
-    .txt a{
-        font-family:"Open Sans";
-        cursor: pointer;
-        font-size: 12px;
-        color: #7d7d7d;
-        font-weight: bold;
-        font-size: 14px;
-        padding: 8px 10px;
-        background: #e9e9e9;
-        background: -moz-linear-gradient(
-            top,
-            #e9e9e9 0%,
-            #dddddd);
-        background: -webkit-gradient(
-            linear, left top, left bottom, 
-            from(#e9e9e9),
-            to(#dddddd));
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
-        border: 1px solid #d1d1d1;
-    }
+.ttdp-txt a{
+    font-family:"Open Sans";
+    cursor: pointer;
+    font-size: 12px;
+    color: #7d7d7d;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 10px;
+    background: #e9e9e9;
+    background: -moz-linear-gradient(
+        top,
+        #e9e9e9 0%,
+        #dddddd);
+    background: -webkit-gradient(
+        linear, left top, left bottom, 
+        from(#e9e9e9),
+        to(#dddddd));
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #d1d1d1;
+}
 
-.result {
+.ttdp-result {
     width: 116px;
     height: 116px;
     border-radius: 58px;
@@ -66,11 +66,11 @@ div#kaleidos-tasaparo {
     margin: 10px 0 22px;;
 }
 
-.r1 { background-color: #c74a53;}
-.r2 { background-color: #e2ba00;}
-.r3 { background-color: #acde5c;}
+.ttdp-r1 { background-color: #c74a53;}
+.ttdp-r2 { background-color: #e2ba00;}
+.ttdp-r3 { background-color: #acde5c;}
 
-a {
+.ttdp-a a {
     color: #646464;
     text-decoration: none;
 }

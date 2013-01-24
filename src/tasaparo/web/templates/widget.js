@@ -2,8 +2,9 @@
     var kaleidosDiv = document.getElementById("kaleidos-tasaparo");
 
     var logoLink = document.createElement('a');
+    logoLink.className = "ttdp-a";
     logoLink.setAttribute("href", "{{ url }}{{ absolute_url }}");
-    logoLink.setAttribute("class", "logo-link");
+    logoLink.setAttribute("class", "ttdp-logo-link");
     logoLink.setAttribute("target", "_new");
     kaleidosDiv.appendChild(logoLink);
 
@@ -12,13 +13,13 @@
     logoLink.appendChild(logo);
 
     var rateValue = document.createElement('div');
-    rateValue.className = "result r" + {{ level }};
+    rateValue.className = "result ttdp-r" + {{ level }};
     rateValue.textContent = {{ rate }}+"%";
     rateValue.setAttribute("href", "{{ url }}{{ absolute_url }}");
     kaleidosDiv.appendChild(rateValue);
 
     var moreInfoText = document.createElement('div');
-    moreInfoText.className = "txt";
+    moreInfoText.className = "ttdp-txt";
     kaleidosDiv.appendChild(moreInfoText);
     
     var moreInfoLink = document.createElement('a');

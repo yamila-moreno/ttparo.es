@@ -33,15 +33,15 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "127.0.0.1:6379:1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-        }
-    }
-}
+#CACHES = {
+#    "default": {
+#        "BACKEND": "redis_cache.cache.RedisCache",
+#        "LOCATION": "127.0.0.1:6379:1",
+#        "OPTIONS": {
+#            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+#        }
+#    }
+#}
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     "django.contrib.auth.context_processors.auth",

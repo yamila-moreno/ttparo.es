@@ -2,6 +2,13 @@
     var app = this.app;
 
     app.levelAttrs = {
+        //sin datos - 0
+        '0' : {
+            fill: "#F2F2F2",
+            stroke: "#fff",
+            "stroke-width": 1,
+            "stroke-linejoin": "round"
+        },
         //alto - 1
         '1' : {
             fill: "#C74A53",

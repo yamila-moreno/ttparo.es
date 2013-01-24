@@ -125,4 +125,3 @@ class MicroDataTest(TestCase):
         response = self.client.get(url, **get_data)
         self.assertEqual(response.status_code, 200)
         json_parsed = simplejson.loads(response.content)
-        print json_parsed

@@ -37,7 +37,7 @@
         {% if calculated_query %}
         <div id="result">
             <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
-            <div id="resulparo" class="r{{calculated_query.compared}}">{% if calculated_query.compared == '0' %}?{% else %}{{calculated_query.rate}}%{% endif %}<span>{{calculated_query.compared_text|safe}}</span></div>
+            <div id="resulparo" class="r{{calculated_query.compared}}">{% if calculated_query.compared == 0 %}?{% else %}{{calculated_query.rate}}%{% endif %}<span>{{calculated_query.compared_text|safe}}</span></div>
             <div id="nav-results">
                 <a class="link" href="{% url map query_hash %}" id="nav-map">Tu perfil<br/>en España</a>
                 <a class="link" href="{% url compare query_hash %}" id="nav-comp">Distribuciones</a>

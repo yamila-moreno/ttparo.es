@@ -108,6 +108,7 @@ def worker(queue, event):
 
     cursor = connection.cursor()
     cursor.execute("BEGIN;")
+    general_rate = calculate_rate(connection)
 
     while not event.is_set():
         greenlet = gevent.getcurrent()
@@ -122,12 +123,22 @@ def worker(queue, event):
         c_age, c_sex, c_province, c_education, c_cycle = c
 
         rate = calculate_rate(connection, c_age, c_cycle, c_education, c_province, c_sex)
+        percent = general_rate * 20 / 100
+        if rate is None:
+            compared = 0
+        elif rate > (general_rate + percent):
+            compared = 1
+        elif rate < (general_rate - percent):
+            compared = 3
+        else:
+            compared = 2
+
         hash = generate_hash(connection, age=c_age, cycle=c_cycle,
                 education=c_education, province=c_province, sex=c_sex),
 
-        params = [hash, rate, c_cycle, c_age, c_sex, c_education, c_province]
-        cursor.execute("INSERT INTO core_ratequery (query_hash, rate, cycle, age_id, sex_id, education_id, province_id, date) "
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s, now())", params)
+        params = [hash, rate, c_cycle, c_age, c_sex, c_education, c_province, compared]
+        cursor.execute("INSERT INTO core_ratequery (query_hash, rate, cycle, age_id, sex_id, education_id, province_id, compared, date) "
+                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, now())", params)
 
         queue.task_done()
 

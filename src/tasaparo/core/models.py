@@ -212,7 +212,7 @@ class RateQuery(models.Model):
     education = models.ForeignKey(Education, null=True)
     province = models.ForeignKey(Province, null=True)
     sex = models.ForeignKey(Sex, null=True)
-
+    compared = models.SmallIntegerField()
     objects = RateQueryManager()
 
     def __unicode__(self):
@@ -235,26 +235,20 @@ class RateQuery(models.Model):
             'province_id': self.province and self.province.ine_id or None,
             'education': self.education and self.education.name or u'formación indiferente',
             'rate':self.rate,
-            'level':self.compare_to_general[0],
-            'leveltxt':self.compare_to_general[1],
+            'level':self.compared,
+            'leveltxt':self.compared_text,
             'absolute_url':self.get_absolute_url(),
         }
         return json_dict
 
     @property
-    def compare_to_general(self):
-        general_rate = cache.get("general-rate")
-        if general_rate is None:
-            general_qr = RateQuery.objects.get_general_rate()
-            general_rate = general_qr.rate
-            cache.set("general-rate", general_rate)
+    def compared_text(self):
+        if self.compared == 0:
+            return 'sin datos'
+        elif self.compared == 1:
+            return '' #'estás por encima de la media'
+        elif self.compared == 2:
+            return '' # estás en la media
+        else: # 3
+            return '' # estás por debajo de la media
 
-        percent = general_rate * 20 / 100
-        if self.rate is None:
-            return '0', 'sin datos'
-        if self.rate > (general_rate + percent):
-            return '1', '' #'estás por encima <br />de la media'
-        elif self.rate < (general_rate - percent):
-            return '3', '' #'estás por debajo <br />de la media'
-        else:
-            return '2', '' #'estás en la media'

@@ -9,7 +9,7 @@
 {% block content %}
 <div id="home-view">
     <div id="info-ttdp"
-        {% if calculated_query %}level="{{calculated_query.compare_to_general.0}}" leveltxt="{{calculated_query.compare_to_general.1}}" rate="{{calculated_query.rate}}"{% endif %}>
+        {% if calculated_query %}level="{{calculated_query.compared}}" leveltxt="{{calculated_query.compared_text}}" rate="{{calculated_query.rate}}"{% endif %}>
         <h1>Calcula tu tasa de paro</h1>
         <form id="calculate" method="get" action="{{get_profile_rate_url}}">
             <div class="field">
@@ -37,7 +37,7 @@
         {% if calculated_query %}
         <div id="result">
             <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
-            <div id="resulparo" class="r{{calculated_query.compare_to_general.0}}">{% if calculated_query.compare_to_general.0 == '0' %}?{% else %}{{calculated_query.rate}}%{% endif %}<span>{{calculated_query.compare_to_general.1|safe}}</span></div>
+            <div id="resulparo" class="r{{calculated_query.compared}}">{% if calculated_query.compared == '0' %}?{% else %}{{calculated_query.rate}}%{% endif %}<span>{{calculated_query.compared_text|safe}}</span></div>
             <div id="nav-results">
                 <a class="link" href="{% url map query_hash %}" id="nav-map">Tu perfil<br/>en España</a>
                 <a class="link" href="{% url compare query_hash %}" id="nav-comp">Distribuciones</a>

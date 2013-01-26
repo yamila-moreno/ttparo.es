@@ -53,7 +53,18 @@
         </div>
     </script>
 
+    {% comment %}
     <script src="{% static 'js/main.min.js' %}"></script>
+    {% endcomment %}
+
+    <script src="{% static 'js/libs/json2.js' %}"></script>
+    <script src="{% static 'js/libs/jquery-1.8.3.min.js' %}"></script>
+    <script src="{% static 'js/libs/raphael-min.js' %}"></script>
+    <script src="{% static 'js/libs/tooltip.js' %}"></script>
+    <script src="{% static 'js/libs/elycharts.min.js' %}"></script>
+    <script src="{% static 'js/libs/underscore-min.js' %}"></script>
+    <script src="{% static 'js/libs/backbone-min.js' %}"></script>
+
     {% if debug %}
     <script src="{% static 'js/tasaparo.js' %}"></script>
     <script src="{% static 'js/mapdata.js' %}"></script>
@@ -61,6 +72,7 @@
     {% else %}
     <script src="{% static 'js/tasaparo.min.js' %}"></script>
     {% endif %}
+
     {% if USE_GOOGLE_ANALYTICS %}
     <script type="text/javascript">
         var _gaq = _gaq || [];

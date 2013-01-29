@@ -246,7 +246,7 @@ class RateQuery(models.Model):
     def frate(self):
         if self.rate > 10:
             return int(round(self.rate))
-        return self.rate
+        return '{0:g}'.format(self.rate)
 
     @property
     def compared_text(self):

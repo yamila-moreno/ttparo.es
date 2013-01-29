@@ -14,7 +14,7 @@
 
     var rateValue = document.createElement('div');
     rateValue.className = "ttdp-result ttdp-r" + {{ level }};
-    rateValue.textContent = {{ rate }}+"%";
+    rateValue.textContent = {{ frate }}+"%";
     rateValue.setAttribute("href", "{{ url }}{{ absolute_url }}");
     kaleidosDiv.appendChild(rateValue);
 

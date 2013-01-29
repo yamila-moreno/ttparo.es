@@ -204,7 +204,7 @@ class RateQueryManager(models.Manager):
 
 class RateQuery(models.Model):
     query_hash = models.CharField(max_length=100, db_index=True)
-    rate = models.IntegerField(null=True, default=None)
+    rate = models.FloatField(null=True, default=None)
     date = models.DateTimeField(auto_now=True)
 
     age = models.ForeignKey(Age, null=True)
@@ -235,11 +235,18 @@ class RateQuery(models.Model):
             'province_id': self.province and self.province.ine_id or None,
             'education': self.education and self.education.name or u'formación indiferente',
             'rate':self.rate,
+            'frate':self.frate,
             'level':self.compared,
             'leveltxt':self.compared_text,
             'absolute_url':self.get_absolute_url(),
         }
         return json_dict
+
+    @property
+    def frate(self):
+        if self.rate > 10:
+            return int(round(self.rate))
+        return self.rate
 
     @property
     def compared_text(self):

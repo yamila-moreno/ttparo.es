@@ -89,7 +89,7 @@ def calculate_rate(connection, age=None, cycle=None, education=None, province=No
     total_unemployed = sum(map(lambda x: x[1], filter(lambda x: x[0]=='p' , values)))
     total = sum(map(lambda x: x[1], values))
     try:
-        return int(round(total_unemployed / total * 100))
+        return round((total_unemployed / total * 100), 1)
     except ZeroDivisionError:
         return None
 

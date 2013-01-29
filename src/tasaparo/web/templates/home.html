@@ -9,7 +9,7 @@
 {% block content %}
 <div id="home-view">
     <div id="info-ttdp"
-        {% if calculated_query %}level="{{calculated_query.compared}}" leveltxt="{{calculated_query.compared_text}}" rate="{{calculated_query.rate}}"{% endif %}>
+        {% if calculated_query %}level="{{calculated_query.compared}}" leveltxt="{{calculated_query.compared_text}}" rate="{{calculated_query.frate}}"{% endif %}>
         <h1>Calcula tu tasa de paro</h1>
         <form id="calculate" method="get" action="{{get_profile_rate_url}}">
             <div class="field">
@@ -33,18 +33,18 @@
         <div class="deco"></div>
     </div>
     <div id="result">
-        <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
+        <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.frate}}%</div>
         {% if calculated_query %}
         <div id="result">
-            <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.rate}}%</div>
-            <div id="resulparo" class="r{{calculated_query.compared}}">{% if calculated_query.compared == 0 %}?{% else %}{{calculated_query.rate}}%{% endif %}<span>{{calculated_query.compared_text|safe}}</span></div>
+            <div id="actual"><span>Paro actual<br/> en España</span>{{general_rate.frate}}%</div>
+            <div id="resulparo" class="r{{calculated_query.compared}}">{% if calculated_query.compared == 0 %}?{% else %}{{calculated_query.frate}}%{% endif %}<span>{{calculated_query.compared_text|safe}}</span></div>
             <div id="nav-results">
                 <a class="link" href="{% url map query_hash %}" id="nav-map">Tu perfil<br/>en España</a>
                 <a class="link" href="{% url compare query_hash %}" id="nav-comp">Distribuciones</a>
                 <a class="link" href="{% url profile query_hash %}" id="nav-prov">Evolución<br/>perfil</a>
             </div>
             <div id="compartir">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-text="Mi tasa de paro es {{calculated_query.rate}}%" data-via="kaleidosnet" data-hashtags="ttdp" data-count="none" data-lang="en">Tweet</a>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-text="Mi tasa de paro es {{calculated_query.frate}}%" data-via="kaleidosnet" data-hashtags="ttdp" data-count="none" data-lang="en">Tweet</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
         </div>
@@ -57,7 +57,7 @@
         <h2>Últimas consultas</h2>
         {% for query in latest_queries %}
         <div class="lresults" rel="{{ query.absolute_url }}">
-            <div class="result r{{query.level}}">{{query.rate}}%</div>
+            <div class="result r{{query.level}}">{{query.frate}}%</div>
             <div class="txt">
                 {{query.sex}}<br/>
                 {{query.age}}<br/>

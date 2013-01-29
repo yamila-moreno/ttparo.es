@@ -1,5 +1,5 @@
     <ul id="tabmenu">
-        <li class="t1"><a class="link c{{calculated_query.compared }}" href="{% url profile-rate-by-hash query_hash %}">Tu tasa: <span>{% if calculated_query.rate %}{{calculated_query.rate}}%{% else%}?{% endif %}</span></a></li>
+        <li class="t1"><a class="link c{{calculated_query.compared }}" href="{% url profile-rate-by-hash query_hash %}">Tu tasa: <span>{% if calculated_query.frate %}{{calculated_query.frate}}%{% else%}?{% endif %}</span></a></li>
         <li class="t2 {% if option == 'map' %}sel{% endif %}"><a class="link" href="{% url map query_hash %}">Tu perfil<br/>en España</a></li>
         <li class="t3 {% if option == 'compare' %}sel{% endif %}"><a class="link" href="{% url compare query_hash %}">Distribuciones</a></li>
         <li class="t4 {% if option == 'profile' %}sel{% endif %}"><a class="link" href="{% url profile query_hash %}">Evolución<br/> de tu perfil</a></li>

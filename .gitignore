@@ -1,3 +1,4 @@
+local.py
 *.pyc
 *.mo
 *.swp

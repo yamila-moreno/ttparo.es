@@ -244,6 +244,10 @@ class RateQuery(models.Model):
 
     @property
     def frate(self):
+        if not self.rate or self.rate == 0.0:
+            self.compared = 0
+            self.save()
+            return ''
         if self.rate > 10:
             return int(round(self.rate))
         return '{0:g}'.format(self.rate)

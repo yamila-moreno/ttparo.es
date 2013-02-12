@@ -76,7 +76,7 @@ class CompareRatesView(SuperView):
         elif by == 'education':
             rates = core.RateQuery.objects.compare_rates_by_education(**form.cleaned_data)
         else:
-            return HttpResponseRedirect(reverse('home'))
+        	return self.render_json({}, False)
 
         if rates:
             list_json_dict = []

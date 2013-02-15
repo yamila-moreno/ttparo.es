@@ -1,0 +1,34 @@
+============
+INSTALLATION
+============
+
+
+1. Requisitos del sistema
+- virtualenv
+- postgres
+- nodejs (última versión, lo mejor es from source)
+- npm
+- R, gcc-fortran
+
+2. Install requirements
+- pip install -r requirements.txtb
+
+3. make dependences (a partir de entonces, solo 'make')
+
+4. MicroDatosEs; desde la consola de R:
+install.packages("MicroDatosEs", repos= c("http://R-Forge.R-project.org", getOption("repos")))
+Si falla, se puede instalar from source con el fichero MicroDatosEs.tar.gz. Desde la consola de linux:
+R CMD INSTALL MicroDatosEs_0.04.tar.gz
+Hacen falta más dependencias (aparece un error si no están incluidas); para instalarlas:
+install.packages("memisc", repos=c("http://R-Forge.R-project.org", getOption("repos") )
+install.packages("Hmisc", repos=c("http://R-Forge.R-project.org", getOption("repos") )
+PARA INVOCAR ESTE SCRIPT:
+*. setear bien el working directory
+*. ejecutar #$ R CMD BATCH script.R
+
+5.
+src/$: python scripts/load-microdata --csv=/ruta/al/CSV
+(1) el csv DEBE estar en UTF-8
+(2) el csv NO DEBE contener la primera fila con los nombres de las columnas
+
+6. src/$: python scripts/load_ratequeries.py

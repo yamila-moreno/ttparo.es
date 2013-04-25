@@ -204,3 +204,7 @@ SV_CONTEXT_VARNAME = 'menu'
 SV_CSS_MENU_ACTIVE = 'sel'
 
 USE_GOOGLE_ANALYTICS = False
+
+# EPA DATA
+EPA_URL = "http://www.ine.es/jaxi/menu.do?type=pcaxis&path=/t22/e308_mnu&file=inebase&N=&L=0"
+EPA_DATE = "25/04/2013""

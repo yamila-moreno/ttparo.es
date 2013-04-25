@@ -33,6 +33,8 @@ class HomeView(SuperView):
         context['query_hash'] = query_hash
         context['general_rate'] = core.RateQuery.objects.get_general_rate()
         context['get_profile_rate_url'] = reverse('api:profile-rate')
+        context['EPA_URL'] = settings.EPA_URL
+        context['EPA_DATE'] = settings.EPA_DATE
 
         latest_queries = core.RateQuery.objects.latest_queries()
         list_json_dict = []

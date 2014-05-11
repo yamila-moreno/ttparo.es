@@ -103,7 +103,13 @@ Este script genera un fichero datos_epa.csv que tenemos que cargar en la bbdd.
 Notas
 -----
 
-Para descargarse todos los .zip se puede usar el script `descarga-datos.sh` (hay que mantenerlo actualizado)
+* Para descargarse todos los .zip se puede usar el script ``descarga-datos.sh`` (hay que mantenerlo actualizado)
 
+* El script incluído en ``scripts/load_epa_data.py`` automatiza el proceso de descarga de datos, procesado en R y carga de datos. Se invoca empleando como parámetro la URL de fichero ZIP de datos de la EPA::
 
+        python load_epa_data.py --zipfile_url ZIPFILE_URL -v
 
+.. warning::
+
+    (1) Este script emplea el fichero .R original (``leer_epa.R`)
+    (2) Antes de ejecutar el script, hay que poner manualmente el nombre de la bbdd en los scripts ``load_microdata.py`` y ``load_ratequeries.py`` 

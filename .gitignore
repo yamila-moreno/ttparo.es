@@ -3,12 +3,16 @@ local.py
 *.mo
 *.swp
 *.csv
-tasaparo_fulldb.sql
+*.Rout
 styles.css
 tasaparo.min.js
 src/media
 node_modules
 *.py[cod]
+docs/build/*
+src/static/*
+src/scripts/epa-raw/*
+
 
 # C extensions
 *.so

@@ -20,7 +20,11 @@ En la máquina donde vayamos a desplegar, hay que instalar los siguientes compon
 
   * Postgresql 9.2
 
-  * node.js(0.10.19-1), npm
+  * node.js(0.10.19-1)
+
+  * npm (curl https://npmjs.org/install.sh | sudo sh)
+
+  * less (sudo npm install less -g)
 
   * R (pacman -S r)
 

@@ -590,23 +590,5 @@
             "name": "Parados",
             "inner_id": "p"
         }
-    },
-    {
-        "pk": 1,
-        "model": "auth.user",
-        "fields": {
-            "username": "admin",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": true,
-            "is_staff": true,
-            "last_login": "2012-07-09T18:20:24.875Z",
-            "groups": [],
-            "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$aROaz3papoyv$fVnLjUlx6NVKOIjIhF+YzMAubA2xbgjy45UOVkHicp0=",
-            "email": "yamila.moreno@kaleidos.net",
-            "date_joined": "2012-07-09T14:11:28.636Z"
-        }
     }
 ]

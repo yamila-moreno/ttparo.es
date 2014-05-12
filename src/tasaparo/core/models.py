@@ -90,6 +90,9 @@ class Microdata(models.Model):
     def __unicode__(self):
         return u'%(id)s' % {'id':self.id}
 
+    class Meta:
+        unique_together = ['age','cycle','education','province','sex', 'aoi']
+
 def generate_hash(age=None, cycle=None, education=None, province=None, sex=None):
     data_normalized = {}
     data_normalized['age'] = age and str(age) or ''

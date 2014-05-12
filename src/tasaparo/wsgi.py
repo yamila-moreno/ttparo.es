@@ -15,7 +15,7 @@ framework.
 """
 import os, sys
 
-sys.path.insert(0, '/home/ubuntu/ttdp/src')
+sys.path.insert(0, '/home/yami/ttdp/src')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tasaparo.settings")
 

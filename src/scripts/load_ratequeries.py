@@ -19,7 +19,7 @@ from datamaps import (province_map, aoi_map, education_map,
                        sex_map, age_map)
 
 def create_postgresql_connection():
-    connection = psycopg2.connect(database="tasaparo", async=False)
+    connection = psycopg2.connect(database="ttdp", async=False)
     return connection
 
 

@@ -87,10 +87,15 @@ Este script genera un fichero datos_epa.csv que tenemos que cargar en la bbdd.
 
     (1) el csv debe estar en UTF-8
     (2) el csv no debe contener la primera fila con los nombres de las columnas
+    (3) en este script hay que poner manualmente el nombre de la bbdd
 
 * Para recalcular las tasas de paro, usamos el script::
 
     scripts/load_ratequeries.py
+
+.. warning::
+
+    (1) en este script hay que poner manualmente el nombre de la bbdd
 
 * Conviene borrar tanto el fichero.zip inicial, como el raw.csv como datos_epa.csv después de que termine el proceso exitosamente.
 

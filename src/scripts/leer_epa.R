@@ -58,5 +58,5 @@ final <- aggregate(final$factorel, by = subset( final, select = -factorel), sum)
 names(final)[ names(final) == "x" ] <- "factorel"
 
 
-
-write.table( final, file = "../datos_epa.csv", row.names = F, col.names = T, sep = "\t", quote = FALSE )
+# col.names = F (False)
+write.table( final, file = "../datos_epa.csv", row.names = F, col.names = F, sep = "\t", quote = FALSE )

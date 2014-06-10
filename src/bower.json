@@ -1,0 +1,26 @@
+{
+  "name": "ttparo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/yamila-moreno/ttparo.es",
+  "authors": [
+    "Jesús Espino <jesus.espino@kaleidos.net>"
+  ],
+  "license": "AGPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.8.3",
+    "backbone": "~1.1.2",
+    "json2": "*",
+    "underscore": "~1.6.0",
+    "less": "~1.7.1",
+    "raphael": "~2.1.2"
+  }
+}

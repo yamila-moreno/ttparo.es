@@ -1,4 +1,4 @@
-all: mainjs tasaparojs compileless
+all: bower mainjs tasaparojs compileless
 
 dependences:
 	npm install uglify-js less jshint
@@ -7,15 +7,19 @@ dependences:
 compileless:
 	./node_modules/less/bin/lessc --yui-compress tasaparo/web/static/css/styles.less tasaparo/web/static/css/styles.css
 
+bower:
+	bower install
+	cp app/components/less/dist/less-1.7.1.js tasaparo/web/static/js/libs/less.js
+
 mainjs:
 	./node_modules/uglify-js/bin/uglifyjs \
-					      tasaparo/web/static/js/libs/json2.js \
-					      tasaparo/web/static/js/libs/jquery-1.8.3.js \
-					      tasaparo/web/static/js/libs/raphael.js \
+					      app/components/json2/json2.js \
+					      app/components/jquery/jquery.js \
+						  app/components/raphael/raphael.js \
 					      tasaparo/web/static/js/libs/tooltip.js \
 					      tasaparo/web/static/js/libs/elycharts.js \
-					      tasaparo/web/static/js/libs/underscore.js \
-					      tasaparo/web/static/js/libs/backbone.js \
+					      app/components/underscore/underscore.js \
+						  app/components/backbone/backbone.js \
 					      	-o tasaparo/web/static/js/main.min.js
 
 tasaparojs:

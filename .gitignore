@@ -47,3 +47,8 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Bower and generated javascripts
+src/tasaparo/web/static/js/main.min.js
+src/tasaparo/web/static/js/libs/less.js
+src/app/components

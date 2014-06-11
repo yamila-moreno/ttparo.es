@@ -9,16 +9,17 @@ compileless:
 
 bower:
 	bower install
+	wget http://elycharts.googlecode.com/svn/tags/stable/dist/elycharts.js -O app/components/elycharts.js
 	cp app/components/less/dist/less-1.7.1.js tasaparo/web/static/js/libs/less.js
 
 mainjs:
 	./node_modules/uglify-js/bin/uglifyjs \
 					      app/components/json2/json2.js \
-					      app/components/jquery/jquery.js \
+					      app/components/jquery/dist/jquery.js \
 						  app/components/raphael/raphael.js \
 					      tasaparo/web/static/js/libs/tooltip.js \
-					      app/components/ElyCharts/dist/elycharts.js \
-					      app/components/underscore/underscore.js \
+					      app/components/elycharts.js \
+					      app/components/lodash/dist/lodash.compat.js \
 						  app/components/backbone/backbone.js \
 					      	-o tasaparo/web/static/js/main.min.js
 

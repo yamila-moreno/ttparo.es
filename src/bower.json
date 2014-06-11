@@ -17,10 +17,11 @@
   ],
   "dependencies": {
     "jquery": "1.8.3",
-    "backbone": "~1.1.2",
+    "backbone": "0.9.10",
     "json2": "*",
-    "underscore": "~1.6.0",
+    "underscore": "1.4.3",
     "less": "~1.7.1",
-    "raphael": "~2.1.2"
+    "raphael": "~2.1.2",
+    "ElyCharts": "voidlabs/ElyCharts"
   }
 }

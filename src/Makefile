@@ -17,7 +17,7 @@ mainjs:
 					      app/components/jquery/jquery.js \
 						  app/components/raphael/raphael.js \
 					      tasaparo/web/static/js/libs/tooltip.js \
-					      tasaparo/web/static/js/libs/elycharts.js \
+					      app/components/ElyCharts/dist/elycharts.js \
 					      app/components/underscore/underscore.js \
 						  app/components/backbone/backbone.js \
 					      	-o tasaparo/web/static/js/main.min.js

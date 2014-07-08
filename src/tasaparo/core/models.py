@@ -81,14 +81,16 @@ class RateQueryManager(models.Manager):
             query_hash = generate_hash(age=age,cycle=cycle,education=education,province=province,sex=sex)
 
         try:
-            return RateQuery.objects.get(query_hash=query_hash)
+            rq = RateQuery.objects.get(query_hash=query_hash)
+            rq.save() # save the model to update date for latest_queries
+            return rq
 
         except RateQuery.DoesNotExist:
             return None
 
     def get_general_rate(self):
-        rate = self.get_rate()
-        return rate
+        query_hash = generate_hash(age=None,cycle=None,education=None,province=None,sex=None)
+        return RateQuery.objects.get(query_hash=query_hash)
 
     def latest_queries(self):
         latest_cycle = Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
@@ -199,7 +201,6 @@ class RateQuery(models.Model):
     def frate(self):
         if not self.rate or self.rate == 0.0:
             self.compared = 0
-            self.save()
             return ''
         if self.rate > 10:
             return int(round(self.rate))

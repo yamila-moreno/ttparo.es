@@ -18,15 +18,19 @@ class HomeView(SuperView):
         context = {}
         context['form'] = FilterForm()
         if query_hash:
-            context['calculated_query'] = core.RateQuery.objects.get_rate(query_hash=query_hash)
-            if not context['calculated_query']:
+            calculated_ratequery = core.RateQuery.objects.get_rate(query_hash=query_hash)
+
+            if not calculated_ratequery:
                 return HttpResponseRedirect(reverse('home'))
+
+            context['calculated_query'] = calculated_ratequery
+
             initial = {
-                'age':context['calculated_query'].age and context['calculated_query'].age.id or None,
-                'education':context['calculated_query'].education and context['calculated_query'].education.id or None,
-                'sex':context['calculated_query'].sex and context['calculated_query'].sex.id or None,
-                'province':context['calculated_query'].province and context['calculated_query'].province.id or None,
-                'cycle':context['calculated_query'].cycle
+                'age': calculated_ratequery.age and calculated_ratequery.age.id or None,
+                'education': calculated_ratequery.education and calculated_ratequery.education.id or None,
+                'sex': calculated_ratequery.sex and calculated_ratequery.sex.id or None,
+                'province': calculated_ratequery.province and calculated_ratequery.province.id or None,
+                'cycle': calculated_ratequery.cycle
             }
             context['form'] = FilterForm(initial=initial)
 
@@ -37,6 +41,7 @@ class HomeView(SuperView):
         context['EPA_DATE'] = settings.EPA_DATE
 
         latest_queries = core.RateQuery.objects.latest_queries()
+
         list_json_dict = []
         for l in latest_queries:
             list_json_dict.append(l.to_json_dict())

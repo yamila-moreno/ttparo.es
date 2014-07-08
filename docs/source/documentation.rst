@@ -26,6 +26,8 @@ En la máquina donde vayamos a desplegar, hay que instalar los siguientes compon
 
   * less (sudo npm install less -g)
 
+  * bower (sudo npm install bower -g)
+
   * R (pacman -S r)
 
   * gcc-fortran
@@ -112,4 +114,4 @@ Notas
 .. warning::
 
     (1) Este script emplea el fichero .R original (``leer_epa.R``)
-    (2) Antes de ejecutar el script, hay que poner manualmente el nombre de la bbdd en los scripts ``load_microdata.py`` y ``load_ratequeries.py`` 
+    (2) Antes de ejecutar el script, hay que poner manualmente el nombre de la bbdd en los scripts ``load_microdata.py`` y ``load_ratequeries.py``

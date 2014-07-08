@@ -49,8 +49,6 @@ class Aoi(models.Model):
     def __unicode__(self):
         return self.name
 
-
-
 class Microdata(models.Model):
     cycle = models.IntegerField()
     age = models.ForeignKey(Age)
@@ -79,14 +77,12 @@ def generate_hash(age=None, cycle=None, education=None, province=None, sex=None)
 class RateQueryManager(models.Manager):
 
     def get_rate(self, query_hash=None, age=None, cycle=None, education=None, province=None, sex=None):
-
         if not query_hash:
             query_hash = generate_hash(age=age,cycle=cycle,education=education,province=province,sex=sex)
 
         try:
-            rq = RateQuery.objects.get(query_hash=query_hash)
-            rq.save()
-            return rq
+            return RateQuery.objects.get(query_hash=query_hash)
+
         except RateQuery.DoesNotExist:
             return None
 
@@ -101,25 +97,6 @@ class RateQueryManager(models.Manager):
             .exclude(age__isnull=True,sex__isnull=True,education__isnull=True,province__isnull=True,cycle=latest_cycle)\
             .order_by('-date')[:4]
         return latest_queries
-
-    def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
-        results = RateQuery.objects.all()
-        latest_cycle = results.aggregate(Max('cycle'))
-
-        if sex:
-            results = results.filter(sex__pk=sex)
-        if age:
-            results = results.filter(age__pk=age)
-        if education:
-            results = results.filter(education__pk=education)
-        if province:
-            results = results.filter(province__pk=province)
-        if cycle:
-            results = results.filter(cycle=cycle)
-        else:
-            results = results.filter(cycle=latest_cycle['cycle__max'])
-
-        return results
 
     def compare_rates_by_sex(self, age=None, cycle=None, education=None, province=None, sex=None, compared_by=None):
         latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
@@ -166,8 +143,7 @@ class RateQueryManager(models.Manager):
         return rq
 
     def get_province_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
-        latest_cycle = self.get_query_set().aggregate(Max('cycle'))
-        #latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
+        latest_cycle = RateQuery.objects.all().aggregate(Max('cycle'))
 
         rq = RateQuery.objects.filter(
             cycle=latest_cycle['cycle__max'],

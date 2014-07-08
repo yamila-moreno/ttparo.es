@@ -50,32 +50,6 @@ class Aoi(models.Model):
         return self.name
 
 
-class MicrodataManager(models.Manager):
-
-    def calculate_rate(self, age=None, cycle=None, education=None, province=None, sex=None):
-        results = Microdata.objects.all()
-        latest_cycle = results.aggregate(Max('cycle'))
-
-        if sex:
-            results = results.filter(sex__pk=sex)
-        if age:
-            results = results.filter(age__pk=age)
-        if education:
-            results = results.filter(education__pk=education)
-        if province:
-            results = results.filter(province__pk=province)
-        if cycle:
-            results = results.filter(cycle=cycle)
-        else:
-            results = results.filter(cycle=latest_cycle['cycle__max'])
-
-        values = list(results.values_list('aoi__inner_id', 'factorel'))
-        total_unemployed = sum(map(lambda x: x[1], filter(lambda x: x[0]=='p' , values)))
-        total = sum(map(lambda x: x[1], values))
-        try:
-            return int(round(total_unemployed / total * 100))
-        except ZeroDivisionError:
-            return 0
 
 class Microdata(models.Model):
     cycle = models.IntegerField()
@@ -85,7 +59,6 @@ class Microdata(models.Model):
     province = models.ForeignKey(Province)
     aoi = models.ForeignKey(Aoi)
     factorel = models.FloatField()
-    objects = MicrodataManager()
 
     def __unicode__(self):
         return u'%(id)s' % {'id':self.id}
@@ -124,9 +97,10 @@ class RateQueryManager(models.Manager):
     def latest_queries(self):
         latest_cycle = Microdata.objects.all().aggregate(Max('cycle'))['cycle__max']
         # TODO. ¿por qué excluimos las RQ que tienen algún criterio a null? ¿qué más da?
-        return RateQuery.objects.filter(rate__isnull=False)\
+        latest_queries = RateQuery.objects.filter(rate__isnull=False)\
             .exclude(age__isnull=True,sex__isnull=True,education__isnull=True,province__isnull=True,cycle=latest_cycle)\
             .order_by('-date')[:4]
+        return latest_queries
 
     def get_rates(self, age=None, cycle=None, education=None, province=None, sex=None):
         results = RateQuery.objects.all()

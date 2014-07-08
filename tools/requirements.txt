@@ -1,6 +1,6 @@
 Django==1.4.3
 psycopg2==2.4.6
-PIL
+Pillow
 django-superview
 gevent==0.13.8
 psycogreen

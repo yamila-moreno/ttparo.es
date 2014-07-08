@@ -5,3 +5,4 @@ django-superview
 gevent==0.13.8
 psycogreen
 django-redis==3.1.5
+Fabric==1.6.1

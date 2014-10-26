@@ -28,7 +28,7 @@ En la máquina donde vayamos a desplegar, hay que instalar los siguientes compon
 
   * bower (sudo npm install bower -g)
 
-  * R (pacman -S r)
+  * R . **$ apt-get install r-base**
 
   * gcc-fortran
 

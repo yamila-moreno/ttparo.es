@@ -206,5 +206,5 @@ SV_CSS_MENU_ACTIVE = 'sel'
 USE_GOOGLE_ANALYTICS = False
 
 # EPA DATA
-EPA_URL = "http://www.ine.es/jaxi/menu.do?type=pcaxis&path=/t22/e308_mnu&file=inebase&N=&L=0"
+EPA_URL = "http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=ultiDatos&idp=1254735976595"
 EPA_DATE = "29/04/2014"
